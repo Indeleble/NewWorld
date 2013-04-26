@@ -11,6 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Core extends JavaPlugin {
 	//prueba de mierda
+	//mierda preytor
 	Logger log;
 	List<IndePlayer> IndePlayerList;
 
