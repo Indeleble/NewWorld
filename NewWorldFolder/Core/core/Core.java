@@ -10,7 +10,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Core extends JavaPlugin {
-
+	//prueba de mierda
 	Logger log;
 	List<IndePlayer> IndePlayerList;
 
