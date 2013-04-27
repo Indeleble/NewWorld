@@ -1,0 +1,6 @@
+name: Husbandry
+main: husbandry.Husbandry
+version: 0.1b
+description: Husbandry system
+author: Indeleble
+depend: [ControllableMobsAPI, NWCore]

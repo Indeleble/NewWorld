@@ -1,74 +1,63 @@
 package core;
 
+import husbandry.HusAnimal;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import javax.persistence.PersistenceException;
 
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import com.avaje.ebean.Query;
 
 public class Core extends JavaPlugin {
 
 	Logger log;
-	List<IndePlayer> IndePlayerList;
-
-	List<MulaPlayer> MulaPlayerList;
+	List<HusAnimal> husAnimalsList;
 
 	@Override
 	public void onEnable() {
 
 		log = this.getLogger();
-
-		PluginManager pm = this.getServer().getPluginManager();
-		pm.registerEvents(new PlayerListener(this), this);
-
+		
+		log.info("Setting up database");
 		setupDatabase();
+		this.husAnimalsList = this.getDataHusAnimals();
 
 	}
 
 	@Override
 	public void onDisable() {
-		// TODO Insert logic to be performed when the plugin is disabled
+		log.info("Saving animals");
+		this.getDatabase().save(husAnimalsList);
+	}
+	
+	/*
+	 *   ANIMALS
+	 * 
+	 */
+	public void saveHusAnimal(Object et) {
+		this.getDatabase().save(et);
+		husAnimalsList.add((HusAnimal) et);
 	}
 
-	public List<IndePlayer> getIndePlayerList() {
-		return IndePlayerList;
-	}
+	private List<HusAnimal> getDataHusAnimals() {
 
-	public void setIndePlayerList(List<IndePlayer> indePlayerList) {
-		IndePlayerList = indePlayerList;
-	}
+		List<HusAnimal> husAnimalsList2;
 
-	public void addIndePlayer(IndePlayer indePlayer) {
-		IndePlayerList.add(indePlayer);
-	}
+		Query<HusAnimal> query = getDatabase().find(HusAnimal.class);
+		husAnimalsList2 = query.findList();
 
-	public void removeIndePlayer(IndePlayer indePlayer) {
+		return husAnimalsList2;
 
-		for (int i = 0; i < IndePlayerList.size(); i++) {
-
-			if (IndePlayerList.get(i).getId() == indePlayer.getId()) {
-
-				IndePlayerList.remove(i);
-				break;
-			}
-		}
-
-	}
-
-	public List<MulaPlayer> getMulaPlayerList() {
-		return MulaPlayerList;
-	}
-
-	public void setMulaPlayerList(List<MulaPlayer> mulaPlayerList) {
-		MulaPlayerList = mulaPlayerList;
 	}
 
 	private void setupDatabase() {
 		try {
 			getDatabase().find(IndePlayer.class).findRowCount();
+			getDatabase().find(HusAnimal.class).findRowCount();
 		} catch (PersistenceException ex) {
 			System.out.println("Installing database for "
 					+ getDescription().getName() + " due to first time usage");
@@ -82,6 +71,7 @@ public class Core extends JavaPlugin {
 		List<Class<?>> classes = new LinkedList<Class<?>>();
 		classes.add(IndePlayer.class);
 		classes.add(MulaPlayer.class);
+		classes.add(HusAnimal.class);
 
 		return classes;
 	}
