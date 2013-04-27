@@ -1,4 +1,4 @@
-package Miscelaneo;
+package miscelaneo;
 
 import java.util.logging.Logger;
 
@@ -6,7 +6,9 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import Commands.MiscelaneoCommand;
+import commands.MiscelaneoCommand;
+
+
 
 public class Miscelaneo  extends JavaPlugin{
 

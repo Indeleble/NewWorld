@@ -1,6 +1,8 @@
-package Commands;
+package commands;
 
 import java.util.Random;
+
+import miscelaneo.Miscelaneo;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -8,7 +10,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import Miscelaneo.Miscelaneo;
+
 
 public class MiscelaneoCommand implements CommandExecutor{
 	@SuppressWarnings("unused")
