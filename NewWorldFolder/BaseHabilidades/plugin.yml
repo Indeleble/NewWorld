@@ -1,0 +1,6 @@
+name: BaseHabilidades
+main: basehabilidades.BaseHabilidades
+version: 1.0
+description: La base de las habilidades de sacra
+author: Preytor
+depend: [NWCore]
