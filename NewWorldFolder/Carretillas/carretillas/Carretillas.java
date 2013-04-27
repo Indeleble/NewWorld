@@ -2,13 +2,10 @@ package carretillas;
 
 import java.util.logging.Logger;
 
-
 import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -26,7 +23,7 @@ public class Carretillas extends JavaPlugin implements CommandExecutor {
 
 		PluginManager pm = this.getServer().getPluginManager();
 		pm.registerEvents(new CarretillasListener(this), this);
-		Entity carretilla = new Entity(EntityType.MINECART_CHEST);
+		//Entity carretilla = new Entity(EntityType.MINECART_CHEST);
 		
 		
 
@@ -50,7 +47,7 @@ public class Carretillas extends JavaPlugin implements CommandExecutor {
 				Location loc = player.getLocation();
 
 
-				getServer().getWorld(player.getWorld().getName()).spawnEntity(loc, type)
+				//getServer().getWorld(player.getWorld().getName()).spawnEntity(loc, type)
 				
 				return true;
 			}

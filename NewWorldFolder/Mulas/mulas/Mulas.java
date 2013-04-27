@@ -15,7 +15,7 @@ public class Mulas extends JavaPlugin implements CommandExecutor {
 	public void onEnable() {
 		
 		PluginManager pm = this.getServer().getPluginManager();
-        pm.registerEvents(new MulasListener(), this);
+        //pm.registerEvents(new MulasListener(), this);
 
 	}
 

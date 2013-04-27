@@ -1,18 +1,12 @@
 package mulas;
 
-import mulajpa.MulaAdmin;
-
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Cow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.plugin.Plugin;
 
 public class MulasListener implements Listener {
@@ -30,8 +24,8 @@ public class MulasListener implements Listener {
 		Entity e = ev.getRightClicked();
 
 		if (e.getType() == EntityType.COW) {
-			MulaAdmin ma = new MulaAdmin();
-			ma.newMula("Vaca de prueba");
+			// MulaAdmin ma = new MulaAdmin();
+			// ma.newMula("Vaca de prueba");
 			ev.getPlayer().sendMessage("Mula creada" + e.getEntityId());
 		}
 
