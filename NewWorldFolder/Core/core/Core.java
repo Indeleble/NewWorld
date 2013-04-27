@@ -16,6 +16,7 @@ public class Core extends JavaPlugin {
 
 	Logger log;
 	List<HusAnimal> husAnimalsList;
+	//hola
 
 	@Override
 	public void onEnable() {
