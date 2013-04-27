@@ -10,8 +10,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Core extends JavaPlugin {
-	//prueba de mierda
-	//mierda preytor
+
 	Logger log;
 	List<IndePlayer> IndePlayerList;
 
@@ -81,7 +80,7 @@ public class Core extends JavaPlugin {
 	public List<Class<?>> getDatabaseClasses() {
 
 		List<Class<?>> classes = new LinkedList<Class<?>>();
-		classes.add(IndePlayer.class); 
+		classes.add(IndePlayer.class);
 		classes.add(MulaPlayer.class);
 
 		return classes;
