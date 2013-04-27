@@ -1,4 +1,4 @@
-package core;
+package mulas;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

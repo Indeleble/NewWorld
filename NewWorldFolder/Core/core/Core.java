@@ -8,15 +8,19 @@ import java.util.logging.Logger;
 
 import javax.persistence.PersistenceException;
 
+import mulas.MulaPlayer;
+
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.avaje.ebean.Query;
+import com.avaje.ebean.EbeanServer;
 
 public class Core extends JavaPlugin {
 
 	Logger log;
-	List<HusAnimal> husAnimalsList;
-	//hola
+	EbeanServer db;
+	
+	HusAnimalManager ham;
+	
 
 	@Override
 	public void onEnable() {
@@ -25,35 +29,25 @@ public class Core extends JavaPlugin {
 		
 		log.info("Setting up database");
 		setupDatabase();
-		this.husAnimalsList = this.getDataHusAnimals();
+		db = this.getDatabase();
+		
+		//Create managers
+		ham = new HusAnimalManager(db);
+		
 
 	}
 
 	@Override
 	public void onDisable() {
 		log.info("Saving animals");
-		this.getDatabase().save(husAnimalsList);
+		
 	}
 	
-	/*
-	 *   ANIMALS
-	 * 
-	 */
-	public void saveHusAnimal(Object et) {
-		this.getDatabase().save(et);
-		husAnimalsList.add((HusAnimal) et);
+	public HusAnimalManager getHusAnimalManager(){
+		
+		return this.ham;
 	}
-
-	private List<HusAnimal> getDataHusAnimals() {
-
-		List<HusAnimal> husAnimalsList2;
-
-		Query<HusAnimal> query = getDatabase().find(HusAnimal.class);
-		husAnimalsList2 = query.findList();
-
-		return husAnimalsList2;
-
-	}
+	
 
 	private void setupDatabase() {
 		try {
