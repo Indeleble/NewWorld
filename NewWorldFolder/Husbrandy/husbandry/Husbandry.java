@@ -2,8 +2,6 @@ package husbandry;
 
 import java.util.logging.Logger;
 
-import listeners.CraftListener;
-
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -27,7 +25,9 @@ public class Husbandry extends JavaPlugin {
 		Core core = (Core) pm.getPlugin("NWCore");
 		ham = core.getHusAnimalManager();
 
-		pm.registerEvents(new CraftListener(this), this);
+		pm.registerEvents(new TameListener(this.ham), this);
+		
+		
 		
 
 	}

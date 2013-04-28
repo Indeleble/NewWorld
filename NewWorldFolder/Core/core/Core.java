@@ -1,14 +1,11 @@
 package core;
 
-import husbandry.HusAnimal;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
 
 import javax.persistence.PersistenceException;
-
-import mulas.MulaPlayer;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -65,7 +62,6 @@ public class Core extends JavaPlugin {
 
 		List<Class<?>> classes = new LinkedList<Class<?>>();
 		classes.add(IndePlayer.class);
-		classes.add(MulaPlayer.class);
 		classes.add(HusAnimal.class);
 
 		return classes;

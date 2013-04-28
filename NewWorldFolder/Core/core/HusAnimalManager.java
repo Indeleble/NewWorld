@@ -1,6 +1,5 @@
 package core;
 
-import husbandry.HusAnimal;
 
 import java.util.List;
 
