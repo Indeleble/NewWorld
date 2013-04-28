@@ -9,6 +9,9 @@ import javax.persistence.PersistenceException;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import ru.tehkode.permissions.PermissionUser;
+import ru.tehkode.permissions.bukkit.PermissionsEx;
+
 import com.avaje.ebean.EbeanServer;
 
 public class Core extends JavaPlugin {
@@ -30,6 +33,7 @@ public class Core extends JavaPlugin {
 		
 		//Create managers
 		ham = new HusAnimalManager(db);
+		
 		
 
 	}

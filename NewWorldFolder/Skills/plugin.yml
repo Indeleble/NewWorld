@@ -1,0 +1,6 @@
+name: Skills
+main: skills.Skills
+version: 0.1b
+description: Skills system
+author: Indeleble
+depend: [NWCore]
