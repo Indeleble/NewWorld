@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 public class MiscelaneoCommand implements CommandExecutor{
 
 	@Override
-	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args) {
 		Random r = new Random();
 		int random = 0;
     	Player player = (Player) sender;

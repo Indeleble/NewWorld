@@ -21,6 +21,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="Dependencies/PermissionsEx.jar"/>
+	<classpathentry kind="lib" path="C:/Users/pr3ytor/Desktop/TEST Server Sacra/workspace/PermissionsEx.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

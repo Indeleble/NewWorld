@@ -1,4 +1,4 @@
-package skills;
+package skills.mineria;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,7 +12,7 @@ public class MiningListener implements Listener{
 
 	
 	public MiningListener(){
-		
+
 
 	}
 	
