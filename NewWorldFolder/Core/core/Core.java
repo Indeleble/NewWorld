@@ -52,7 +52,7 @@ public class Core extends JavaPlugin {
 
 	private void setupDatabase() {
 		try {
-			getDatabase().find(IndePlayer.class).findRowCount();
+			getDatabase().find(SkillPlayer.class).findRowCount();
 			getDatabase().find(HusAnimal.class).findRowCount();
 		} catch (PersistenceException ex) {
 			System.out.println("Installing database for "
@@ -65,7 +65,7 @@ public class Core extends JavaPlugin {
 	public List<Class<?>> getDatabaseClasses() {
 
 		List<Class<?>> classes = new LinkedList<Class<?>>();
-		classes.add(IndePlayer.class);
+		classes.add(SkillPlayer.class);
 		classes.add(HusAnimal.class);
 
 		return classes;

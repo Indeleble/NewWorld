@@ -7,13 +7,16 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "players")
-public class IndePlayer {
+public class SkillPlayer {
 
 	@Id
 	private int id;
 
 	@Column
 	private String accountName;
+	
+	@Column
+	private String skills;
 
 	public int getId() {
 		return id;

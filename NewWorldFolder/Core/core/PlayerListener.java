@@ -25,13 +25,13 @@ public class PlayerListener implements Listener {
 	@EventHandler
 	public void PlayerJoin(PlayerJoinEvent ev) {
 
-		Query<IndePlayer> query = pl.getDatabase().find(IndePlayer.class);
+		Query<SkillPlayer> query = pl.getDatabase().find(SkillPlayer.class);
 		log.info("Ha encontrado la clase");
 		
-		List<IndePlayer> beans = query.findList();
+		List<SkillPlayer> beans = query.findList();
 		log.info("Ha encontrado la lista");
 		
-		for (IndePlayer ip : beans) {
+		for (SkillPlayer ip : beans) {
 			log.info("entra en bucle");
 			if (ip.getAccountName().compareToIgnoreCase(
 					ev.getPlayer().getName()) == 0) {
@@ -42,7 +42,7 @@ public class PlayerListener implements Listener {
 
 			else {
 
-				IndePlayer ip2 = new IndePlayer();
+				SkillPlayer ip2 = new SkillPlayer();
 				ip2.setAccountName(ev.getPlayer().getName());
 				
 				pl.getDatabase().save(ip2);
@@ -54,7 +54,7 @@ public class PlayerListener implements Listener {
 		if (beans.size() == 0 || beans == null){
 			
 			log.info("Ha entrado if secundario");
-			IndePlayer ip2 = new IndePlayer();
+			SkillPlayer ip2 = new SkillPlayer();
 			ip2.setAccountName(ev.getPlayer().getName());
 			
 			pl.getDatabase().save(ip2);
