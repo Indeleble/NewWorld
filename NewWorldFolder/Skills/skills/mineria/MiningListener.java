@@ -47,24 +47,16 @@ public class MiningListener implements Listener{
         switch (action) {
         case RIGHT_CLICK_BLOCK:
 //        	if (user.inGroup("mineria")){   // Colocar a nivel en el que empieza a ser prospectable la piedra
-    		if((inHand==257) || (inHand==274) || (inHand==278) || (inHand==285) ){
-				player.sendMessage("test block");
-				if(prospectando==false){             //Mal fijo, a revisar.
-    				player.sendMessage("Te preparas para prospectar la piedra");
-    			}else{
-    				player.sendMessage("Dejas de prospectar la piedra");
+    			if((inHand==257) || (inHand==274) || (inHand==278) || (inHand==285) ){
+    				player.sendMessage("test block");
+    				if(prospectando==false){             //Mal fijo, a revisar.
+    					player.sendMessage("Te preparas para prospectar la piedra");
+    				}else{
+    					player.sendMessage("Dejas de prospectar la piedra");
+    				}
     			}
-    		}
 //        	}
     		break;
-        case RIGHT_CLICK_AIR:	
-//        	if (user.inGroup("mineria")){   // Colocar a nivel en el que empieza a ser prospectable la piedra
-        		if((inHand==257) || (inHand==274) || (inHand==278) || (inHand==285) ){
-    				player.sendMessage("test aire");
-
-        		}
-//        	}
-        	break;
         default:
 			break;
         }
@@ -86,18 +78,5 @@ public class MiningListener implements Listener{
 		ev.getPlayer().sendMessage("Has ganado 1 punto de experiencia");
 		} else ev.getPlayer().sendMessage("No ganas exp");
 
-		
-
-
-		
-//		if (user.inGroup("mineria")){   // Colocar a nivel en el que empieza a ser prospectable la piedra
-			if(player.getGameMode()==GameMode.SURVIVAL){
-				if (block.getType() == Material.STONE){ 
-		       		if((inHand==257) || (inHand==274) || (inHand==278) || (inHand==285) ){
-		       			player.sendMessage("test romper stone");
-		       		}
-				}
-			}
-//    	}
 	}
 }
