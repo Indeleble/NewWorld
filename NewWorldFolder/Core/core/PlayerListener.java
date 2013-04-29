@@ -10,6 +10,8 @@ import org.bukkit.plugin.Plugin;
 
 import com.avaje.ebean.Query;
 
+import core.skills.SkillPlayer;
+
 public class PlayerListener implements Listener {
 
 	Plugin pl;

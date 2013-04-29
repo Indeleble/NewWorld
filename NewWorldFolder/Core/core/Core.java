@@ -14,6 +14,8 @@ import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 import com.avaje.ebean.EbeanServer;
 
+import core.skills.SkillPlayer;
+
 public class Core extends JavaPlugin {
 
 	Logger log;
