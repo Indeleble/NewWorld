@@ -1,5 +1,6 @@
 package skills.mineria;
 
+
 import java.util.Random;
 
 import org.bukkit.GameMode;
@@ -16,15 +17,12 @@ import ru.tehkode.permissions.PermissionUser;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 public class MiningListener implements Listener{
-	
-    private static boolean prospectando = false;
 
 	public MiningListener(){
 
 
 	}
-	
-	
+
 	@EventHandler
     public static void PlayerInteractEvent(PlayerInteractEvent event) {
 
@@ -49,11 +47,11 @@ public class MiningListener implements Listener{
 //        	if (user.inGroup("mineria")){   // Colocar a nivel en el que empieza a ser prospectable la piedra
     		if((inHand==257) || (inHand==274) || (inHand==278) || (inHand==285) ){
 				player.sendMessage("test block");
-				if(prospectando==false){             //Mal fijo, a revisar.
+//				if(prospectando==false){             //Mal fijo, a revisar.
     				player.sendMessage("Te preparas para prospectar la piedra");
-    			}else{
+//    			}else{
     				player.sendMessage("Dejas de prospectar la piedra");
-    			}
+ //   			}
     		}
 //        	}
     		break;

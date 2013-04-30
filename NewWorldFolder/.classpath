@@ -11,6 +11,7 @@
 	<classpathentry kind="src" path="BaseHabilidades"/>
 	<classpathentry kind="src" path="Physics"/>
 	<classpathentry kind="src" path="Skills"/>
+	<classpathentry kind="src" path="ArmasFuego"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
