@@ -7,21 +7,21 @@ import java.util.logging.Logger;
 
 import javax.persistence.PersistenceException;
 
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import ru.tehkode.permissions.PermissionUser;
-import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 import com.avaje.ebean.EbeanServer;
 
-import core.skills.Skill;
+import core.skills.PlayerListener;
 import core.skills.SkillPlayer;
+import core.skills.SkillPlayerManager;
 
 public class Core extends JavaPlugin {
 
 	Logger log;
 	EbeanServer db;
-	
+	PluginManager pm;
+	SkillPlayerManager spm;
 	HusAnimalManager ham;
 	
 
@@ -34,15 +34,20 @@ public class Core extends JavaPlugin {
 		setupDatabase();
 		db = this.getDatabase();
 		
-		//Create managers
-		ham = new HusAnimalManager(db);
+		spm = new SkillPlayerManager(db, log);
+		pm = this.getServer().getPluginManager();
+		
+		pm.registerEvents(new PlayerListener(spm), this);
+		
+
 		
 				
 	}
 
 	@Override
 	public void onDisable() {
-		log.info("Saving animals");
+
+		spm.saveDb();
 		
 	}
 	
@@ -55,7 +60,6 @@ public class Core extends JavaPlugin {
 	private void setupDatabase() {
 		try {
 			getDatabase().find(SkillPlayer.class).findRowCount();
-			getDatabase().find(HusAnimal.class).findRowCount();
 		} catch (PersistenceException ex) {
 			System.out.println("Installing database for "
 					+ getDescription().getName() + " due to first time usage");
@@ -68,7 +72,6 @@ public class Core extends JavaPlugin {
 
 		List<Class<?>> classes = new LinkedList<Class<?>>();
 		classes.add(SkillPlayer.class);
-		classes.add(HusAnimal.class);
 
 		return classes;
 	}
