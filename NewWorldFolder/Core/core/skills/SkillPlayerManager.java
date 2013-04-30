@@ -27,6 +27,14 @@ public class SkillPlayerManager {
 
 	}
 
+	public boolean existPlayerInDb(String name) {
+		
+		Query<SkillPlayer> query = db.find(SkillPlayer.class);
+		//skillPlayerList = db.up
+
+		return false;
+
+	}
 
 	public SkillPlayer getSkillPlayer(String accountName) {
 
@@ -43,7 +51,8 @@ public class SkillPlayerManager {
 						player = skillPlayerList.get(i);
 						return player;
 					}
-				}return null;
+				}
+				return null;
 
 			} else
 				return null;

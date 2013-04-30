@@ -14,6 +14,7 @@ import ru.tehkode.permissions.bukkit.PermissionsEx;
 
 import com.avaje.ebean.EbeanServer;
 
+import core.skills.Skill;
 import core.skills.SkillPlayer;
 
 public class Core extends JavaPlugin {
@@ -36,8 +37,7 @@ public class Core extends JavaPlugin {
 		//Create managers
 		ham = new HusAnimalManager(db);
 		
-		
-
+				
 	}
 
 	@Override
