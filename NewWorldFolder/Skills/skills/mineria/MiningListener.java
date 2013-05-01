@@ -78,11 +78,6 @@ public class MiningListener implements Listener{
         int inHand = player.getItemInHand().getTypeId();
 		int r2 = 0;
 		
-		
-		if (user.inGroup("mining")){
-		
-		ev.getPlayer().sendMessage("Has ganado 1 punto de experiencia");
-		} else ev.getPlayer().sendMessage("No ganas exp");
 
 		
 

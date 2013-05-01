@@ -32,10 +32,10 @@ public class Core extends JavaPlugin {
 		setupDatabase();
 		db = this.getDatabase();
 
-		spm = new SkillPlayerManager(db, log);
+		spm = new SkillPlayerManager(db, log, this);
 		pm = this.getServer().getPluginManager();
 
-		pm.registerEvents(new PlayerListener(spm), this);
+		pm.registerEvents(new PlayerListener(spm, log), this);
 
 	}
 
@@ -59,6 +59,7 @@ public class Core extends JavaPlugin {
 	private void setupDatabase() {
 		try {
 			getDatabase().find(SkillPlayer.class).findRowCount();
+		
 		} catch (PersistenceException ex) {
 			System.out.println("Installing database for "
 					+ getDescription().getName() + " due to first time usage");

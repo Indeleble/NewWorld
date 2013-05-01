@@ -3,36 +3,46 @@ package core.skills;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitRunnable;
+
 import com.avaje.ebean.EbeanServer;
 import com.avaje.ebean.Query;
 
-public class SkillPlayerManager {
+public class SkillPlayerManager extends BukkitRunnable {
 
 	EbeanServer db;
 	List<SkillPlayer> skillPlayerList;
 	Logger log;
+	Plugin core;
 
-	public SkillPlayerManager(EbeanServer db, Logger log) {
+	public SkillPlayerManager(EbeanServer db, Logger log, Plugin core) {
 
 		this.db = db;
 		this.log = log;
+		this.core = core;
 		Query<SkillPlayer> query = db.find(SkillPlayer.class);
 		skillPlayerList = query.findList();
+		this.runTaskTimerAsynchronously(this.core, 50, 50);
 	}
 
 	public void saveDb() {
-		log.info("Saving players database");
-		
-		for(SkillPlayer sp : this.skillPlayerList){
-			
+
+		for (SkillPlayer sp : this.skillPlayerList) {
+			db.beginTransaction().setPersistCascade(true);
 			db.update(sp);
+			db.commitTransaction();
+			db.endTransaction();
+			log.info(String.valueOf(sp.getTalaExp()));
 		}
+
 	}
-	
-	public void addSkillPlayer(SkillPlayer player){
-		
+
+	public void addSkillPlayer(SkillPlayer player) {
+
 		this.skillPlayerList.add(player);
 		db.save(player);
+
 	}
 
 	public List<SkillPlayer> getSkillPlayerList() {
@@ -73,6 +83,13 @@ public class SkillPlayerManager {
 
 		} else
 			return null;
+	}
+
+	@Override
+	public void run() {
+
+		this.saveDb();
+
 	}
 
 }

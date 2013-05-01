@@ -4,3 +4,10 @@ version: 0.1b
 description: Skills system
 author: Indeleble
 depend: [NWCore]
+
+commands:
+   skills:
+      description: This is a demo command.
+      usage: /<command> [player]
+      permission:
+      permission-message: You don't have <permission>
