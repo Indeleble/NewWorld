@@ -1,5 +1,6 @@
 package gui.command;
 
+
 public class CustomGui {
 
 	public void makeGui() {

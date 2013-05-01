@@ -1,34 +1,39 @@
 package gui;
 
-import gui.command.GuiCommand;
+import gui.command.GuiHandler;
 
 import java.util.logging.Logger;
 
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.getspout.spoutapi.SpoutManager;
+import org.getspout.spoutapi.keyboard.Keyboard;
 
 public class Gui extends JavaPlugin{
 	
-	public GuiCommand ejecutor;
+	private static GuiHandler gHandler;
 	
+	@Override
+	public void onLoad() {
+		gHandler = new GuiHandler();
+	}
 	@Override
 	public void onEnable(){
 		Logger log = this.getLogger();
-		ejecutor = new GuiCommand(this);
-		log.info("Armas de fuego activado");
+		log.info("Gui activado");
 	}
 
 	@Override
 	public void onDisable(){
 		Logger log = this.getLogger();
-		log.info("Armas de fuego desactivado");
+		log.info("Gui desactivado");
 	}
 	
-	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args){
-		return ejecutor.onCommand(sender, cmd, commandLabel, args);
+	public void registerKeys() {
+		SpoutManager.getKeyBindingManager().registerBinding("menu de inventario sacra", Keyboard.KEY_F12, "Abre el menu de personaje", gHandler, this);
 	}
-
-
+	
+	public static GuiHandler getGuiHandler() {
+		return gHandler;
+	}
 
 }
