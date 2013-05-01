@@ -24,6 +24,10 @@
 			<id>bukkit-repo</id>
 			<url>http://repo.bukkit.org/content/groups/public/</url>
 		</repository>
+		<repository>
+			<id>spout-repo</id>
+			<url>http://repo.spout.org</url>
+		</repository>
 	</repositories>
 
 	<dependencies>
@@ -34,6 +38,13 @@
 			<artifactId>bukkit</artifactId>
 			<!-- Bukkit API Version, change if necessary -->
 			<version>1.5.1-R0.2-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.getspout</groupId>
+			<artifactId>spoutplugin</artifactId>
+			<version>dev-SNAPSHOT</version>
+			<type>jar</type>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 </project>
