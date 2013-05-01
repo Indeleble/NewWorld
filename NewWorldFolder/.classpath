@@ -23,6 +23,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="Dependencies/PermissionsEx.jar"/>
-	<classpathentry kind="lib" path="C:/Users/pr3ytor/Desktop/TEST Server Sacra/workspace/WorldGuard.jar"/>
+	<classpathentry kind="lib" path="Dependencies/WorldGuard.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
