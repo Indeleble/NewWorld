@@ -51,20 +51,21 @@ public class SkillPlayer {
 		
 	}
 
-	private int checkTotalLevel(int skillActualLevel, int skillExpGained) {
+	private int checkTotalLevel(int skillActualExpLevel, int skillExpGained) {
 
-		int expNeed = (int) (this.totalExp + Math
-				.round(Math.log(this.totalExp) * 21));
-		this.totalExp += skillExpGained;
+		int expNeed = (int) (10 + (this.totalLvl+1 + Math.log(this.totalLvl+1) * Math.log(150) *700));
 
-		if ((skillActualLevel + skillExpGained) >= expNeed) {
+		if ((skillActualExpLevel + skillExpGained) >= expNeed) {
 
-			return (skillActualLevel + skillExpGained) - expNeed;
+			return (skillActualExpLevel + skillExpGained) - expNeed;
 		} else {
 
 			return skillExpGained;
 		}
 
+	}
+	public void addTotalLevel(int lvl){
+		this.totalLvl+=lvl;
 	}
 	public String getAccountName(){
 		return this.accountName;

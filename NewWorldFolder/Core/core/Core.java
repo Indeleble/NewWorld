@@ -36,6 +36,7 @@ public class Core extends JavaPlugin {
 		pm = this.getServer().getPluginManager();
 
 		pm.registerEvents(new PlayerListener(spm, log), this);
+		log.info("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
 	}
 

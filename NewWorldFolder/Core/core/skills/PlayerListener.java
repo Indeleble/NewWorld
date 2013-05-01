@@ -33,9 +33,7 @@ public class PlayerListener implements Listener {
 			
 			player.sendMessage("Bienvenido a Sacra RP, esperamos que lo pases bien");
 			SkillPlayer sp = new SkillPlayer();
-			sp.setAccountName(player.getName());
-			sp.setTotalExp(10);
-			
+			sp.setAccountName(player.getName());	
 			
 			spm.addSkillPlayer(sp);
 			PermissionUser user = PermissionsEx.getUser(player);

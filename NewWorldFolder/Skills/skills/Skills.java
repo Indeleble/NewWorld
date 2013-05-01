@@ -49,8 +49,6 @@ public class Skills extends JavaPlugin {
 		SkillPlayer sp;
 		PermissionUser user;
 		PermissionManager pex;
-		
-		boolean flag = false;
 
 		if (cmd.getName().equalsIgnoreCase("skills")) {
 
@@ -81,7 +79,7 @@ public class Skills extends JavaPlugin {
 						sender.sendMessage(ChatColor.AQUA + "Tu nivel total: "
 								+ sp.getTotalLevel());
 					} else {
-						sender.sendMessage(ChatColor.RED
+						if (args[0].equalsIgnoreCase("ver")) sender.sendMessage(ChatColor.RED
 								+ "Escribe /skills ver");
 					}
 
@@ -95,7 +93,9 @@ public class Skills extends JavaPlugin {
 								if (!user.inGroup(args[1].toLowerCase())) {
 									user.addGroup(args[1].toLowerCase());
 									sender.sendMessage(ChatColor.RED
-											+ "Decides aprender:  " + args[1]);
+											+ "Decides aprender:  " + args[1] + " y epmpieza a nivel 10");
+									sp.addTotalLevel(10);
+									sp.setTalaLvl(10);
 									return true;
 								} 
 							}
@@ -106,7 +106,7 @@ public class Skills extends JavaPlugin {
 							
 
 					} else {
-						sender.sendMessage(ChatColor.RED
+						if (args[0].equalsIgnoreCase("aprender")) sender.sendMessage(ChatColor.RED
 								+ "Escribe /skills aprender <nombre de habilidad>");
 
 						return true;

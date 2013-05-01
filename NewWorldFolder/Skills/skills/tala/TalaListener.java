@@ -37,15 +37,15 @@ public class TalaListener implements Listener {
 			if (user.inGroup("tala")) {
 				sp = spm.getSkillPlayer(player.getName());
 				if (event.getBlock().getTypeId() == 17) {
-					spm.getSkillPlayer(player.getName()).addTalaExp(10);
-					player.sendMessage("Experiencia en tala subio en 10 puntos");
-					player.sendMessage("Experiencia en tala: " + spm.getSkillPlayer(player.getName()).getTalaExp());
-					player.sendMessage("Nivel de tala: " + spm.getSkillPlayer(player.getName()).getTalaLvl());
-					player.sendMessage("Nivel total: " + spm.getSkillPlayer(player.getName()).getTotalLevel());
+					sp.addTalaExp(200);
+					player.sendMessage("Experiencia en tala subio en 200 puntos");
+					player.sendMessage("Experiencia en tala: " + sp.getTalaExp());
+					player.sendMessage("Nivel de tala: " + sp.getTalaLvl());
+					player.sendMessage("Nivel total: " + sp.getTotalLevel());
 		
 				} else
-					spm.getSkillPlayer(player.getName()).addTalaExp(5);
-				player.sendMessage("Experiencia en tala subio en 5 puntos");
+					sp.addTalaExp(150);
+				player.sendMessage("Experiencia en tala subio en 150 puntos");
 				player.sendMessage("Nivel de tala: " + sp.getTalaLvl());
 				player.sendMessage("Nivel total: " + sp.getTotalLevel());
 
