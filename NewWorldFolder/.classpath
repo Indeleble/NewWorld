@@ -8,7 +8,6 @@
 	<classpathentry kind="src" path="Purity"/>
 	<classpathentry kind="src" path="Miscelaneo"/>
 	<classpathentry kind="src" path="Husbrandy"/>
-	<classpathentry kind="src" path="BaseHabilidades"/>
 	<classpathentry kind="src" path="Physics"/>
 	<classpathentry kind="src" path="Skills"/>
 	<classpathentry kind="src" path="ArmasFuego"/>
