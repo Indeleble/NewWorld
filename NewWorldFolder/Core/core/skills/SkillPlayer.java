@@ -1,9 +1,7 @@
 package core.skills;
 
 import javax.annotation.Nonnull;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -16,9 +14,6 @@ public class SkillPlayer {
 
 	@Nonnull
 	private String accountName;
-
-	@Nonnull
-	private int totalExp;
 	
 	@Nonnull
 	private int totalLvl;
@@ -77,10 +72,6 @@ public class SkillPlayer {
 	
 	public int getTotalLevel(){
 		return this.totalLvl;
-	}
-	
-	public void setTotalExp(int exp){
-		this.totalExp = exp;
 	}
 
 	/*
@@ -175,9 +166,6 @@ public class SkillPlayer {
 	}
 	public void setPescaExp(int pescaExp) {
 		this.pescaExp = pescaExp;
-	}
-	public int getTotalExp() {
-		return totalExp;
 	}
 	public void setMineriaLvl(int mineriaLvl) {
 		this.mineriaLvl = mineriaLvl;
