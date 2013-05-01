@@ -1,6 +1,5 @@
 package core;
 
-
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -23,39 +22,39 @@ public class Core extends JavaPlugin {
 	PluginManager pm;
 	SkillPlayerManager spm;
 	HusAnimalManager ham;
-	
 
 	@Override
 	public void onEnable() {
 
 		log = this.getLogger();
-		
+
 		log.info("Setting up database");
 		setupDatabase();
 		db = this.getDatabase();
-		
+
 		spm = new SkillPlayerManager(db, log);
 		pm = this.getServer().getPluginManager();
-		
-		pm.registerEvents(new PlayerListener(spm), this);
-		
 
-		
-				
+		pm.registerEvents(new PlayerListener(spm), this);
+
 	}
 
 	@Override
 	public void onDisable() {
 
 		spm.saveDb();
-		
+
 	}
-	
-	public HusAnimalManager getHusAnimalManager(){
-		
+
+	public HusAnimalManager getHusAnimalManager() {
+
 		return this.ham;
 	}
-	
+
+	public SkillPlayerManager getSkillPlayerManager() {
+
+		return this.spm;
+	}
 
 	private void setupDatabase() {
 		try {

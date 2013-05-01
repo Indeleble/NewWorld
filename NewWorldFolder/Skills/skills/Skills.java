@@ -6,16 +6,18 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import skills.mineria.MiningListener;
+import skills.tala.TalaListener;
 
 import core.Core;
 import core.HusAnimalManager;
+import core.skills.SkillPlayerManager;
 
 
 
 public class Skills extends JavaPlugin {
 
 	Logger log;
-	HusAnimalManager ham;
+	SkillPlayerManager spm;
 	
 	@Override
 	public void onEnable() {
@@ -25,8 +27,10 @@ public class Skills extends JavaPlugin {
 		PluginManager pm = this.getServer().getPluginManager();
 		
 		Core core = (Core) pm.getPlugin("NWCore");
+		spm = core.getSkillPlayerManager();
 
 		pm.registerEvents(new MiningListener(), this);
+		pm.registerEvents(new TalaListener(spm), this);
 
 	}
 

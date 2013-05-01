@@ -14,112 +14,98 @@ public class SkillPlayer {
 
 	@Column
 	private String accountName;
+
+	@Column
+	private int totalExp;
 	
+	@Column
+	private int totalLvl;
+
 	@Column
 	private int mineriaLvl;
-	
+
 	@Column
 	private int mineriaExp;
-	
+
 	@Column
 	private int talaLvl;
-	
+
 	@Column
 	private int talaExp;
-	
+
 	@Column
 	private int agriculturaLvl;
-	
+
 	@Column
 	private int agriculturaExp;
-	
+
 	@Column
 	private int pescaLvl;
-	
+
 	@Column
 	private int pescaExp;
 
+	private int checkTotalLevel(int skillActualLevel, int skillExpGained) {
+
+		int expNeed = (int) (this.totalExp + Math
+				.round(Math.log(this.totalExp) * 21));
+
+		if ((skillActualLevel + skillExpGained) >= expNeed) {
+
+			return (skillActualLevel + skillExpGained) - expNeed;
+		} else {
+
+			return skillExpGained;
+		}
+
+	}
 	
-
-	public int getId() {
-		return id;
+	public int getTotalLevel(){
+		return this.totalLvl;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
+	/*
+	 * Mineria
+	 */
 
-	public String getAccountName() {
-		return accountName;
-	}
+	public void addMineriaExp(int exp) {
 
-	public void setAccountName(String accountName) {
-		this.accountName = accountName;
+		if (this.mineriaLvl < 100) {
+
+			if (this.checkTotalLevel(this.mineriaExp, exp) == exp) {
+				this.mineriaExp += exp;
+			} else {
+				this.mineriaExp = this.checkTotalLevel(this.mineriaExp, exp);
+				this.mineriaLvl++;
+				this.totalLvl++;
+			}
+		}
 	}
 
 	public int getMineriaLvl() {
-		return mineriaLvl;
+		return this.mineriaLvl;
 	}
 
-	public void setMineriaLvl(int mineriaLvl) {
-		this.mineriaLvl = mineriaLvl;
-	}
+	/*
+	 * Tala
+	 */
 
-	public int getMineriaExp() {
-		return mineriaExp;
-	}
+	public void addTalaExp(int exp) {
 
-	public void setMineriaExp(int mineriaExp) {
-		this.mineriaExp = mineriaExp;
+		if (this.talaLvl < 100) {
+
+			if (this.checkTotalLevel(this.talaExp, exp) == exp) {
+				this.talaExp += exp;
+			} else {
+				this.talaExp = this.checkTotalLevel(this.talaExp, exp);
+				this.talaLvl++;
+				this.totalLvl++;
+			}
+		}
 	}
 
 	public int getTalaLvl() {
-		return talaLvl;
+		return this.mineriaLvl;
 	}
-
-	public void setTalaLvl(int talaLvl) {
-		this.talaLvl = talaLvl;
-	}
-
-	public int getTalaExp() {
-		return talaExp;
-	}
-
-	public void setTalaExp(int talaExp) {
-		this.talaExp = talaExp;
-	}
-
-	public int getAgriculturaLvl() {
-		return agriculturaLvl;
-	}
-
-	public void setAgriculturaLvl(int agriculturaLvl) {
-		this.agriculturaLvl = agriculturaLvl;
-	}
-
-	public int getAgriculturaExp() {
-		return agriculturaExp;
-	}
-
-	public void setAgriculturaExp(int agriculturaExp) {
-		this.agriculturaExp = agriculturaExp;
-	}
-
-	public int getPescaLvl() {
-		return pescaLvl;
-	}
-
-	public void setPescaLvl(int pescaLvl) {
-		this.pescaLvl = pescaLvl;
-	}
-
-	public int getPescaExp() {
-		return pescaExp;
-	}
-
-	public void setPescaExp(int pescaExp) {
-		this.pescaExp = pescaExp;
-	}
-
 
 }
