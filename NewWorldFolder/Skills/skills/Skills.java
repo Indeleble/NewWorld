@@ -28,7 +28,7 @@ public class Skills extends JavaPlugin {
 		
 		//Register listeners
 		pm.registerEvents(new MiningListener(), this);
-		pm.registerEvents(new TalaListener(spm, log), this);
+		pm.registerEvents(new TalaListener(spm, log, this), this);
 		
 		//Register commands
 		getCommand("skills").setExecutor(new SkillCommandsBaseListener(spm));
