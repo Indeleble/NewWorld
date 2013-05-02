@@ -40,7 +40,7 @@ public class CarpinteriaListener implements Listener {
 		
 		if (user.inGroup("carpinteria")) {
 			sp = spm.getSkillPlayer(player.getName());
-			if (resultado==4){
+			if (resultado==5){
 				sp.addCarpinteriaExp(200);
 				player.sendMessage("Experiencia en carpinteria subio en 200 puntos");
 				player.sendMessage("Experiencia en carpinteria: " + sp.getCarpinteriaExp());

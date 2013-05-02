@@ -1,13 +1,8 @@
 package gui.command;
 
-import gui.Gui;
-
-import org.bukkit.event.EventHandler;
 import org.getspout.spoutapi.event.input.KeyBindingEvent;
-import org.getspout.spoutapi.event.input.KeyPressedEvent;
 import org.getspout.spoutapi.gui.ScreenType;
 import org.getspout.spoutapi.keyboard.BindingExecutionDelegate;
-import org.getspout.spoutapi.player.SpoutPlayer;
 
 
 public class GuiHandler implements BindingExecutionDelegate{
@@ -19,22 +14,14 @@ public class GuiHandler implements BindingExecutionDelegate{
 	}
 
 	@Override
-	public void keyReleased(KeyBindingEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void keyReleased(KeyBindingEvent event) {
+		if (event.getPlayer().getActiveScreen() == ScreenType.GAME_SCREEN) {
+			if (event.getBinding().getId().equalsIgnoreCase("menu de inventario sacra")) {
+				GuiMenu giMenu = new GuiMenu(event.getPlayer());
+				event.getPlayer().getMainScreen().attachPopupScreen(giMenu);
+				return;
+			}
+		}
 	}
 
-	@EventHandler
-	public void onKeyPress(KeyPressedEvent event) { 
-		if (event.getKey().equals(event.getPlayer().getInventoryKey())) {
-			SpoutPlayer player = event.getPlayer();
-			if (player.getActiveScreen() == ScreenType.GAME_SCREEN || player.getActiveScreen() == ScreenType.PLAYER_INVENTORY) {
-				final CustomGui gi = new CustomGui(Gui.getPlayer(player));
-					gi.makeGui();
-				}
-			}
-	}
-	
-	
-	
 }
