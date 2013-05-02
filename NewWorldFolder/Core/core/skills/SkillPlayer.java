@@ -686,7 +686,7 @@ public class SkillPlayer {
 		return mamposteriaExp;
 	}
 	
-	public void setMamposteriaLvl(Integer mamposteriaLvl) {
+	public void setMamposteriaLvl(int mamposteriaLvl) {
 		this.mamposteriaLvl = mamposteriaLvl;
 	}
 
@@ -721,7 +721,7 @@ public class SkillPlayer {
 		return domaExp;
 	}
 	
-	public void setDomaLvl(Integer domaLvl) {
+	public void setDomaLvl(int domaLvl) {
 		this.domaLvl = domaLvl;
 	}
 
@@ -756,7 +756,7 @@ public class SkillPlayer {
 		return pinturaExp;
 	}
 	
-	public void setPinturaLvl(Integer pinturaLvl) {
+	public void setPinturaLvl(int pinturaLvl) {
 		this.pinturaLvl = pinturaLvl;
 	}
 
@@ -791,7 +791,7 @@ public class SkillPlayer {
 		return arcoExp;
 	}
 	
-	public void setArcoLvl(Integer arcoLvl) {
+	public void setArcoLvl(int arcoLvl) {
 		this.arcoLvl = arcoLvl;
 	}
 
@@ -826,7 +826,7 @@ public class SkillPlayer {
 		return escudosExp;
 	}
 	
-	public void setEscudosLvl(Integer escudosLvl) {
+	public void setEscudosLvl(int escudosLvl) {
 		this.escudosLvl = escudosLvl;
 	}
 
@@ -861,7 +861,7 @@ public class SkillPlayer {
 		return armadurasExp;
 	}
 	
-	public void setArmadurasLvl(Integer armadurasLvl) {
+	public void setArmadurasLvl(int armadurasLvl) {
 		this.armadurasLvl = armadurasLvl;
 	}
 
@@ -896,7 +896,7 @@ public class SkillPlayer {
 		return lanzasExp;
 	}
 	
-	public void setLanzasLvl(Integer lanzasLvl) {
+	public void setLanzasLvl(int lanzasLvl) {
 		this.lanzasLvl = lanzasLvl;
 	}
 
@@ -931,7 +931,7 @@ public class SkillPlayer {
 		return espadasExp;
 	}
 	
-	public void setEspadasLvl(Integer espadasLvl) {
+	public void setEspadasLvl(int espadasLvl) {
 		this.espadasLvl = espadasLvl;
 	}
 
@@ -966,7 +966,7 @@ public class SkillPlayer {
 		return hachasExp;
 	}
 	
-	public void setHachasLvl(Integer hachasLvl) {
+	public void setHachasLvl(int hachasLvl) {
 		this.hachasLvl = hachasLvl;
 	}
 
@@ -1001,7 +1001,7 @@ public class SkillPlayer {
 		return mazasExp;
 	}
 	
-	public void setMazasLvl(Integer mazasLvl) {
+	public void setMazasLvl(int mazasLvl) {
 		this.mazasLvl = mazasLvl;
 	}
 
