@@ -1,0 +1,50 @@
+package skills.carpinteria;
+
+import java.util.logging.Logger;
+
+import org.bukkit.entity.HumanEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.CraftItemEvent;
+
+import ru.tehkode.permissions.PermissionUser;
+import ru.tehkode.permissions.bukkit.PermissionsEx;
+import core.skills.SkillPlayer;
+import core.skills.SkillPlayerManager;
+
+public class CarpinteriaListener implements Listener {
+
+		SkillPlayerManager spm;
+		Logger log;
+
+		public CarpinteriaListener(SkillPlayerManager spm, Logger log) {
+
+			this.spm = spm;
+			this.log = log;
+		}
+
+		@EventHandler(priority = EventPriority.HIGHEST)
+		public void CarpinteriaCraftEvent(CraftItemEvent event){
+
+			HumanEntity entity = event.getViewers().get(0);
+			Player player = (Player) entity;
+
+			SkillPlayer sp;
+
+			PermissionUser user = PermissionsEx.getUser(player);
+
+			if (user.inGroup("carpinteria")) {
+				sp = spm.getSkillPlayer(player.getName());
+				if (event.getRecipe().equals(5)){
+					sp.addCarpinteriaExp(200);
+					player.sendMessage("Experiencia en carpinteria subio en 200 puntos");
+					player.sendMessage("Experiencia en carpinteria: " + sp.getCarpinteriaExp());
+					player.sendMessage("Nivel de carpinteria: " + sp.getCarpinteriaLvl());
+					player.sendMessage("Nivel total: " + sp.getTotalLevel());
+				
+				} 
+			}
+		}
+}
