@@ -35,7 +35,19 @@ public class SkillPlayer {
 
 	@Nonnull
 	private int agriculturaExp;
+	
+	@Nonnull
+	private int ganaderiaLvl;
 
+	@Nonnull
+	private int ganaderiaExp;
+
+	@Nonnull
+	private int botanicaLvl;
+	
+	@Nonnull
+	private int botanicaExp;
+	
 	@Nonnull
 	private int pescaLvl;
 
@@ -108,6 +120,7 @@ public class SkillPlayer {
 		this.mineriaExp = mineriaExp;
 	}
 
+
 	/*
 	 * Tala
 	 */
@@ -130,6 +143,95 @@ public class SkillPlayer {
 		return this.talaLvl;
 	}
 	
+	public int getTalaExp() {
+		return talaExp;
+	}
+	
+	public void setTalaLvl(int talaLvl) {
+		this.talaLvl = talaLvl;
+	}
+	
+	public void setTalaExp(int talaExp) {
+		this.talaExp = talaExp;
+	}
+	
+
+	/*
+	 * Agricultura
+	 */
+
+	public void addAgriculturaExp(int exp) {
+
+		if (this.agriculturaLvl < 100 && this.totalLvl<150) {
+
+			if (this.checkTotalLevel(this.agriculturaExp, exp) == exp) {
+				this.agriculturaExp += exp;
+			} else {
+				this.agriculturaExp = this.checkTotalLevel(this.agriculturaExp, exp);
+				this.agriculturaLvl++;
+				this.totalLvl++;
+			}
+		}
+	}
+
+	public int getAgriculturaLvl() {
+		return this.agriculturaLvl;
+	}
+	
+	public int getAgriculturaExp() {
+		return agriculturaExp;
+	}
+	
+	public void setAgriculturaLvl(int agriculturaLvl) {
+		this.agriculturaLvl = agriculturaLvl;
+	}
+	
+	public void setAgriculturaExp(int agriculturaExp) {
+		this.agriculturaExp = agriculturaExp;
+	}
+
+
+	/*
+	 * Ganaderia
+	 */
+
+	public void addGanaderiaExp(int exp) {
+
+		if (this.ganaderiaLvl < 100 && this.totalLvl<150) {
+
+			if (this.checkTotalLevel(this.ganaderiaExp, exp) == exp) {
+				this.ganaderiaExp += exp;
+			} else {
+				this.ganaderiaExp = this.checkTotalLevel(this.ganaderiaExp, exp);
+				this.ganaderiaLvl++;
+				this.totalLvl++;
+			}
+		}
+	}
+
+	public int getGanaderiaLvl() {
+		return this.ganaderiaLvl;
+	}
+	
+	public int getGanaderiaExp() {
+		return ganaderiaExp;
+	}
+	
+	public void setGanaderiaLvl(int ganaderiaLvl) {
+		this.ganaderiaLvl = ganaderiaLvl;
+	}
+	
+	public void setGanaderiaExp(int ganaderiaExp) {
+		this.ganaderiaExp = ganaderiaExp;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public int getId() {
 		return id;
@@ -144,24 +246,6 @@ public class SkillPlayer {
 		this.totalLvl = totalLvl;
 	}
 
-	public int getTalaExp() {
-		return talaExp;
-	}
-	public void setTalaExp(int talaExp) {
-		this.talaExp = talaExp;
-	}
-	public int getAgriculturaLvl() {
-		return agriculturaLvl;
-	}
-	public void setAgriculturaLvl(int agriculturaLvl) {
-		this.agriculturaLvl = agriculturaLvl;
-	}
-	public int getAgriculturaExp() {
-		return agriculturaExp;
-	}
-	public void setAgriculturaExp(int agriculturaExp) {
-		this.agriculturaExp = agriculturaExp;
-	}
 	public int getPescaLvl() {
 		return pescaLvl;
 	}
@@ -175,8 +259,5 @@ public class SkillPlayer {
 		this.pescaExp = pescaExp;
 	}
 
-	public void setTalaLvl(int talaLvl) {
-		this.talaLvl = talaLvl;
-	}
 
 }
