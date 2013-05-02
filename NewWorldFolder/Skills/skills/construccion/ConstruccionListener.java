@@ -1,4 +1,4 @@
-package skills.tala;
+package skills.construccion;
 
 import java.util.logging.Logger;
 
