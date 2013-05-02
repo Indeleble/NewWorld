@@ -8,13 +8,23 @@ public class CustomDrop {
 	ItemStack itemStack;
 	int maxLevel;
 	int amount;
+	int prob;
 
-	public CustomDrop(ItemStack itemStack, int maxLevel, int amount) {
+	public CustomDrop(ItemStack itemStack, int maxLevel, int amount, int prob) {
 
 		this.itemStack = itemStack;
 		this.maxLevel = maxLevel;
 		this.amount = amount;
+		this.prob = prob;
 
+	}
+
+	public int getProb() {
+		return prob;
+	}
+
+	public void setProb(int prob) {
+		this.prob = prob;
 	}
 
 	public ItemStack getItemStack() {

@@ -32,7 +32,7 @@ public class Skills extends JavaPlugin {
 		
 		//Register commands
 		getCommand("skills").setExecutor(new SkillCommandsBaseListener(spm));
-
+		
 	}
 
 	@Override

@@ -5,11 +5,10 @@ import java.util.Random;
 
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.material.MaterialData;
 
 public class ItemPurityBuilder {
 
-	ArrayList<CustomDrop> drops;
+	ArrayList<CustomDrop>	drops;
 
 	public ItemPurityBuilder() {
 
@@ -26,25 +25,18 @@ public class ItemPurityBuilder {
 		// Array de drops que devolvera
 		ArrayList<ItemStack> finalDrops = new ArrayList<ItemStack>();
 
-		// Cantidad de posibles drops. Cada drop puede tener su propia cantidad
-		// final
-		int total = this.drops.size();
-
 		Random r = new Random();
 		r.setSeed(r.nextLong());
 
-		// P es la posicion del tipo de drop que se dropeara
-		int p = r.nextInt(total);
+		for (CustomDrop drop : drops) {
 
-		for (int i = 0; i < drops.get(p).getAmount(); i++) {
+			if (r.nextInt(101) + 1 <= drop.getProb()) {
 
-			// 80% de posibilidades de añadir el drop
-			if (r.nextInt(6) != 0) {
+				for (int j = 0; j < drop.getAmount(); j++) {
 
-				// Añadimos a la lista de drops final los drops con su purity
-				// basada en el nivel maximo
-				// que pueden llegar a tener
-				finalDrops.add(this.buildItem(drops.get(p).getItemStack(), drops.get(p).getMaxLevel()));
+					finalDrops.add(this.buildItem(drop.getItemStack(), drop.getMaxLevel()));
+				}
+				break;
 			}
 		}
 
@@ -55,7 +47,7 @@ public class ItemPurityBuilder {
 		ItemStack item = is.clone();
 		Random r = new Random();
 		r.setSeed(r.nextLong());
-		
+
 		int v = r.nextInt(probability + 1);
 		if (v == 0)
 			v = 1;
@@ -79,8 +71,7 @@ public class ItemPurityBuilder {
 
 		if (is.getItemMeta().getLore() != null) {
 
-			ArrayList<String> lore = (ArrayList<String>) is.getItemMeta()
-					.getLore();
+			ArrayList<String> lore = (ArrayList<String>) is.getItemMeta().getLore();
 
 			for (int i = 0; i < lore.size(); i++) {
 
