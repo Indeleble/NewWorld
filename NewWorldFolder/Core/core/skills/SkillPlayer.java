@@ -43,12 +43,6 @@ public class SkillPlayer {
 	private int ganaderiaExp;
 
 	@Nonnull
-	private int botanicaLvl;
-	
-	@Nonnull
-	private int botanicaExp;
-	
-	@Nonnull
 	private int pescaLvl;
 
 	@Nonnull
@@ -342,41 +336,6 @@ public class SkillPlayer {
 	
 	public void setGanaderiaExp(int ganaderiaExp) {
 		this.ganaderiaExp = ganaderiaExp;
-	}
-
-
-	/*
-	 * Botanica
-	 */
-
-	public void addBotanicaExp(int exp) {
-
-		if (this.botanicaLvl < 100 && this.totalLvl<150) {
-
-			if (this.checkTotalLevel(this.botanicaExp, exp) == exp) {
-				this.botanicaExp += exp;
-			} else {
-				this.botanicaExp = this.checkTotalLevel(this.botanicaExp, exp);
-				this.botanicaLvl++;
-				this.totalLvl++;
-			}
-		}
-	}
-
-	public int getBotanicaLvl() {
-		return this.botanicaLvl;
-	}
-	
-	public int getBotanicaExp() {
-		return botanicaExp;
-	}
-	
-	public void setBotanicaLvl(int botanicaLvl) {
-		this.botanicaLvl = botanicaLvl;
-	}
-	
-	public void setBotanicaExp(int botanicaExp) {
-		this.botanicaExp = botanicaExp;
 	}
 
 
