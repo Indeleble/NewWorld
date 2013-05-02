@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.CraftItemEvent;
+import org.bukkit.inventory.ItemStack;
 
 import ru.tehkode.permissions.PermissionUser;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
@@ -34,10 +35,12 @@ public class CarpinteriaListener implements Listener {
 		SkillPlayer sp;
 
 		PermissionUser user = PermissionsEx.getUser(player);
-
+		ItemStack res = event.getInventory().getResult();
+		int resultado = res.getTypeId();
+		
 		if (user.inGroup("carpinteria")) {
 			sp = spm.getSkillPlayer(player.getName());
-			if (event.getResult().equals(5)){
+			if (resultado==4){
 				sp.addCarpinteriaExp(200);
 				player.sendMessage("Experiencia en carpinteria subio en 200 puntos");
 				player.sendMessage("Experiencia en carpinteria: " + sp.getCarpinteriaExp());
