@@ -76,7 +76,7 @@ public class SkillCommandsBaseListener implements CommandExecutor {
 									user.addGroup(args[1].toLowerCase());
 									sender.sendMessage(ChatColor.RED
 											+ "Decides aprender:  " + args[1]
-											+ " y epmpieza a nivel 10");
+											+ " y empieza a nivel 10");
 									sp.addTotalLevel(10);
 									sp.setTalaLvl(10);
 									return true;
