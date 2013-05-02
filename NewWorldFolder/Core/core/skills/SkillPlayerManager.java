@@ -23,7 +23,7 @@ public class SkillPlayerManager extends BukkitRunnable {
 		this.core = core;
 		Query<SkillPlayer> query = db.find(SkillPlayer.class);
 		skillPlayerList = query.findList();
-		this.runTaskTimerAsynchronously(this.core, 50, 50);
+		this.runTaskTimerAsynchronously(this.core, 200, 200);
 	}
 
 	public void saveDb() {

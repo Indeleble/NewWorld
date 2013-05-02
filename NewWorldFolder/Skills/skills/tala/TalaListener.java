@@ -45,16 +45,13 @@ public class TalaListener implements Listener {
 				|| event.getBlock().getTypeId() == 18) {
 
 			if (user.inGroup("tala")) {
+				
+				log.info(String.valueOf(itemId));
 
 				if (itemId == 275 || itemId == 258 || itemId == 279) {
 					
-					event.setCancelled(true);
-					event.getBlock().setTypeId(0);
-					
 					sp = spm.getSkillPlayer(player.getName());
 					ipb = new ItemPurityBuilder();
-					
-					
 
 					if (event.getBlock().getTypeId() == 17) {
 						
@@ -63,9 +60,14 @@ public class TalaListener implements Listener {
 						if (itemId == 275) ipb.addDrop(new CustomDrop(new ItemStack(280), sp.getTalaLvl(), 2));
 						if (itemId == 258) ipb.addDrop(new CustomDrop(new ItemStack(280), sp.getTalaLvl(), 3));
 						if (itemId == 279) ipb.addDrop(new CustomDrop(new ItemStack(280), sp.getTalaLvl(), 4));
+						log.info(String.valueOf(ipb.getDrops().size()));
+						log.info("Hace cooosaaaas");
 						
+						if (ipb.getDrops().size()>0){
 						for (int i=0; i< ipb.getDrops().size();i++){
 							pl.getServer().getWorld("world").dropItem(blockLocation, ipb.getDrops().get(i));
+							log.info("Hace cooosaaaas muchaaaaaas");
+							}
 						}
 						
 						sp.addTalaExp(200);
@@ -75,13 +77,17 @@ public class TalaListener implements Listener {
 						player.sendMessage("Nivel de tala: " + sp.getTalaLvl());
 						player.sendMessage("Nivel total: " + sp.getTotalLevel());
 						
-						
+						event.setCancelled(true);
+						event.getBlock().setTypeId(0);
 
 					} else
 						sp.addTalaExp(150);
 					player.sendMessage("Experiencia en tala subio en 150 puntos");
 					player.sendMessage("Nivel de tala: " + sp.getTalaLvl());
 					player.sendMessage("Nivel total: " + sp.getTotalLevel());
+					
+					event.setCancelled(true);
+					event.getBlock().setTypeId(0);
 
 				}
 			}

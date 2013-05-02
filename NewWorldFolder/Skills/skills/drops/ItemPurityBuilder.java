@@ -8,8 +8,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 public class ItemPurityBuilder {
 
-	ItemStack is;
-	int prob;
 	ArrayList<CustomDrop> drops;
 
 	public ItemPurityBuilder() {
@@ -39,7 +37,7 @@ public class ItemPurityBuilder {
 		
 		for (int i = 0; i < drops.get(p).getAmount(); i++) {
 			
-			// 50% de posibilidades de añadir el drop
+			// 75% de posibilidades de añadir el drop
 			if (r.nextInt(4) != 0){
 			
 			// Añadimos a la lista de drops final los drops con su purity basada en el nivel maximo
@@ -54,14 +52,11 @@ public class ItemPurityBuilder {
 
 	private ItemStack buildItem(ItemStack is, int probability) {
 
-		this.is = is;
-		this.prob = probability;
-
 		if (!hasPurity(is)) {
 
 			Random r = new Random();
 			r.setSeed(r.nextLong());
-			int v = r.nextInt(prob + 1);
+			int v = r.nextInt(probability + 1);
 			if (v == 0)
 				v = 1;
 
