@@ -3,6 +3,7 @@ package skills.tala;
 import java.util.logging.Logger;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -54,20 +55,22 @@ public class TalaListener implements Listener {
 					ipb = new ItemPurityBuilder();
 
 					if (event.getBlock().getTypeId() == 17) {
+					
 						
-						ipb.addDrop(new CustomDrop(new ItemStack(event.getBlock().getType()), sp.getTalaLvl(), 1));
-						
-						if (itemId == 275) ipb.addDrop(new CustomDrop(new ItemStack(280), sp.getTalaLvl(), 2));
-						if (itemId == 258) ipb.addDrop(new CustomDrop(new ItemStack(280), sp.getTalaLvl(), 3));
-						if (itemId == 279) ipb.addDrop(new CustomDrop(new ItemStack(280), sp.getTalaLvl(), 4));
+						ipb.addDrop(new CustomDrop(event.getBlock().getState().getData().toItemStack(1), sp.getTalaLvl(), 1));
+						ItemStack stick = new ItemStack(280);
+						if (itemId == 275) ipb.addDrop(new CustomDrop(stick, sp.getTalaLvl(), 2));
+						if (itemId == 258) ipb.addDrop(new CustomDrop(stick, sp.getTalaLvl(), 3));
+						if (itemId == 279) ipb.addDrop(new CustomDrop(stick, sp.getTalaLvl(), 4));
 						log.info(String.valueOf(ipb.getDrops().size()));
-						log.info("Hace cooosaaaas");
 						
-						if (ipb.getDrops().size()>0){
-						for (int i=0; i< ipb.getDrops().size();i++){
-							pl.getServer().getWorld("world").dropItem(blockLocation, ipb.getDrops().get(i));
-							log.info("Hace cooosaaaas muchaaaaaas");
-							}
+						
+						
+						for (ItemStack is : ipb.getDrops()){
+							pl.getServer().getWorld("world").dropItem(blockLocation, is);
+							log.info("Ha spawneado: " + is.getType().toString());
+							
+							
 						}
 						
 						sp.addTalaExp(200);

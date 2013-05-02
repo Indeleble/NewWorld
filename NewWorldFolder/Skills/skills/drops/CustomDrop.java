@@ -2,6 +2,7 @@ package skills.drops;
 
 import org.bukkit.inventory.ItemStack;
 
+
 public class CustomDrop {
 
 	ItemStack itemStack;
@@ -13,6 +14,15 @@ public class CustomDrop {
 		this.itemStack = itemStack;
 		this.maxLevel = maxLevel;
 		this.amount = amount;
+
+	}
+
+	public ItemStack getItemStack() {
+		return itemStack;
+	}
+
+	public void setItemStack(ItemStack itemStack) {
+		this.itemStack = itemStack;
 	}
 
 	public int getMaxLevel() {
@@ -31,12 +41,8 @@ public class CustomDrop {
 		this.amount = amount;
 	}
 
-	public ItemStack getItemStack() {
-		return itemStack;
-	}
 
-	public void setItemStack(ItemStack itemStack) {
-		this.itemStack = itemStack;
-	}
+
+
 
 }

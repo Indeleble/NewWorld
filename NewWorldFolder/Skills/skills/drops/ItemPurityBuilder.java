@@ -5,6 +5,7 @@ import java.util.Random;
 
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.material.MaterialData;
 
 public class ItemPurityBuilder {
 
@@ -21,29 +22,29 @@ public class ItemPurityBuilder {
 	}
 
 	public ArrayList<ItemStack> getDrops() {
-		
-		//Array de drops que devolvera
+
+		// Array de drops que devolvera
 		ArrayList<ItemStack> finalDrops = new ArrayList<ItemStack>();
-		
-		//Cantidad de posibles drops. Cada drop puede tener su propia cantidad final
+
+		// Cantidad de posibles drops. Cada drop puede tener su propia cantidad
+		// final
 		int total = this.drops.size();
-		
+
 		Random r = new Random();
-		
+		r.setSeed(r.nextLong());
+
 		// P es la posicion del tipo de drop que se dropeara
 		int p = r.nextInt(total);
-		
-		r.setSeed(r.nextLong());
-		
+
 		for (int i = 0; i < drops.get(p).getAmount(); i++) {
-			
-			// 75% de posibilidades de añadir el drop
-			if (r.nextInt(4) != 0){
-			
-			// Añadimos a la lista de drops final los drops con su purity basada en el nivel maximo
-			// que pueden llegar a tener
-			finalDrops.add(this.buildItem(drops.get(p).getItemStack(), drops
-					.get(p).getMaxLevel()));
+
+			// 80% de posibilidades de añadir el drop
+			if (r.nextInt(6) != 0) {
+
+				// Añadimos a la lista de drops final los drops con su purity
+				// basada en el nivel maximo
+				// que pueden llegar a tener
+				finalDrops.add(this.buildItem(drops.get(p).getItemStack(), drops.get(p).getMaxLevel()));
 			}
 		}
 
@@ -51,27 +52,25 @@ public class ItemPurityBuilder {
 	}
 
 	private ItemStack buildItem(ItemStack is, int probability) {
+		ItemStack item = is.clone();
+		Random r = new Random();
+		r.setSeed(r.nextLong());
+		
+		int v = r.nextInt(probability + 1);
+		if (v == 0)
+			v = 1;
 
-		if (!hasPurity(is)) {
+		ItemMeta im = is.getItemMeta();
 
-			Random r = new Random();
-			r.setSeed(r.nextLong());
-			int v = r.nextInt(probability + 1);
-			if (v == 0)
-				v = 1;
+		ArrayList<String> lore = new ArrayList<String>();
 
-			ItemMeta im = is.getItemMeta();
+		lore.add("Calidad: " + v);
 
-			ArrayList<String> lore = new ArrayList<String>();
+		im.setLore(lore);
 
-			lore.add("Calidad: " + v);
+		item.setItemMeta(im);
 
-			im.setLore(lore);
-
-			is.setItemMeta(im);
-		}
-
-		return is;
+		return item;
 	}
 
 	private boolean hasPurity(ItemStack is) {
