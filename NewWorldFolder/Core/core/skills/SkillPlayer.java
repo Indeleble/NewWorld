@@ -96,6 +96,18 @@ public class SkillPlayer {
 		return this.mineriaLvl;
 	}
 
+	public int getMineriaExp() {
+		return mineriaExp;
+	}
+	
+	public void setMineriaLvl(int mineriaLvl) {
+		this.mineriaLvl = mineriaLvl;
+	}
+	
+	public void setMineriaExp(int mineriaExp) {
+		this.mineriaExp = mineriaExp;
+	}
+
 	/*
 	 * Tala
 	 */
@@ -131,12 +143,7 @@ public class SkillPlayer {
 	public void setTotalLvl(int totalLvl) {
 		this.totalLvl = totalLvl;
 	}
-	public int getMineriaExp() {
-		return mineriaExp;
-	}
-	public void setMineriaExp(int mineriaExp) {
-		this.mineriaExp = mineriaExp;
-	}
+
 	public int getTalaExp() {
 		return talaExp;
 	}
@@ -167,9 +174,7 @@ public class SkillPlayer {
 	public void setPescaExp(int pescaExp) {
 		this.pescaExp = pescaExp;
 	}
-	public void setMineriaLvl(int mineriaLvl) {
-		this.mineriaLvl = mineriaLvl;
-	}
+
 	public void setTalaLvl(int talaLvl) {
 		this.talaLvl = talaLvl;
 	}
