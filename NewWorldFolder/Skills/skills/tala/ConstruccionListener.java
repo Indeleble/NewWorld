@@ -31,7 +31,8 @@ public class ConstruccionListener implements Listener {
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void ConstruccionBlockPlaceEvent(BlockPlaceEvent event) {
 
-		Block block = event.getBlockPlaced();
+		Block b = event.getBlockPlaced();
+		int block = b.getTypeId();
 		Player player = event.getPlayer();
 		PermissionUser user = PermissionsEx.getUser(player);
 		SkillPlayer sp;
@@ -40,7 +41,7 @@ public class ConstruccionListener implements Listener {
 					
 			sp = spm.getSkillPlayer(player.getName());
 
-			if (block.getTypeId() == 4) {
+			if (block == 4) {
 
 				sp.addConstruccionExp(200);
 				player.sendMessage("Experiencia en construccion subio en 200 puntos");
