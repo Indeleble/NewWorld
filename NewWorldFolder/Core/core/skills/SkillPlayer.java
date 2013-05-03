@@ -85,12 +85,6 @@ public class SkillPlayer {
 	private int apotecarioExp;
 	
 	@Nonnull
-	private int joyeriaLvl;
-
-	@Nonnull
-	private int joyeriaExp;
-	
-	@Nonnull
 	private int mamposteriaLvl;
 
 	@Nonnull
@@ -582,43 +576,8 @@ public class SkillPlayer {
 	public void setApotecarioExp(int apotecarioExp) {
 		this.apotecarioExp = apotecarioExp;
 	}
-	
-	
-	/*
-	 * Joyeria
-	 */
 
-	public void addJoyeriaExp(int exp) {
 
-		if (this.joyeriaLvl < 20 && this.joyeriaLvl<150) {
-
-			if (this.checkTotalLevel(this.joyeriaExp, exp) == exp) {
-				this.joyeriaExp += exp;
-			} else {
-				this.joyeriaExp = this.checkTotalLevel(this.joyeriaExp, exp);
-				this.joyeriaLvl++;
-				this.totalLvl++;
-			}
-		}
-	}
-
-	public int getJoyeriaLvl() {
-		return joyeriaLvl;
-	}
-	
-	public int getJoyeriaExp() {
-		return joyeriaExp;
-	}
-	
-	public void setJoyeriaLvl(int joyeriaLvl) {
-		this.joyeriaLvl = joyeriaLvl;
-	}
-
-	public void setJoyeriaExp(int joyeriaExp) {
-		this.joyeriaExp = joyeriaExp;
-	}
-	
-	
 	/*
 	 * Mamposteria
 	 */

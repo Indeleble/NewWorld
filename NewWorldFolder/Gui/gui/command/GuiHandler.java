@@ -8,9 +8,8 @@ import org.getspout.spoutapi.keyboard.BindingExecutionDelegate;
 public class GuiHandler implements BindingExecutionDelegate{
 
 	@Override
-	public void keyPressed(KeyBindingEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void keyPressed(KeyBindingEvent event) {
+
 	}
 
 	@Override
@@ -23,5 +22,4 @@ public class GuiHandler implements BindingExecutionDelegate{
 			}
 		}
 	}
-
 }

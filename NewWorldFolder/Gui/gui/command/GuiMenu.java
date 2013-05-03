@@ -21,8 +21,6 @@ import core.skills.SkillPlayerManager;
 public class GuiMenu extends GenericPopup{
 
 	private Label title;
-	private Button nextButton;
-	private Button prevButton;
 	private Button closeButton;
 
 	SkillPlayerManager spm;
