@@ -27,7 +27,7 @@ public class Skills extends JavaPlugin {
 		spm = core.getSkillPlayerManager();
 		
 		//Register listeners
-		pm.registerEvents(new MiningListener(), this);
+		pm.registerEvents(new MiningListener(spm, log, this), this);
 		pm.registerEvents(new TalaListener(spm, log, this), this);
 		
 		//Register commands

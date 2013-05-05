@@ -3,10 +3,11 @@ package armasfuego.cannon;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Listener;
 
 import armasfuego.ArmasFuego;
 
-public class CannonEventHandler {
+public class CannonEventHandler implements Listener{
 
 	@SuppressWarnings("unused")
 	private ArmasFuego plugin;
@@ -16,7 +17,7 @@ public class CannonEventHandler {
 	}
 	
 	
-	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
+	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) { // CAÑON
 		if((cmd.getName().equalsIgnoreCase("canon")) || (cmd.getName().equalsIgnoreCase("ca"))){
 
         	Player player = (Player) sender;
@@ -67,5 +68,5 @@ public class CannonEventHandler {
 		}
 		return false;
 	}
-	
 }
+

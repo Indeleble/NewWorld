@@ -11,6 +11,7 @@ import org.getspout.spoutapi.keyboard.Keyboard;
 public class Gui extends JavaPlugin{
 	
 	private static GuiHandler gHandler;
+
 	
 	@Override
 	public void onLoad() {
