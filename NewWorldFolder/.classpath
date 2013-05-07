@@ -24,14 +24,5 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="Dependencies/PermissionsEx.jar"/>
 	<classpathentry kind="lib" path="Dependencies/WorldGuard.jar"/>
-	<classpathentry kind="lib" path="C:/Users/pr3ytor/.m2/repository/org/getspout/spoutplugin/dev-SNAPSHOT/spoutplugin-dev-SNAPSHOT.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.groupId" value="org.getspout"/>
-			<attribute name="maven.artifactId" value="spoutplugin"/>
-			<attribute name="maven.version" value="dev-SNAPSHOT"/>
-			<attribute name="maven.scope" value="compile"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
