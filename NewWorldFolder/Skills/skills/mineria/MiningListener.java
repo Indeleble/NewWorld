@@ -101,8 +101,10 @@ public class MiningListener implements Listener {
 		int r2 = 0;
 		if (block.getType() == Material.STONE){ 
 // 			if (user.inGroup("mineria")){ // Colocar a nivel en el que empieza a ser prospectable la piedra
-				if(player.getGameMode()==GameMode.SURVIVAL){ if((inHand==257) || (inHand==274) || (inHand==278) || (inHand==285)){ 
+				if(player.getGameMode()==GameMode.SURVIVAL){ if((inHand==257) || (inHand==274) || (inHand==278) || (inHand==285)){
+
 					ipb = new ItemPurityBuilder();
+
 /*					if(sp.isProspectando()==true){// Si prospecta
 						player.sendMessage("test romper stone prospectando");
 						sp.setProspectando(false); // Pendiente de revisar el prospecteo de cada material
@@ -116,7 +118,7 @@ public class MiningListener implements Listener {
 				}else{ //si no prospecta
 					player.sendMessage("test romper stone sin prospectar");
 					ItemStack cobblestone = new ItemStack(4);
-					if(inHand==274){ //pico cobre 
+/*					if(inHand==274){ //pico cobre 
 						ipb.addDrop(new CustomDrop(cobblestone, sp.getMineriaLvl(), 1, 50)); 
 					} 
 					if (inHand==257) { //pico hierro
@@ -129,7 +131,7 @@ public class MiningListener implements Listener {
 						for (ItemStack is : ipb.getDrops()) {
 							pl.getServer().getWorld("world").dropItem(blockLocation, is);
 						}
-					}
+					}*/
 					sp.addMineriaExp(200);
 					player.sendMessage("Experiencia en mineria subio en 200 puntos");
 					player.sendMessage("Experiencia en mineria: " + sp.getMineriaExp());
@@ -140,7 +142,8 @@ public class MiningListener implements Listener {
 
 						// Añadir el resto de bloques a parte de la piedra
 				}
-			}
+				}
+//			}
 		}
 	}
 }
