@@ -45,20 +45,20 @@ public class TalaListener implements Listener {
 		SkillPlayer sp;
 		PermissionUser user = PermissionsEx.getUser(player);
 		ItemPurityBuilder ipb;
-
+		log.info("Entra en el evento");
 		if (event.getBlock().getTypeId() == 17 || event.getBlock().getTypeId() == 18) {
-
+			log.info("detecta 17 y 18");
 			if (user.inGroup("tala")) {
-
+				log.info("Grupo tala");
 				log.info(String.valueOf(itemId));
 
 				if (itemId == 275 || itemId == 258 || itemId == 279) {
-
+					log.info("Hachas");
 					sp = spm.getSkillPlayer(player.getName());
 					ipb = new ItemPurityBuilder();
 
 					if (event.getBlock().getTypeId() == 17) {
-
+						log.info("Cortando madera");
 						ItemStack stick = new ItemStack(280);
 						if (itemId == 275) {
 							ipb.addDrop(new CustomDrop(event.getBlock().getState().getData().toItemStack(1), sp.getTalaLvl(), 1, 40));
@@ -93,24 +93,23 @@ public class TalaListener implements Listener {
 
 						ItemStack stick = new ItemStack(280);
 						ItemStack leave = event.getBlock().getState().getData().toItemStack(1);
-						ItemStack sapling = new ItemStack(6);
-						MaterialData mds = event.getBlock().getState().getData();
-						sapling.setData(mds);
+						ItemStack sapling = new ItemStack(6, 1, (short) event.getBlock().getData());
 						
+								
 						if (itemId == 275) {
-							ipb.addDrop(new CustomDrop(sapling, sp.getTalaLvl(), 1, 40));
-							ipb.addDrop(new CustomDrop(leave, sp.getTalaLvl(), 2, 50));
-							ipb.addDrop(new CustomDrop(stick, sp.getTalaLvl(), 2, 50));
+							ipb.addDrop(new CustomDrop(sapling, sp.getTalaLvl(), 1, 10));
+							ipb.addDrop(new CustomDrop(leave, sp.getTalaLvl(), 1, 10));
+							ipb.addDrop(new CustomDrop(stick, sp.getTalaLvl(), 1, 30));
 						}
 						if (itemId == 258) {
-							ipb.addDrop(new CustomDrop(sapling, sp.getTalaLvl(), 1, 90));
-							ipb.addDrop(new CustomDrop(leave, sp.getTalaLvl(), 2, 50));
-							ipb.addDrop(new CustomDrop(stick, sp.getTalaLvl(), 2, 50));
+							ipb.addDrop(new CustomDrop(sapling, sp.getTalaLvl(), 1, 15));
+							ipb.addDrop(new CustomDrop(leave, sp.getTalaLvl(), 2, 10));
+							ipb.addDrop(new CustomDrop(stick, sp.getTalaLvl(), 2, 40));
 						}
 						if (itemId == 279) {
-							ipb.addDrop(new CustomDrop(sapling, sp.getTalaLvl(), 1, 40));
-							ipb.addDrop(new CustomDrop(leave, sp.getTalaLvl(), 2, 50));
-							ipb.addDrop(new CustomDrop(stick, sp.getTalaLvl(), 2, 50));
+							ipb.addDrop(new CustomDrop(sapling, sp.getTalaLvl(), 1, 20));
+							ipb.addDrop(new CustomDrop(leave, sp.getTalaLvl(), 1, 10));
+							ipb.addDrop(new CustomDrop(stick, sp.getTalaLvl(), 3, 50));
 						}
 
 						if (ipb.getDrops().size() > 0) {

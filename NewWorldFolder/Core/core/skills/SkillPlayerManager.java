@@ -11,10 +11,10 @@ import com.avaje.ebean.Query;
 
 public class SkillPlayerManager extends BukkitRunnable {
 
-	EbeanServer db;
-	List<SkillPlayer> skillPlayerList;
-	Logger log;
-	Plugin core;
+	EbeanServer			db;
+	List<SkillPlayer>	skillPlayerList;
+	Logger				log;
+	Plugin				core;
 
 	public SkillPlayerManager(EbeanServer db, Logger log, Plugin core) {
 
@@ -27,12 +27,13 @@ public class SkillPlayerManager extends BukkitRunnable {
 	}
 
 	public void saveDb() {
-
+		log.info("Saving data base. NUmber of players to save: " + skillPlayerList.size());
 		for (SkillPlayer sp : this.skillPlayerList) {
-			db.beginTransaction().setPersistCascade(true);
-			db.update(sp);
-			db.commitTransaction();
-			db.endTransaction();
+			//db.beginTransaction().setPersistCascade(true);
+			//db.update(sp);
+			//db.commitTransaction();
+			//db.endTransaction();
+			db.save(sp);
 			log.info("-------------");
 			log.info(String.valueOf(sp.getTalaExp()));
 			log.info(String.valueOf(sp.getTalaLvl()));
@@ -72,8 +73,7 @@ public class SkillPlayerManager extends BukkitRunnable {
 
 				for (int i = 0; i < skillPlayerList.size(); i++) {
 
-					if (skillPlayerList.get(i).getAccountName()
-							.compareToIgnoreCase(accountName) == 0) {
+					if (skillPlayerList.get(i).getAccountName().compareToIgnoreCase(accountName) == 0) {
 						player = skillPlayerList.get(i);
 						return player;
 					}
@@ -85,6 +85,23 @@ public class SkillPlayerManager extends BukkitRunnable {
 
 		} else
 			return null;
+	}
+
+	public void removeSkillPlayer(String accountName) {
+
+		if (skillPlayerList != null) {
+
+			if (skillPlayerList.size() > 0) {
+
+				for (int i = 0; i < skillPlayerList.size(); i++) {
+
+					if (skillPlayerList.get(i).getAccountName().compareToIgnoreCase(accountName) == 0) {
+						skillPlayerList.remove(i);
+						break;
+					}
+				}
+			}
+		}
 	}
 
 	@Override
