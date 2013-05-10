@@ -14,3 +14,18 @@ commands:
       usage: /walk
       permission: 
       permission-message:
+   hacha:
+      description: Run command.
+      usage: /run
+      permission: 
+      permission-message:
+   getduro:
+      description: Walk command.
+      usage: /walk
+      permission: 
+      permission-message:
+   setduro:
+      description: Walk command.
+      usage: /walk
+      permission: 
+      permission-message:

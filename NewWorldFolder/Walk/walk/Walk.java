@@ -6,6 +6,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Walk extends JavaPlugin implements CommandExecutor {
@@ -52,6 +53,50 @@ public class Walk extends JavaPlugin implements CommandExecutor {
 				Player player = (Player) sender;
 				player.setWalkSpeed(0.2f);
 				return true;
+			}
+
+		}
+		if (cmd.getName().equalsIgnoreCase("hacha")) {
+
+			if (!(sender instanceof Player)) {
+				sender.sendMessage("This command can only be run by a player.");
+				return true;
+			} else {
+				
+				ItemStack hacha = new ItemStack(275);
+				hacha.setDurability((short) 50);
+				Player player = (Player) sender;
+				player.setItemInHand(hacha);
+				return true;
+			}
+
+		}
+		if (cmd.getName().equalsIgnoreCase("setduro")) {
+
+			if (!(sender instanceof Player)) {
+				sender.sendMessage("This command can only be run by a player.");
+				return true;
+			} else {
+				
+				Player player = (Player) sender;
+				player.getItemInHand().setDurability((short) 2);
+
+			}
+
+		}
+		
+		if (cmd.getName().equalsIgnoreCase("getduro")) {
+
+			if (!(sender instanceof Player)) {
+				sender.sendMessage("This command can only be run by a player.");
+				return true;
+			} else {
+				
+	
+				Player player = (Player) sender;
+				player.updateInventory();
+				player.sendMessage(String.valueOf(player.getItemInHand().getDurability()));
+
 			}
 
 		}

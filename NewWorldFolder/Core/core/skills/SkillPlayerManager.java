@@ -1,5 +1,6 @@
 package core.skills;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -21,22 +22,18 @@ public class SkillPlayerManager extends BukkitRunnable {
 		this.db = db;
 		this.log = log;
 		this.core = core;
-		Query<SkillPlayer> query = db.find(SkillPlayer.class);
-		skillPlayerList = query.findList();
-		this.runTaskTimerAsynchronously(this.core, 12000, 12000);
+		//Query<SkillPlayer> query = db.find(SkillPlayer.class);
+		skillPlayerList = new ArrayList(); //query.findList();
+		this.runTaskTimerAsynchronously(this.core, 100, 100);
 	}
 
 	public void saveDb() {
 		log.info("Saving data base. NUmber of players to save: " + skillPlayerList.size());
 		for (SkillPlayer sp : this.skillPlayerList) {
-			//db.beginTransaction().setPersistCascade(true);
-			//db.update(sp);
-			//db.commitTransaction();
-			//db.endTransaction();
-			db.save(sp);
+			db.update(sp);
 			log.info("-------------");
-			log.info(String.valueOf(sp.getTalaExp()));
-			log.info(String.valueOf(sp.getTalaLvl()));
+			//log.info(String.valueOf(sp.getTalaExp()));
+			//log.info(String.valueOf(sp.getTalaLvl()));
 		}
 
 	}

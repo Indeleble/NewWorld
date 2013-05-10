@@ -65,6 +65,7 @@ public class ItemPurityBuilder {
 		return item;
 	}
 
+	@SuppressWarnings("unused")
 	private boolean hasPurity(ItemStack is) {
 
 		boolean result = false;
