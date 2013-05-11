@@ -11,6 +11,8 @@ public class Skill {
 	private Long id;
 	private int level = 0;
 	private int experience = 0;
+	private int maxLevel = 0;
+	private String name;
 
 	@Id
 	@Column(name="ID")
@@ -46,5 +48,23 @@ public class Skill {
 
 	public void addExperience(int newExperience) {
 		this.experience += newExperience;
+	}
+	
+	@Column(name="MAXLEVEL")
+	public int getMaxLevel() {
+		return maxLevel;
+	}
+
+	public void setMaxLevel(int maxLevel) {
+		this.maxLevel = maxLevel;
+	}
+	
+	@Column(name="SKILL_NAME", nullable=false)
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

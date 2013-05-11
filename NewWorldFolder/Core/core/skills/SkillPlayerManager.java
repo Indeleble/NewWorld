@@ -8,7 +8,6 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.avaje.ebean.EbeanServer;
-import com.avaje.ebean.Query;
 
 public class SkillPlayerManager extends BukkitRunnable {
 
@@ -23,8 +22,8 @@ public class SkillPlayerManager extends BukkitRunnable {
 		this.log = log;
 		this.core = core;
 		//Query<SkillPlayer> query = db.find(SkillPlayer.class);
-		skillPlayerList = new ArrayList(); //query.findList();
-		this.runTaskTimerAsynchronously(this.core, 100, 100);
+		skillPlayerList = new ArrayList<SkillPlayer>(); //query.findList();
+		this.runTaskTimerAsynchronously(this.core, 200, 200);
 	}
 
 	public void saveDb() {

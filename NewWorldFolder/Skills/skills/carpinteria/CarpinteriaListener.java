@@ -14,6 +14,7 @@ import ru.tehkode.permissions.PermissionUser;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 import core.skills.SkillPlayer;
 import core.skills.SkillPlayerManager;
+import core.skills.SkillType;
 
 public class CarpinteriaListener implements Listener {
 
@@ -41,10 +42,10 @@ public class CarpinteriaListener implements Listener {
 		if (user.inGroup("carpinteria")) {
 			sp = spm.getSkillPlayer(player.getName());
 			if (resultado==5){
-				sp.addCarpinteriaExp(200);
+				sp.addExperience(SkillType.Carpinteria, 200);
 				player.sendMessage("Experiencia en carpinteria subio en 200 puntos");
-				player.sendMessage("Experiencia en carpinteria: " + sp.getCarpinteriaExp());
-				player.sendMessage("Nivel de carpinteria: " + sp.getCarpinteriaLvl());
+				player.sendMessage("Experiencia en carpinteria: " + sp.getLevel(SkillType.Carpinteria));
+				player.sendMessage("Nivel de carpinteria: " + sp.getLevel(SkillType.Carpinteria));
 				player.sendMessage("Nivel total: " + sp.getTotalLevel());
 				
 			} 

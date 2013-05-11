@@ -14,6 +14,7 @@ import ru.tehkode.permissions.PermissionUser;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 import core.skills.SkillPlayer;
 import core.skills.SkillPlayerManager;
+import core.skills.SkillType;
 
 public class ConstruccionListener implements Listener {
 
@@ -43,11 +44,11 @@ public class ConstruccionListener implements Listener {
 
 			if (block == 4) {
 
-				sp.addConstruccionExp(200);
+				sp.addExperience(SkillType.Construccion, 200);
 				player.sendMessage("Experiencia en construccion subio en 200 puntos");
 				player.sendMessage("Experiencia en construccion: "
-					+ sp.getConstruccionExp());
-				player.sendMessage("Nivel de construccion: " + sp.getConstruccionLvl());
+					+ sp.getLevel(SkillType.Construccion));
+				player.sendMessage("Nivel de construccion: " + sp.getLevel(SkillType.Construccion));
 				player.sendMessage("Nivel total: " + sp.getTotalLevel());
 			}
 		}

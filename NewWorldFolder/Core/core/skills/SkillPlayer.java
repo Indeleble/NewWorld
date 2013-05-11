@@ -22,7 +22,6 @@ import ru.tehkode.permissions.bukkit.PermissionsEx;
 public class SkillPlayer {
 
 	private static final int MAX_TOTAL_LEVEL = 150;
-	private static final int MAX_INDIVIDUAL_SKILL_LEVEL = 100;
 
 	private int id;
 	private String accountName;
@@ -77,7 +76,7 @@ public class SkillPlayer {
 	public void addExperience(SkillType type, int newExperience) {
 		Skill skill = getSkill(type);
 
-		if (moreLevelsAvailable(getTotalLevel(), skill.getLevel())) {
+		if (moreLevelsAvailable(getTotalLevel(), skill)) {
 
 			int experienceNeed = getExperienceNeeded(getTotalLevel());
 
@@ -88,6 +87,8 @@ public class SkillPlayer {
 				skill.setExperience(newLevelExperience);
 				skill.addLevel(1);
 				addTotalLevel(1);
+				CheckPermission check = new CheckPermission(accountName, type, skill.getLevel());
+				check.check();
 			} else {
 				skill.addExperience(newExperience);
 			}
@@ -109,7 +110,7 @@ public class SkillPlayer {
 	}
 
 	@Transient
-	private Skill getSkill(SkillType type) {
+	public Skill getSkill(SkillType type) {
 		if (!skills.containsKey(type)) {
 			skills.put(type, new Skill());
 			PermissionUser user = PermissionsEx.getUser(accountName);
@@ -117,8 +118,13 @@ public class SkillPlayer {
 		}
 		return skills.get(type);
 	}
+	
+	@Transient
+	public Map<SkillType, Skill> getSkills() {		
+		return this.skills;
+	}
 
-	private boolean moreLevelsAvailable(int totalLevel, int skillLevel) {
-		return (skillLevel < MAX_INDIVIDUAL_SKILL_LEVEL) && (totalLevel < MAX_TOTAL_LEVEL);
+	private boolean moreLevelsAvailable(int totalLevel, Skill skill) {
+		return (skill.getLevel() < skill.getMaxLevel()) && (totalLevel < MAX_TOTAL_LEVEL);
 	}
 }

@@ -9,21 +9,22 @@ import org.bukkit.entity.Player;
 import ru.tehkode.permissions.PermissionManager;
 import ru.tehkode.permissions.PermissionUser;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
+import core.skills.Skill;
 import core.skills.SkillPlayer;
 import core.skills.SkillPlayerManager;
+import core.skills.SkillType;
 
 public class SkillCommandsBaseListener implements CommandExecutor {
 
-	SkillPlayerManager spm;
+	SkillPlayerManager	spm;
 
 	public SkillCommandsBaseListener(SkillPlayerManager spm) {
 		this.spm = spm;
 	}
 
 	@Override
-	public boolean onCommand(CommandSender sender, Command cmd, String label,
-			String[] args) {
-		
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+
 		SkillPlayer sp;
 		PermissionUser user;
 		PermissionManager pex;
@@ -42,62 +43,67 @@ public class SkillCommandsBaseListener implements CommandExecutor {
 
 					if (args[0].equalsIgnoreCase("ver") && args.length == 1) {
 
-						sender.sendMessage(ChatColor.RED
-								+ "-----------------------------");
-						sender.sendMessage(ChatColor.GOLD
-								+ "::::: SACRA RP || HABILIDADES :::::");
-						sender.sendMessage(ChatColor.RED
-								+ "-----------------------------");
-						sender.sendMessage(ChatColor.BLUE
-								+ "Tala: "
-								+ spm.getSkillPlayer(sender.getName())
-										.getTalaLvl());
-						sender.sendMessage(ChatColor.BLUE + "Mineria: "
-								+ sp.getMineriaLvl());
-						sender.sendMessage(ChatColor.RED
-								+ "-----------------------------");
-						sender.sendMessage(ChatColor.AQUA + "Tu nivel total: "
-								+ sp.getTotalLevel());
+						sender.sendMessage(ChatColor.RED + "-----------------------------");
+						sender.sendMessage(ChatColor.GOLD + "::::: SACRA RP || HABILIDADES :::::");
+						sender.sendMessage(ChatColor.RED + "-----------------------------");
+
+						for (Skill skill : spm.getSkillPlayer(sender.getName()).getSkills().values()) {
+							sender.sendMessage(ChatColor.BLUE + skill.getName() + skill.getLevel() + "/" + skill.getMaxLevel());
+						}
+						sender.sendMessage(ChatColor.RED + "-----------------------------");
+						sender.sendMessage(ChatColor.AQUA + "Tu nivel total: " + sp.getTotalLevel() + "/125");
 					} else {
 						if (args[0].equalsIgnoreCase("ver"))
-							sender.sendMessage(ChatColor.RED
-									+ "Escribe /skills ver");
+							sender.sendMessage(ChatColor.RED + "Escribe /skills ver");
 					}
 
-					if (args[0].equalsIgnoreCase("aprender")
-							&& args.length == 2) {
+					if (args[0].equalsIgnoreCase("aprender") && args.length == 2) {
+
+						String skill = args[1];
+						if (skill.contains("_")) {
+
+							skill = skill.split("_", 2)[0];
+						}
 
 						for (int i = 0; i < pex.getGroups().length; i++) {
 
-							if (pex.getGroups()[i].getName().equalsIgnoreCase(
-									args[1]) == true) {
+							if (pex.getGroups()[i].getName().equalsIgnoreCase(skill) == true) {
 
-								if (!user.inGroup(args[1].toLowerCase())) {
-									user.addGroup(args[1].toLowerCase());
-									sender.sendMessage(ChatColor.RED
-											+ "Decides aprender:  " + args[1]
-											+ " y empieza a nivel 10");
-									sp.addTotalLevel(10);
-									sp.setTalaLvl(10);
-									return true;
+								if (!user.inGroup(skill)) {
+
+									for (SkillType st : SkillType.values()) {
+
+										if (sp.getSkills().containsKey(st)) {
+											sender.sendMessage(ChatColor.RED + "Ya conoces esa habilidad");
+										} else {
+											if (st.toString().equalsIgnoreCase(skill)) {
+
+												user.addGroup(skill);
+
+												sp.getSkill(st).setMaxLevel(st.getLevel());
+												sp.getSkill(st).setLevel(st.getLevel() / 10);
+												sp.getSkill(st).setName(st.toString());
+
+												sender.sendMessage(ChatColor.LIGHT_PURPLE + "Decides aprender:  " + skill + " y empieza a nivel " + st.getLevel() / 10);
+												return true;
+											}
+										}
+									}
 								}
 							}
 						}
-						sender.sendMessage(ChatColor.RED
-								+ "Esa habilidad no existe o ya la estás aprendiendo.");
+						sender.sendMessage(ChatColor.RED + "Esa habilidad no existe o ya la estás aprendiendo.");
 						return true;
 
 					} else {
 						if (args[0].equalsIgnoreCase("aprender"))
-							sender.sendMessage(ChatColor.RED
-									+ "Escribe /skills aprender <nombre de habilidad>");
+							sender.sendMessage(ChatColor.RED + "Escribe /skills aprender <nombre de habilidad>");
 
 						return true;
 					}
 
 				} else {
-					sender.sendMessage(ChatColor.RED
-							+ "No has puesto bien el comando: /skills <aprender/ver> <habilidad>");
+					sender.sendMessage(ChatColor.RED + "No has puesto bien el comando: /skills <aprender>/<ver> <habilidad>");
 					return true;
 				}
 			}

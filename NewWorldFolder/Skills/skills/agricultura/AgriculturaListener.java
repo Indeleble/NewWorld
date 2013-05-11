@@ -12,6 +12,7 @@ import ru.tehkode.permissions.PermissionUser;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 import core.skills.SkillPlayer;
 import core.skills.SkillPlayerManager;
+import core.skills.SkillType;
 
 public class AgriculturaListener implements Listener {
 
@@ -37,16 +38,16 @@ public class AgriculturaListener implements Listener {
 			if (user.inGroup("agricultura")) {
 				sp = spm.getSkillPlayer(player.getName());
 				if (event.getBlock().getTypeId() ==59) {
-					sp.addAgriculturaExp(200);
+					sp.addExperience(SkillType.Agricultura, 200);
 					player.sendMessage("Experiencia en agricultura subio en 200 puntos");
-					player.sendMessage("Experiencia en agricultura: " + sp.getAgriculturaExp());
-					player.sendMessage("Nivel de agricultura: " + sp.getAgriculturaLvl());
-					player.sendMessage("Nivel total: " + sp.getTotalLevel());
+					player.sendMessage("Experiencia en agricultura: " + sp.getLevel(SkillType.Agricultura));
+					player.sendMessage("Nivel de agricultura: " + sp.getLevel(SkillType.Agricultura));
+					player.sendMessage("Nivel total: " + sp.getLevel(SkillType.Agricultura));
 		
 				} else
-					sp.addAgriculturaExp(150);
+					sp.addExperience(SkillType.Agricultura, 200);
 				player.sendMessage("Experiencia en agricultura subio en 150 puntos");
-				player.sendMessage("Nivel de agricultura: " + sp.getAgriculturaLvl());
+				player.sendMessage("Nivel de agricultura: " + sp.getLevel(SkillType.Agricultura));
 				player.sendMessage("Nivel total: " + sp.getTotalLevel());
 
 			} 

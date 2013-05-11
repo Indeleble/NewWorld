@@ -19,6 +19,7 @@ import org.bukkit.plugin.Plugin;
 
 import core.skills.SkillPlayer;
 import core.skills.SkillPlayerManager;
+import core.skills.SkillType;
 
 import ru.tehkode.permissions.PermissionUser;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
@@ -112,13 +113,13 @@ public class MiningListener implements Listener {
 				ItemStack cobblestone = new ItemStack(4);
 
 				if (inHand == 274) {
-					ipb.addDrop(new CustomDrop(cobblestone, sp.getMineriaLvl(), 1, 50));
+					ipb.addDrop(new CustomDrop(cobblestone, sp.getLevel(SkillType.Mineria), 1, 50));
 				}
 				if (inHand == 257) {
-					ipb.addDrop(new CustomDrop(cobblestone, sp.getMineriaLvl(), 1, 70));
+					ipb.addDrop(new CustomDrop(cobblestone, sp.getLevel(SkillType.Mineria), 1, 70));
 				}
 				if (inHand == 278) {
-					ipb.addDrop(new CustomDrop(cobblestone, sp.getMineriaLvl(), 1, 80));
+					ipb.addDrop(new CustomDrop(cobblestone, sp.getLevel(SkillType.Mineria), 1, 80));
 				}
 				if (ipb.getDrops().size() > 0){
 					for (ItemStack is : ipb.getDrops()) {
@@ -126,10 +127,10 @@ public class MiningListener implements Listener {
 					}
 				}
 
-				sp.addMineriaExp(200);
+				sp.addExperience(SkillType.Mineria, 200);
 				player.sendMessage("Experiencia en mineria subio en 200 puntos");
-				player.sendMessage("Experiencia en mineria: " + sp.getMineriaExp());
-				player.sendMessage("Nivel de mineria: " + sp.getMineriaLvl());
+				player.sendMessage("Experiencia en mineria: " + sp.getLevel(SkillType.Mineria));
+				player.sendMessage("Nivel de mineria: " + sp.getLevel(SkillType.Mineria));
 				player.sendMessage("Nivel total: " + sp.getTotalLevel());
 
 				ev.setCancelled(true);
