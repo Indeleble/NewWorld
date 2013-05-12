@@ -1,18 +1,15 @@
 package core.skills;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapKey;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import ru.tehkode.permissions.PermissionUser;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
@@ -21,23 +18,29 @@ import ru.tehkode.permissions.bukkit.PermissionsEx;
 @Table(name = "SkillPlayers")
 public class SkillPlayer {
 
-	private static final int MAX_TOTAL_LEVEL = 150;
+	private static final int	MAX_TOTAL_LEVEL	= 150;
 
-	private int id;
-	private String accountName;
-	private int totalLevel;
+	@Id
+	@Column(name = "ID")
+	private int					id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinTable(name = "SKILL_PLAYER_SKILL", joinColumns = @JoinColumn(name = "SKILL_PLAYER_ID"))
-	@MapKey(name = "SKILL_TYPE")
-	private Map<SkillType, Skill> skills = new HashMap<SkillType, Skill>();
+	@Column(name = "ACCOUNT_NAME", nullable = false)
+	private String				accountName;
+
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "player")
+	// @JoinTable(name = "SKILL_PLAYER_SKILL", joinColumns = @JoinColumn(name =
+	// "SKILL_PLAYER_ID"))
+	// @MapKey(name = "type")
+	private List<Skill>			skills			= new ArrayList<Skill>();
 
 	public SkillPlayer() {
 
 	}
 
-	@Id
-	@Column(name="ID")
+	public void setSkills(List<Skill> skills) {
+		this.skills = skills;
+	}
+
 	public int getId() {
 		return id;
 	}
@@ -46,7 +49,6 @@ public class SkillPlayer {
 		this.id = id;
 	}
 
-	@Column(name="ACCOUNT_NAME", nullable=false)
 	public String getAccountName() {
 		return this.accountName;
 	}
@@ -55,22 +57,20 @@ public class SkillPlayer {
 		this.accountName = name;
 	}
 
-	@Transient
+	// @Transient
 	private int getExperienceNeeded(int totalLevel) {
 		return (int) Math.round(10 + (totalLevel + 1 + Math.log(totalLevel + 1) * Math.log(150) * 700));
 	}
 
-	public void addTotalLevel(int totalLevel) {
-		this.totalLevel += totalLevel;
-	}
-
-	@Column(name="TOTAL_LEVEL", nullable=false)
 	public int getTotalLevel() {
-		return this.totalLevel;
-	}
 
-	public void setTotalLevel(int totalLevel) {
-		this.totalLevel = totalLevel;
+		int totalLevel = 0;
+
+		for (Skill skill : skills) {
+			totalLevel += skill.getLevel();
+		}
+
+		return totalLevel;
 	}
 
 	public void addExperience(SkillType type, int newExperience) {
@@ -86,7 +86,6 @@ public class SkillPlayer {
 				int newLevelExperience = currentExperience - experienceNeed;
 				skill.setExperience(newLevelExperience);
 				skill.addLevel(1);
-				addTotalLevel(1);
 				CheckPermission check = new CheckPermission(accountName, type, skill.getLevel());
 				check.check();
 			} else {
@@ -95,12 +94,12 @@ public class SkillPlayer {
 		}
 	}
 
-	@Transient
+	// @Transient
 	public int getExperience(SkillType type) {
 		return getSkill(type).getLevel();
 	}
 
-	@Transient
+	// @Transient
 	public int getLevel(SkillType type) {
 		return getSkill(type).getLevel();
 	}
@@ -109,22 +108,40 @@ public class SkillPlayer {
 		getSkill(type).setLevel(level);
 	}
 
-	@Transient
-	public Skill getSkill(SkillType type) {
-		if (!skills.containsKey(type)) {
-			skills.put(type, new Skill());
-			PermissionUser user = PermissionsEx.getUser(accountName);
-			user.addGroup(type.toString());
+	// @Transient
+	private Skill getSkill(SkillType type) {
+		Skill skill = null;
+		for (Skill skill2 : skills) {
+			if (skill2.getType() == type) {
+				skill = skill2;
+				break;
+			}
 		}
-		return skills.get(type);
+		if (skill == null) {
+			skill = new Skill();
+			skill.setType(type);
+			skill.setPlayer(this);
+			skills.add(skill);
+			
+			PermissionUser user = PermissionsEx.getUser(accountName);
+			user.addGroup(type.toString().toLowerCase());
+		}
+		return skill;
 	}
-	
-	@Transient
-	public Map<SkillType, Skill> getSkills() {		
+
+	public void addSkill(SkillType type) {
+		Skill skill = getSkill(type);
+		skill.setMaxLevel(type.getLevel());
+		skill.setLevel(type.getLevel() / 10);
+
+	}
+
+	// @Transient
+	public List<Skill> getSkills() {
 		return this.skills;
 	}
 
 	private boolean moreLevelsAvailable(int totalLevel, Skill skill) {
-		return (skill.getLevel() < skill.getMaxLevel()) && (totalLevel < MAX_TOTAL_LEVEL);
+		return (skill.getLevel() < skill.getMaxLevel()) && (getTotalLevel() < MAX_TOTAL_LEVEL);
 	}
 }

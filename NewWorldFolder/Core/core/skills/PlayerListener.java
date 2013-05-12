@@ -57,7 +57,7 @@ public class PlayerListener implements Listener {
 	@EventHandler
 	public void PlayerQuit(PlayerQuitEvent ev) {
 		
+		spm.db.update(spm.getSkillPlayer(ev.getPlayer().getName()));
 		spm.removeSkillPlayer(ev.getPlayer().getName());
-		spm.saveDb();
 	}
 }

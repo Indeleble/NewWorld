@@ -47,8 +47,8 @@ public class SkillCommandsBaseListener implements CommandExecutor {
 						sender.sendMessage(ChatColor.GOLD + "::::: SACRA RP || HABILIDADES :::::");
 						sender.sendMessage(ChatColor.RED + "-----------------------------");
 
-						for (Skill skill : spm.getSkillPlayer(sender.getName()).getSkills().values()) {
-							sender.sendMessage(ChatColor.BLUE + skill.getName() + skill.getLevel() + "/" + skill.getMaxLevel());
+						for (Skill skill : spm.getSkillPlayer(sender.getName()).getSkills()) {
+							sender.sendMessage(ChatColor.BLUE + skill.getType().toString()+ " " + skill.getLevel() + "/" + skill.getMaxLevel());
 						}
 						sender.sendMessage(ChatColor.RED + "-----------------------------");
 						sender.sendMessage(ChatColor.AQUA + "Tu nivel total: " + sp.getTotalLevel() + "/125");
@@ -60,9 +60,12 @@ public class SkillCommandsBaseListener implements CommandExecutor {
 					if (args[0].equalsIgnoreCase("aprender") && args.length == 2) {
 
 						String skill = args[1];
+						skill.toLowerCase();
+
 						if (skill.contains("_")) {
 
 							skill = skill.split("_", 2)[0];
+
 						}
 
 						for (int i = 0; i < pex.getGroups().length; i++) {
@@ -71,24 +74,26 @@ public class SkillCommandsBaseListener implements CommandExecutor {
 
 								if (!user.inGroup(skill)) {
 
-									for (SkillType st : SkillType.values()) {
+									SkillType st = SkillType.getFromString(skill);
 
-										if (sp.getSkills().containsKey(st)) {
+									if (st != null) {
+
+										if (sp.getSkills().contains(st)) {
 											sender.sendMessage(ChatColor.RED + "Ya conoces esa habilidad");
 										} else {
-											if (st.toString().equalsIgnoreCase(skill)) {
 
-												user.addGroup(skill);
+											user.addGroup(skill);
 
-												sp.getSkill(st).setMaxLevel(st.getLevel());
-												sp.getSkill(st).setLevel(st.getLevel() / 10);
-												sp.getSkill(st).setName(st.toString());
+											sp.addSkill(st);
 
-												sender.sendMessage(ChatColor.LIGHT_PURPLE + "Decides aprender:  " + skill + " y empieza a nivel " + st.getLevel() / 10);
-												return true;
-											}
+											sender.sendMessage(ChatColor.LIGHT_PURPLE + "Decides aprender:  " + skill + " y empieza a nivel " + st.getLevel() / 10);
+											return true;
+
 										}
+									} else {
+										sender.sendMessage(ChatColor.RED + "Esa habilidad no existe.");
 									}
+
 								}
 							}
 						}

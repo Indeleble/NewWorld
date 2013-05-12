@@ -1,5 +1,7 @@
 package core.skills;
 
+import java.util.logging.Logger;
+
 import ru.tehkode.permissions.PermissionGroup;
 import ru.tehkode.permissions.PermissionManager;
 import ru.tehkode.permissions.PermissionUser;
@@ -10,6 +12,7 @@ public class CheckPermission {
 	SkillType skill;
 	String playerName;
 	int skillLevel;
+	Logger log;
 	
 	public CheckPermission(String playerName, SkillType skill, int skillLevel){
 		this.skill = skill;
@@ -22,14 +25,18 @@ public class CheckPermission {
 		PermissionUser user = PermissionsEx.getUser(playerName);
 		PermissionManager pex = PermissionsEx.getPermissionManager();
 		PermissionGroup[] groups = pex.getGroups();
+		//Grupo a buscar si existe
+		String playerGroup = skill.toString().toLowerCase() +"_"+ String.valueOf(skillLevel);
 		
+		
+		//Recorremos todos los grupos que existen en el permissions
 		for (int i = 0;i < groups.length;i++){
-			
-			String playerGroup = skill.toString() + String.valueOf(skillLevel);
-			
-			if (groups[i].toString().equalsIgnoreCase(playerGroup)){
+			//Si coincide le asigna el grupo
+			if (groups[i].getName().equalsIgnoreCase(playerGroup)){
 				
 				user.addGroup(playerGroup);
+				user.save();
+				
 				return true;
 			}
 		}		

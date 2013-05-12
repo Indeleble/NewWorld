@@ -41,7 +41,7 @@ public class TalaListener implements Listener {
 		SkillPlayer sp;
 		PermissionUser user = PermissionsEx.getUser(player);
 		ItemPurityBuilder ipb;
-		
+
 		log.info("Entra en el evento");
 		if (event.getBlock().getTypeId() == 17 || event.getBlock().getTypeId() == 18) {
 			log.info("detecta 17 y 18");
@@ -77,7 +77,7 @@ public class TalaListener implements Listener {
 							}
 						}
 
-						sp.addExperience(SkillType.Tala, 200);
+						sp.addExperience(SkillType.Tala, 500);
 						player.sendMessage("Experiencia en tala subio en 200 puntos");
 						player.sendMessage("Experiencia en tala: " + sp.getLevel(SkillType.Tala));
 						player.sendMessage("Nivel de tala: " + sp.getLevel(SkillType.Tala));
@@ -91,8 +91,7 @@ public class TalaListener implements Listener {
 						ItemStack stick = new ItemStack(280);
 						ItemStack leave = event.getBlock().getState().getData().toItemStack(1);
 						ItemStack sapling = new ItemStack(6, 1, (short) event.getBlock().getData());
-						
-								
+
 						if (itemId == 275) {
 							ipb.addDrop(new CustomDrop(sapling, sp.getLevel(SkillType.Tala), 1, 10));
 							ipb.addDrop(new CustomDrop(leave, sp.getLevel(SkillType.Tala), 1, 10));
@@ -114,15 +113,16 @@ public class TalaListener implements Listener {
 							for (ItemStack is : ipb.getDrops()) {
 								pl.getServer().getWorld("world").dropItem(blockLocation, is);
 							}
-
-							sp.addExperience(SkillType.Tala, 200);
-							player.sendMessage("Experiencia en tala subio en 150 puntos");
-							player.sendMessage("Nivel de tala: " + sp.getLevel(SkillType.Tala));
-							player.sendMessage("Nivel total: " + sp.getTotalLevel());
-
-							event.setCancelled(true);
-							event.getBlock().setTypeId(0);
 						}
+
+						sp.addExperience(SkillType.Tala, 200);
+						player.sendMessage("Experiencia en tala subio en 150 puntos");
+						player.sendMessage("Nivel de tala: " + sp.getLevel(SkillType.Tala));
+						player.sendMessage("Nivel total: " + sp.getTotalLevel());
+
+						event.setCancelled(true);
+						event.getBlock().setTypeId(0);
+
 					}
 				}
 			}

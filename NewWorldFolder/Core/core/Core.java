@@ -12,6 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.avaje.ebean.EbeanServer;
 
 import core.skills.PlayerListener;
+import core.skills.Skill;
 import core.skills.SkillPlayer;
 import core.skills.SkillPlayerManager;
 
@@ -72,6 +73,7 @@ public class Core extends JavaPlugin {
 
 		List<Class<?>> classes = new LinkedList<Class<?>>();
 		classes.add(SkillPlayer.class);
+		classes.add(Skill.class);
 
 		return classes;
 	}
