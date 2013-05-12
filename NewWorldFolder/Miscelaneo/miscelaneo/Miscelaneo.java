@@ -1,8 +1,10 @@
 package miscelaneo;
 
+
 import java.util.logging.Logger;
 
 import miscelaneo.commands.MiscelaneoCommand;
+import miscelaneo.instrumentos.InstrumentoHandler;
 import miscelaneo.listeners.MiscelaneoListener;
 
 import org.bukkit.command.Command;
@@ -14,6 +16,14 @@ public class Miscelaneo extends JavaPlugin{
 	
 	public MiscelaneoCommand ejecutor;
 	public MiscelaneoListener listener;
+	
+	private static InstrumentoHandler iHandler;
+
+	
+	@Override
+	public void onLoad() {
+		iHandler = new InstrumentoHandler();
+	}
 	
 	@Override
 	public void onEnable() {
@@ -31,5 +41,9 @@ public class Miscelaneo extends JavaPlugin{
 	
 	public boolean onCommand(CommandSender sender, Command command, String commandLabel, String[] args){
 		return ejecutor.onCommand(sender, command, commandLabel, args);
+	}
+	
+	public static InstrumentoHandler getInstrumentoHandler() {
+		return iHandler;
 	}
 }

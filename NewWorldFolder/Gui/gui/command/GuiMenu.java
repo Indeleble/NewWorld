@@ -40,10 +40,10 @@ public class GuiMenu extends GenericPopup{
 //		MPlayer giplayer = Gui.getPlayer(player);
 		
 		
-		closeButton = new GenericButton(ChatColor.RED + "Close") {
+		closeButton = new GenericButton(ChatColor.RED +"Close") {
 			@Override
 			public void onButtonClick(ButtonClickEvent event) {
-			getPlayer().getMainScreen().closePopup();
+				getPlayer().getMainScreen().closePopup();
 			}
 		};
 		closeButton.setAnchor(WidgetAnchor.BOTTOM_CENTER)

@@ -9,6 +9,10 @@ public class GuiHandler implements BindingExecutionDelegate{
 
 	@Override
 	public void keyPressed(KeyBindingEvent event) {
+	}
+
+	@Override
+	public void keyReleased(KeyBindingEvent event) {
 		if (!event.getPlayer().isSpoutCraftEnabled()) return;
 		if (event.getPlayer().getActiveScreen() == ScreenType.GAME_SCREEN) {
 			if (event.getBinding().getId().equalsIgnoreCase("menu de inventario sacra")) {
@@ -17,10 +21,5 @@ public class GuiHandler implements BindingExecutionDelegate{
 				return;
 			}
 		}
-	}
-
-	@Override
-	public void keyReleased(KeyBindingEvent event) {
-
 	}
 }
