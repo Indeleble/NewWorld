@@ -1,10 +1,10 @@
 package miscelaneo.listeners;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.Random;
 
 import miscelaneo.Miscelaneo;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
@@ -16,11 +16,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerToggleSprintEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.Door;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 @SuppressWarnings("deprecation")
 public class MiscelaneoListener implements Listener{
@@ -34,12 +31,17 @@ public class MiscelaneoListener implements Listener{
 	@EventHandler //----- Abrir la puerta de hierro
     public void onPlayerInteract(PlayerInteractEvent evnt) {
 		
+		boolean canFarm = false;
         Player player = evnt.getPlayer();
         Action action = evnt.getAction();
         Block block = evnt.getClickedBlock();
         ItemStack inHand = evnt.getPlayer().getItemInHand();
+        int inHandId = evnt.getPlayer().getItemInHand().getTypeId();
         Material material;
-        
+		Random r = new Random();
+		int r2 = 0;
+		int itemcalidad = 50;  // AQUI COLOCAR EL CHECK DE LA CALIDAD DEL ITEM EN LA MANO
+		
         if (player.hasMetadata("NPC")) return; // Checkear si el jugador es NPC.
 
         /* Fix for NPE on interacting with air */
@@ -51,12 +53,30 @@ public class MiscelaneoListener implements Listener{
         
         switch (action) {
 	        case RIGHT_CLICK_BLOCK:
-			if (material == Material.IRON_DOOR_BLOCK) {
-
+			if(material == Material.SOIL){
+	        	if((inHandId==295) || (inHandId==338) || (inHandId==361) || (inHandId==362) || (inHandId==391) || (inHandId==392)){  // Wheat Seeds, Sugar Cane, Pumpkin Seeds, Melon Seeds, Carrot, Potato
+	        		// checkear el radio alrededor del block. si no tiene bloque molino o espantapajaros, event.setcanceled
+		        }
+        	}else if(material == Material.STONE){  // Colocar los soportes de las minas en la piedra.
+	        	if(inHandId==370){ // colocado como provisional, ghast tear (370)
+	        		r2 = r.nextInt(100);
+	        		if(inHand.getAmount()>1){
+	        			player.getInventory().getItemInHand().setAmount(player.getInventory().getItemInHand().getAmount()-1);
+	        		}else if(inHand.getAmount()<=1){
+	        			player.getInventory().removeItem(player.getInventory().getItemInHand());
+	        		}
+	        		if(r2<=itemcalidad){
+	        			block.setTypeIdAndData(98, (byte) 3, true); //chiseled stone brick
+	        			player.sendMessage(ChatColor.GREEN+"Has colocado el soporte para la mina en la piedra");
+	        		}else{
+	        			evnt.setCancelled(true);
+	        			player.sendMessage(ChatColor.RED+"El soporte para la mina no tenia suficiente calidad como para aguantar el peso de la roca y se ha roto");
+	        		}
+	        	}
+	        }else if(material == Material.IRON_DOOR_BLOCK){ // Abrir las puertas de hierro con click derecho.
 				BlockState state = block.getState();
 				Door door = (Door) state.getData();
 				BlockState state2;
-
 				if (door.isTopHalf()) {
 					Door top = door;
 					state2 = block.getRelative(BlockFace.DOWN).getState();
