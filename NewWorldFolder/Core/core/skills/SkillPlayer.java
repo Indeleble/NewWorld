@@ -28,9 +28,6 @@ public class SkillPlayer {
 	private String				accountName;
 
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "player")
-	// @JoinTable(name = "SKILL_PLAYER_SKILL", joinColumns = @JoinColumn(name =
-	// "SKILL_PLAYER_ID"))
-	// @MapKey(name = "type")
 	private List<Skill>			skills			= new ArrayList<Skill>();
 
 	public SkillPlayer() {
@@ -122,7 +119,7 @@ public class SkillPlayer {
 			skill.setType(type);
 			skill.setPlayer(this);
 			skills.add(skill);
-			
+
 			PermissionUser user = PermissionsEx.getUser(accountName);
 			user.addGroup(type.toString().toLowerCase());
 		}
