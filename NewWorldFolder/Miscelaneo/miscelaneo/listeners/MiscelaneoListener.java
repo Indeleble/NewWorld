@@ -31,6 +31,7 @@ public class MiscelaneoListener implements Listener{
 	@EventHandler //----- Abrir la puerta de hierro
     public void onPlayerInteract(PlayerInteractEvent evnt) {
 		
+		boolean canFarm = false;
         Player player = evnt.getPlayer();
         Action action = evnt.getAction();
         Block block = evnt.getClickedBlock();
@@ -52,10 +53,13 @@ public class MiscelaneoListener implements Listener{
         
         switch (action) {
 	        case RIGHT_CLICK_BLOCK:
-	        if (material == Material.STONE) {  // Colocar los soportes de las minas en la piedra.
+			if(material == Material.SOIL){
+	        	if((inHandId==295) || (inHandId==338) || (inHandId==361) || (inHandId==362) || (inHandId==391) || (inHandId==392)){  // Wheat Seeds, Sugar Cane, Pumpkin Seeds, Melon Seeds, Carrot, Potato
+	        		// checkear el radio alrededor del block. si no tiene bloque molino o espantapajaros, event.setcanceled
+		        }
+        	}else if(material == Material.STONE){  // Colocar los soportes de las minas en la piedra.
 	        	if(inHandId==370){ // colocado como provisional, ghast tear (370)
 	        		r2 = r.nextInt(100);
-	        		player.sendMessage("el random es"+r2);
 	        		if(inHand.getAmount()>1){
 	        			player.getInventory().getItemInHand().setAmount(player.getInventory().getItemInHand().getAmount()-1);
 	        		}else if(inHand.getAmount()<=1){
@@ -69,12 +73,10 @@ public class MiscelaneoListener implements Listener{
 	        			player.sendMessage(ChatColor.RED+"El soporte para la mina no tenia suficiente calidad como para aguantar el peso de la roca y se ha roto");
 	        		}
 	        	}
-	        }else if (material == Material.IRON_DOOR_BLOCK) { // Abrir las puertas de hierro con click derecho.
-
+	        }else if(material == Material.IRON_DOOR_BLOCK){ // Abrir las puertas de hierro con click derecho.
 				BlockState state = block.getState();
 				Door door = (Door) state.getData();
 				BlockState state2;
-
 				if (door.isTopHalf()) {
 					Door top = door;
 					state2 = block.getRelative(BlockFace.DOWN).getState();
