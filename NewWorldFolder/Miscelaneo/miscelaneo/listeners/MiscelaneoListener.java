@@ -12,10 +12,13 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.Door;
 
@@ -28,7 +31,19 @@ public class MiscelaneoListener implements Listener{
 		plugin=listener;
 	}
 	
-	@EventHandler //----- Abrir la puerta de hierro
+	@EventHandler(priority=EventPriority.MONITOR, ignoreCancelled=true)
+	public void onPlayerJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+		player.setCompassTarget(player.getWorld().getBlockAt(0, 0, -12550820).getLocation());
+	}
+	  
+	@EventHandler(priority=EventPriority.MONITOR, ignoreCancelled=true)
+	public void onPlayerTeleport(PlayerTeleportEvent event) {
+		Player player = event.getPlayer();
+		player.setCompassTarget(player.getWorld().getBlockAt(0, 0, -12550820).getLocation());
+	}
+	 
+	@EventHandler
     public void onPlayerInteract(PlayerInteractEvent evnt) {
 		
 		boolean canFarm = false;
@@ -40,7 +55,7 @@ public class MiscelaneoListener implements Listener{
         Material material;
 		Random r = new Random();
 		int r2 = 0;
-		int itemcalidad = 50;  // AQUI COLOCAR EL CHECK DE LA CALIDAD DEL ITEM EN LA MANO
+		int itemcalidad = 50 +10;  // AQUI COLOCAR EL CHECK DE LA CALIDAD DEL ITEM EN LA MANO
 		
         if (player.hasMetadata("NPC")) return; // Checkear si el jugador es NPC.
 
@@ -51,8 +66,13 @@ public class MiscelaneoListener implements Listener{
             material = block.getType();
         }
         
+        player.setCompassTarget(player.getWorld().getBlockAt(0, 0, -12550820).getLocation());
+        
         switch (action) {
 	        case RIGHT_CLICK_BLOCK:
+	        if(material == Material.NETHERRACK){
+	        	evnt.setCancelled(true);
+	        }
 			if(material == Material.SOIL){
 	        	if((inHandId==295) || (inHandId==338) || (inHandId==361) || (inHandId==362) || (inHandId==391) || (inHandId==392)){  // Wheat Seeds, Sugar Cane, Pumpkin Seeds, Melon Seeds, Carrot, Potato
 	        		// checkear el radio alrededor del block. si no tiene bloque molino o espantapajaros, event.setcanceled
