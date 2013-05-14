@@ -4,7 +4,12 @@ import java.util.logging.Logger;
 
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.getspout.spout.entity.EntityBase;
+import org.getspout.spout.entity.SpoutcraftEntity;
+import org.getspout.spout.entity.ai.SpoutcraftAI;
+import org.getspout.spoutapi.entity.SpoutEntity;
 
+import skills.agricultura.AgriculturaListener;
 import skills.commands.SkillCommandsBaseListener;
 import skills.mineria.MiningListener;
 import skills.tala.TalaListener;
@@ -26,9 +31,12 @@ public class Skills extends JavaPlugin {
 		Core core = (Core) pm.getPlugin("NWCore");
 		spm = core.getSkillPlayerManager();
 		
+		
+		
 		//Register listeners
 		pm.registerEvents(new MiningListener(spm, log, this), this);
 		pm.registerEvents(new TalaListener(spm, log, this), this);
+		pm.registerEvents(new AgriculturaListener(spm, log, this), this);
 		
 		//Register commands
 		getCommand("skills").setExecutor(new SkillCommandsBaseListener(spm));

@@ -30,11 +30,12 @@ public class TalaListener implements Listener {
 		this.spm = spm;
 		this.log = log;
 		this.pl = pl;
+
 	}
 
-	@EventHandler(priority = EventPriority.HIGHEST)
+	@EventHandler(priority = EventPriority.HIGH)
 	public void TalaDamageEvent(BlockBreakEvent event) {
-		log.info(String.valueOf(spm.getSkillPlayer(event.getPlayer().getName()).getLevel(SkillType.Tala)));
+		
 		Player player = event.getPlayer();
 		Location blockLocation = event.getBlock().getLocation();
 		int itemId = player.getItemInHand().getTypeId();
@@ -42,21 +43,21 @@ public class TalaListener implements Listener {
 		PermissionUser user = PermissionsEx.getUser(player);
 		ItemPurityBuilder ipb;
 
-		log.info("Entra en el evento");
+		//log.info("Entra en el evento");
+		
 		if (event.getBlock().getTypeId() == 17 || event.getBlock().getTypeId() == 18) {
-			log.info("detecta 17 y 18");
+
 			if (user.inGroup("tala")) {
-				log.info("Grupo tala");
-				log.info(String.valueOf(itemId));
 
 				if (itemId == 275 || itemId == 258 || itemId == 279) {
-					log.info("Hachas");
+
 					sp = spm.getSkillPlayer(player.getName());
 					ipb = new ItemPurityBuilder();
 
 					if (event.getBlock().getTypeId() == 17) {
-						log.info("Cortando madera");
+
 						ItemStack stick = new ItemStack(280);
+						
 						if (itemId == 275) {
 							ipb.addDrop(new CustomDrop(event.getBlock().getState().getData().toItemStack(1), sp.getLevel(SkillType.Tala), 1, 40));
 							ipb.addDrop(new CustomDrop(stick, sp.getLevel(SkillType.Tala), 2, 50));
@@ -78,10 +79,7 @@ public class TalaListener implements Listener {
 						}
 
 						sp.addExperience(SkillType.Tala, 500);
-						player.sendMessage("Experiencia en tala subio en 200 puntos");
-						player.sendMessage("Experiencia en tala: " + sp.getLevel(SkillType.Tala));
-						player.sendMessage("Nivel de tala: " + sp.getLevel(SkillType.Tala));
-						player.sendMessage("Nivel total: " + sp.getTotalLevel());
+						player.sendMessage("Exp. tala subio 500 puntos. Total: "+ sp.getExperience(SkillType.Tala) + "Level: " + sp.getLevel(SkillType.Tala));
 
 						event.setCancelled(true);
 						event.getBlock().setTypeId(0);
@@ -93,19 +91,19 @@ public class TalaListener implements Listener {
 						ItemStack sapling = new ItemStack(6, 1, (short) event.getBlock().getData());
 
 						if (itemId == 275) {
-							ipb.addDrop(new CustomDrop(sapling, sp.getLevel(SkillType.Tala), 1, 10));
-							ipb.addDrop(new CustomDrop(leave, sp.getLevel(SkillType.Tala), 1, 10));
-							ipb.addDrop(new CustomDrop(stick, sp.getLevel(SkillType.Tala), 1, 30));
+							ipb.addDrop(new CustomDrop(sapling, sp.getLevel(SkillType.Tala), 1, 5));
+							ipb.addDrop(new CustomDrop(leave, sp.getLevel(SkillType.Tala), 1, 5));
+							ipb.addDrop(new CustomDrop(stick, sp.getLevel(SkillType.Tala), 1, 15));
 						}
 						if (itemId == 258) {
-							ipb.addDrop(new CustomDrop(sapling, sp.getLevel(SkillType.Tala), 1, 15));
+							ipb.addDrop(new CustomDrop(sapling, sp.getLevel(SkillType.Tala), 1, 10));
 							ipb.addDrop(new CustomDrop(leave, sp.getLevel(SkillType.Tala), 2, 10));
-							ipb.addDrop(new CustomDrop(stick, sp.getLevel(SkillType.Tala), 2, 40));
+							ipb.addDrop(new CustomDrop(stick, sp.getLevel(SkillType.Tala), 2, 20));
 						}
 						if (itemId == 279) {
-							ipb.addDrop(new CustomDrop(sapling, sp.getLevel(SkillType.Tala), 1, 20));
-							ipb.addDrop(new CustomDrop(leave, sp.getLevel(SkillType.Tala), 1, 10));
-							ipb.addDrop(new CustomDrop(stick, sp.getLevel(SkillType.Tala), 3, 50));
+							ipb.addDrop(new CustomDrop(sapling, sp.getLevel(SkillType.Tala), 1, 15));
+							ipb.addDrop(new CustomDrop(leave, sp.getLevel(SkillType.Tala), 1, 15));
+							ipb.addDrop(new CustomDrop(stick, sp.getLevel(SkillType.Tala), 3, 25));
 						}
 
 						if (ipb.getDrops().size() > 0) {
@@ -116,9 +114,7 @@ public class TalaListener implements Listener {
 						}
 
 						sp.addExperience(SkillType.Tala, 200);
-						player.sendMessage("Experiencia en tala subio en 150 puntos");
-						player.sendMessage("Nivel de tala: " + sp.getLevel(SkillType.Tala));
-						player.sendMessage("Nivel total: " + sp.getTotalLevel());
+						player.sendMessage("Exp. tala subio 500 puntos. Total: "+ sp.getExperience(SkillType.Tala) + " Level: " + sp.getLevel(SkillType.Tala));
 
 						event.setCancelled(true);
 						event.getBlock().setTypeId(0);

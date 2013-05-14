@@ -13,7 +13,6 @@ public class ItemPurityBuilder {
 	public ItemPurityBuilder() {
 
 		this.drops = new ArrayList<CustomDrop>();
-
 	}
 
 	public void addDrop(CustomDrop drop) {
@@ -34,7 +33,7 @@ public class ItemPurityBuilder {
 
 				for (int j = 0; j < drop.getAmount(); j++) {
 
-					finalDrops.add(this.buildItem(drop.getItemStack(), drop.getMaxLevel()));
+					finalDrops.add(buildItem(drop.getItemStack(), drop.getMaxLevel()));
 				}
 				break;
 			}
@@ -49,8 +48,7 @@ public class ItemPurityBuilder {
 		r.setSeed(r.nextLong());
 
 		int v = r.nextInt(probability + 1);
-		if (v == 0)
-			v = 1;
+		if (v == 0)	v = 1;
 
 		ItemMeta im = is.getItemMeta();
 

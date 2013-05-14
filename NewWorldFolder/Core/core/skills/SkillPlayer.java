@@ -93,7 +93,7 @@ public class SkillPlayer {
 
 	// @Transient
 	public int getExperience(SkillType type) {
-		return getSkill(type).getLevel();
+		return getSkill(type).getExperience();
 	}
 
 	// @Transient
@@ -114,20 +114,16 @@ public class SkillPlayer {
 				break;
 			}
 		}
-		if (skill == null) {
-			skill = new Skill();
-			skill.setType(type);
-			skill.setPlayer(this);
-			skills.add(skill);
-
-			PermissionUser user = PermissionsEx.getUser(accountName);
-			user.addGroup(type.toString().toLowerCase());
-		}
 		return skill;
 	}
 
 	public void addSkill(SkillType type) {
-		Skill skill = getSkill(type);
+		
+		Skill skill = new Skill();
+		skill.setType(type);
+		skill.setPlayer(this);
+		skills.add(skill);
+
 		skill.setMaxLevel(type.getLevel());
 		skill.setLevel(type.getLevel() / 10);
 
