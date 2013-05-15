@@ -7,7 +7,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.getspout.spout.entity.EntityBase;
 import org.getspout.spout.entity.SpoutcraftEntity;
 import org.getspout.spout.entity.ai.SpoutcraftAI;
+import org.getspout.spoutapi.Spout;
 import org.getspout.spoutapi.entity.SpoutEntity;
+
+import com.avaje.ebeaninternal.server.deploy.BeanDescriptor.EntityType;
 
 import skills.agricultura.AgriculturaListener;
 import skills.commands.SkillCommandsBaseListener;

@@ -2,7 +2,7 @@ package skills.agricultura;
 
 import java.util.logging.Logger;
 
-import org.bukkit.Material;
+import org.bukkit.CropState;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -37,13 +37,14 @@ public class AgriculturaListener implements Listener {
 	public void AgriculturaDamageEvent(BlockBreakEvent event) {
 
 		Block block = event.getBlock();
-		Player player;
+		int bId = block.getTypeId();
+		Player player = event.getPlayer();
 		SkillPlayer sp;
 		PermissionUser user;
 		ItemPurityBuilder ipb;
-		player = event.getPlayer();
+
 		user = PermissionsEx.getUser(player);
-		
+
 		if (user.inGroup("agricultura")) {
 			log.info("Detecta grupo agricultura");
 
@@ -52,34 +53,90 @@ public class AgriculturaListener implements Listener {
 			int level = sp.getLevel(SkillType.Agricultura);
 			int dropLevel = Double.valueOf(level / 2).intValue();
 
-			if (block.getType() == Material.POTATO) {
-				log.info("Patata");
-				ipb.addDrop(new CustomDrop(new ItemStack(392), level, 1, 90));
+			boolean canFarm = false;
+			int drop = 0;
+			int seed = 0;
 
+			for (AgBlocks agb : AgBlocks.values()) {
+
+				if (bId == agb.getId()) {
+					canFarm = true;
+					drop = agb.getDropId();
+					seed = agb.getSeedId();
+					event.setCancelled(false);
+					break;
+				}
+				event.setCancelled(true);
 			}
-			if (block.getType() == Material.CARROT) {
-				log.info("Zanahoria");
-				ipb.addDrop(new CustomDrop(new ItemStack(391), level, 1, 90));
 
-			}
-			if (block.getType() == Material.WHEAT) {
-				log.info("trigos");
-				ipb.addDrop(new CustomDrop(new ItemStack(296), level, 1, 90));
+			if (canFarm && player.getItemInHand().getTypeId() == 292) {
 
+				/* Bloques de crecimiento Trigo, patata, zanahoria */
+				if (bId == 59 || bId == 142 || bId == 141) {
+
+					// Si el bloque esta 100% crecido
+					if (block.getData() == CropState.RIPE.getData()) {
+
+						// 2 de drop
+						ipb.addDrop(new CustomDrop(new ItemStack(drop), level, 2, dropLevel));
+						// Semilla
+						ipb.addDrop(new CustomDrop(new ItemStack(seed), level, 1, 2000 / level));
+
+						event.setCancelled(true);
+						block.setTypeId(0);
+
+						sp.addExperience(SkillType.Agricultura, 500);
+						player.sendMessage("Exp. agricultura subio 500 puntos. Total: " + sp.getExperience(SkillType.Agricultura) + "Level: " + sp.getLevel(SkillType.Agricultura));
+					}
+
+					else {
+						ipb.addDrop(new CustomDrop(new ItemStack(seed), level, 1, 100));
+
+						event.setCancelled(true);
+						block.setTypeId(0);
+
+						sp.addExperience(SkillType.Agricultura, 250);
+						player.sendMessage("Exp. agricultura subio 250 puntos. Total: " + sp.getExperience(SkillType.Agricultura) + "Level: " + sp.getLevel(SkillType.Agricultura));
+					}
+				} else if (bId == 103 || bId == 86) {
+
+					// 1 de drop ya que siempre estará plantado
+					ipb.addDrop(new CustomDrop(new ItemStack(drop), level, 1, dropLevel));
+
+					event.setCancelled(true);
+					block.setTypeId(0);
+
+					sp.addExperience(SkillType.Agricultura, 500);
+					player.sendMessage("Exp. agricultura subio 500 puntos. Total: " + sp.getExperience(SkillType.Agricultura) + "Level: " + sp.getLevel(SkillType.Agricultura));
+				}
+			} else if(bId == 104 && player.getItemInHand().getTypeId() == 292){
+				
+				ipb.addDrop(new CustomDrop(new ItemStack(AgBlocks.Calabaza.getSeedId()), level, 1, 90));
+
+				event.setCancelled(true);
+				block.setTypeId(0);
+
+				sp.addExperience(SkillType.Agricultura, 500);
+				player.sendMessage("Exp. agricultura subio 500 puntos. Total: " + sp.getExperience(SkillType.Agricultura) + "Level: " + sp.getLevel(SkillType.Agricultura));
+				
+			} else if(bId == 105 && player.getItemInHand().getTypeId() == 292){
+				
+				ipb.addDrop(new CustomDrop(new ItemStack(AgBlocks.Melon.getSeedId()), level, 1, 90));
+
+				event.setCancelled(true);
+				block.setTypeId(0);
+
+				sp.addExperience(SkillType.Agricultura, 500);
+				player.sendMessage("Exp. agricultura subio 500 puntos. Total: " + sp.getExperience(SkillType.Agricultura) + "Level: " + sp.getLevel(SkillType.Agricultura));
+				
 			}
 
 			if (ipb.getDrops().size() > 0) {
-
 				for (ItemStack is : ipb.getDrops()) {
-					pl.getServer().getWorld("world").dropItem(block.getLocation(), is);
+					if (is.getTypeId() != 0)
+						pl.getServer().getWorld("world").dropItem(block.getLocation(), is);
 				}
 			}
-
-			sp.addExperience(SkillType.Agricultura, 500);
-			player.sendMessage("Exp. agricultura subio 500 puntos. Total: " + sp.getExperience(SkillType.Agricultura) + "Level: " + sp.getLevel(SkillType.Agricultura));
-
-			event.setCancelled(true);
-			event.getBlock().setTypeId(0);
 		}
 	}
 }
