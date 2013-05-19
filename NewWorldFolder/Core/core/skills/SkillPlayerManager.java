@@ -21,13 +21,13 @@ public class SkillPlayerManager extends BukkitRunnable {
 		this.db = db;
 		this.log = log;
 		this.core = core;
-		//Query<SkillPlayer> query = db.find(SkillPlayer.class);
-		skillPlayerList = new ArrayList<SkillPlayer>(); //query.findList();
+		
+		skillPlayerList = new ArrayList<SkillPlayer>(); 
 		this.runTaskTimerAsynchronously(this.core, 500, 500);
 	}
 
 	public void saveDb() {
-		log.info("Saving data base. Number of players to save: " + skillPlayerList.size());
+		log.info("Saving database. Number of players to save: " + skillPlayerList.size());
 		for (SkillPlayer sp : this.skillPlayerList) {
 			
 			db.update(sp);

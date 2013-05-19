@@ -2,15 +2,10 @@ package skills;
 
 import java.util.logging.Logger;
 
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.getspout.spout.entity.EntityBase;
-import org.getspout.spout.entity.SpoutcraftEntity;
-import org.getspout.spout.entity.ai.SpoutcraftAI;
-import org.getspout.spoutapi.Spout;
-import org.getspout.spoutapi.entity.SpoutEntity;
-
-import com.avaje.ebeaninternal.server.deploy.BeanDescriptor.EntityType;
+import org.getspout.spoutapi.player.SpoutPlayer;
 
 import skills.agricultura.AgriculturaListener;
 import skills.commands.SkillCommandsBaseListener;
@@ -49,5 +44,9 @@ public class Skills extends JavaPlugin {
 	@Override
 	public void onDisable() {
 		// TODO Insert logic to be performed when the plugin is disabled
+	}
+	
+	public SpoutPlayer getPlayer(String name){
+		return (SpoutPlayer) getServer().getPlayer(name);
 	}
 }

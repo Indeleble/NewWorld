@@ -11,6 +11,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import com.avaje.ebean.EbeanServer;
 
+import core.husbrandy.AnimalDb;
+import core.husbrandy.HusAnimalManager;
 import core.skills.PlayerListener;
 import core.skills.Skill;
 import core.skills.SkillPlayer;
@@ -74,6 +76,7 @@ public class Core extends JavaPlugin {
 		List<Class<?>> classes = new LinkedList<Class<?>>();
 		classes.add(SkillPlayer.class);
 		classes.add(Skill.class);
+		classes.add(AnimalDb.class);
 
 		return classes;
 	}

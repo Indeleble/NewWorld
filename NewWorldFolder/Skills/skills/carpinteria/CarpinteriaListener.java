@@ -29,10 +29,10 @@ public class CarpinteriaListener implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void CarpinteriaCraftEvent(CraftItemEvent event){
-
+		
+		
 		HumanEntity entity = event.getViewers().get(0);
 		Player player = (Player) entity;
-
 		SkillPlayer sp;
 
 		PermissionUser user = PermissionsEx.getUser(player);

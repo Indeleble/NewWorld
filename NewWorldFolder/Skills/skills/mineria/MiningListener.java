@@ -3,7 +3,6 @@ package skills.mineria;
 import java.util.Random;
 import java.util.logging.Logger;
 
-import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -17,14 +16,13 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
-import core.skills.SkillPlayer;
-import core.skills.SkillPlayerManager;
-import core.skills.SkillType;
-
 import ru.tehkode.permissions.PermissionUser;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 import skills.drops.CustomDrop;
 import skills.drops.ItemPurityBuilder;
+import core.skills.SkillPlayer;
+import core.skills.SkillPlayerManager;
+import core.skills.SkillType;
 
 public class MiningListener implements Listener {
 
