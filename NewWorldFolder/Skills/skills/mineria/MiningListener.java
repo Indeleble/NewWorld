@@ -145,126 +145,160 @@ public class MiningListener implements Listener {
 					int inHand = player.getItemInHand().getTypeId();
 					ItemStack dirt = new ItemStack(3);
 					
-					
+					if(inHand == 273){ //pala de cobre
+						ipb.addDrop(new CustomDrop(dirt, sp.getLevel(SkillType.Mineria), 1, 40));
+					}else if(inHand == 256){ // pala de hierro
+						ipb.addDrop(new CustomDrop(dirt, sp.getLevel(SkillType.Mineria), 1, 60));
+					}else if( inHand == 277){ // pala de acero
+						ipb.addDrop(new CustomDrop(dirt, sp.getLevel(SkillType.Mineria), 1, 80));
+					}
 				}else if(block.getType() == Material.GRASS){
 					int inHand = player.getItemInHand().getTypeId();
 					ItemStack dirt = new ItemStack(3);			
 					
-					
+					if(inHand == 273){ //pala de cobre
+						ipb.addDrop(new CustomDrop(dirt, sp.getLevel(SkillType.Mineria), 1, 40));
+					}else if(inHand == 256){ // pala de hierro
+						ipb.addDrop(new CustomDrop(dirt, sp.getLevel(SkillType.Mineria), 1, 60));
+					}else if( inHand == 277){ // pala de acero
+						ipb.addDrop(new CustomDrop(dirt, sp.getLevel(SkillType.Mineria), 1, 80));
+					}
 				}else if(block.getType() == Material.SAND){
 					int inHand = player.getItemInHand().getTypeId();
 					ItemStack sand = new ItemStack(12);
 					
-					
+					if(inHand == 273){ //pala de cobre
+						ipb.addDrop(new CustomDrop(sand, sp.getLevel(SkillType.Mineria), 1, 40));
+					}else if(inHand == 256){ // pala de hierro
+						ipb.addDrop(new CustomDrop(sand, sp.getLevel(SkillType.Mineria), 1, 60));
+					}else if( inHand == 277){ // pala de acero
+						ipb.addDrop(new CustomDrop(sand, sp.getLevel(SkillType.Mineria), 1, 80));
+					}
 				}else if(block.getType() == Material.CLAY){
 					int inHand = player.getItemInHand().getTypeId();
 					ItemStack clay = new ItemStack(337);
 					
-					
+					if(inHand == 273){ //pala de cobre
+						ipb.addDrop(new CustomDrop(clay, sp.getLevel(SkillType.Mineria), 3, 40));
+						ipb.addDrop(new CustomDrop(clay, sp.getLevel(SkillType.Mineria), 2, 40));
+					}else if(inHand == 256){ // pala de hierro
+						ipb.addDrop(new CustomDrop(clay, sp.getLevel(SkillType.Mineria), 3, 60));
+						ipb.addDrop(new CustomDrop(clay, sp.getLevel(SkillType.Mineria), 2, 60));
+					}else if( inHand == 277){ // pala de acero
+						ipb.addDrop(new CustomDrop(clay, sp.getLevel(SkillType.Mineria), 3, 80));
+						ipb.addDrop(new CustomDrop(clay, sp.getLevel(SkillType.Mineria), 2, 80));
+					}
 				}else if(block.getType() == Material.GRAVEL){ // revisar drops, algo mas dará a parte del bloque
 					int inHand = player.getItemInHand().getTypeId();
 					ItemStack gravel = new ItemStack(13);
+					ItemStack flint = new ItemStack(318);
 					
-					
+					if(inHand == 273){ //pala de cobre
+						ipb.addDrop(new CustomDrop(gravel, sp.getLevel(SkillType.Mineria), 1, 40));
+						ipb.addDrop(new CustomDrop(flint, sp.getLevel(SkillType.Mineria), 1, 20));
+					}else if(inHand == 256){ // pala de hierro
+						ipb.addDrop(new CustomDrop(gravel, sp.getLevel(SkillType.Mineria), 1, 60));
+						ipb.addDrop(new CustomDrop(flint, sp.getLevel(SkillType.Mineria), 1, 40));
+					}else if( inHand == 277){ // pala de acero
+						ipb.addDrop(new CustomDrop(gravel, sp.getLevel(SkillType.Mineria), 1, 80));
+						ipb.addDrop(new CustomDrop(flint, sp.getLevel(SkillType.Mineria), 1, 60));
+					}
 				}else if(block.getType() == Material.SANDSTONE){
 					int inHand = player.getItemInHand().getTypeId();
 					ItemStack sandstone = new ItemStack(24);
 
 					if(inHand == 274){ //pico de cobre
-						
+						ipb.addDrop(new CustomDrop(sandstone, sp.getLevel(SkillType.Mineria), 1, 40));
 					}else if(inHand == 257){	// pico de hierro
-						
+						ipb.addDrop(new CustomDrop(sandstone, sp.getLevel(SkillType.Mineria), 1, 60));
 					}else if(inHand == 278){  // pico de acero
-						
+						ipb.addDrop(new CustomDrop(sandstone, sp.getLevel(SkillType.Mineria), 1, 80));
 					}
 				}else if(block.getType() == Material.COAL_ORE){
 					int inHand = player.getItemInHand().getTypeId();
-					ItemStack coalore = new ItemStack(16);
+					ItemStack coal = new ItemStack(263);
 					
 					if(inHand == 274){ //pico de cobre
-						
+						ipb.addDrop(new CustomDrop(coal, sp.getLevel(SkillType.Mineria), 2, 50));
+						ipb.addDrop(new CustomDrop(coal, sp.getLevel(SkillType.Mineria), 4, 1));
 					}else if(inHand == 257){	// pico de hierro
-						
+						ipb.addDrop(new CustomDrop(coal, sp.getLevel(SkillType.Mineria), 2, 60));
+						ipb.addDrop(new CustomDrop(coal, sp.getLevel(SkillType.Mineria), 4, 2));
 					}else if(inHand == 278){  // pico de acero
-						
+						ipb.addDrop(new CustomDrop(coal, sp.getLevel(SkillType.Mineria), 2, 70));
+						ipb.addDrop(new CustomDrop(coal, sp.getLevel(SkillType.Mineria), 4, 3));
 					}
 				}else if(block.getType() == Material.ENDER_STONE){ // piedra fallada al prospectar, dropea cobble.
 					int inHand = player.getItemInHand().getTypeId();
 					ItemStack cobblestone = new ItemStack(4);
 					
 					if(inHand == 274){ //pico de cobre
-						
+						ipb.addDrop(new CustomDrop(cobblestone, sp.getLevel(SkillType.Mineria), 1, 40));
 					}else if(inHand == 257){	// pico de hierro
-						
+						ipb.addDrop(new CustomDrop(cobblestone, sp.getLevel(SkillType.Mineria), 1, 60));
 					}else if(inHand == 278){  // pico de acero
-						
+						ipb.addDrop(new CustomDrop(cobblestone, sp.getLevel(SkillType.Mineria), 1, 80));
 					}
 				}else if(block.getType() == Material.IRON_ORE){
 					int inHand = player.getItemInHand().getTypeId();
 					ItemStack ironore = new ItemStack(15);
 					
 					if(inHand == 274){ //pico de cobre
-						
+						ipb.addDrop(new CustomDrop(ironore, sp.getLevel(SkillType.Mineria), 1, 40));
 					}else if(inHand == 257){	// pico de hierro
-						
+						ipb.addDrop(new CustomDrop(ironore, sp.getLevel(SkillType.Mineria), 1, 60));
 					}else if(inHand == 278){  // pico de acero
-						
+						ipb.addDrop(new CustomDrop(ironore, sp.getLevel(SkillType.Mineria), 1, 80));
 					}
 				}else if(block.getType() == Material.QUARTZ_ORE){
 					int inHand = player.getItemInHand().getTypeId();
-					ItemStack quartzore = new ItemStack(153);
+					ItemStack quartz = new ItemStack(406);
 					
 					if(inHand == 274){ //pico de cobre
-						
+						ipb.addDrop(new CustomDrop(quartz, sp.getLevel(SkillType.Mineria), 1, 15));
 					}else if(inHand == 257){	// pico de hierro
-						
+						ipb.addDrop(new CustomDrop(quartz, sp.getLevel(SkillType.Mineria), 1, 30));
 					}else if(inHand == 278){  // pico de acero
-						
+						ipb.addDrop(new CustomDrop(quartz, sp.getLevel(SkillType.Mineria), 1, 40));
 					}
 				}else if(block.getType() == Material.GOLD_ORE){
 					int inHand = player.getItemInHand().getTypeId();
 					ItemStack goldore = new ItemStack(14);
 					
-					if(inHand == 274){ //pico de cobre
-						
-					}else if(inHand == 257){	// pico de hierro
-						
+					if(inHand == 257){	// pico de hierro
+						ipb.addDrop(new CustomDrop(goldore, sp.getLevel(SkillType.Mineria), 1, 20));
 					}else if(inHand == 278){  // pico de acero
-						
+						ipb.addDrop(new CustomDrop(goldore, sp.getLevel(SkillType.Mineria), 1, 30));
 					}
 				}else if(block.getType() == Material.EMERALD_ORE){
 					int inHand = player.getItemInHand().getTypeId();
 					ItemStack emerald = new ItemStack(388);
-//					ItemStack lapis = new ItemStack(¿?¿?¿?¿?¿?); 351:4
+					ItemStack lapis = new ItemStack(351, 1, (short)4);
 					
-					if(inHand == 274){ //pico de cobre
-						
-					}else if(inHand == 257){	// pico de hierro
-						
+					if(inHand == 257){	// pico de hierro
+						ipb.addDrop(new CustomDrop(lapis, sp.getLevel(SkillType.Mineria), 1, 10));
 					}else if(inHand == 278){  // pico de acero
-						
+						ipb.addDrop(new CustomDrop(lapis, sp.getLevel(SkillType.Mineria), 1, 15));
 					}
 				}else if(block.getType() == Material.DIAMOND_ORE){
 					int inHand = player.getItemInHand().getTypeId();
 					ItemStack diamond = new ItemStack(264);
 					
-					if(inHand == 274){ //pico de cobre
-						
-					}else if(inHand == 257){	// pico de hierro
-						
+					if(inHand == 257){	// pico de hierro
+						ipb.addDrop(new CustomDrop(diamond, sp.getLevel(SkillType.Mineria), 1, 10));
 					}else if(inHand == 278){  // pico de acero
-						
+						ipb.addDrop(new CustomDrop(diamond, sp.getLevel(SkillType.Mineria), 1, 15));
 					}
 				}else if(block.getType() == Material.LAPIS_ORE){    // ore de cobre. dropea cobre (en teoria)
 					int inHand = player.getItemInHand().getTypeId();
-//					ItemStack cobre = new ItemStack(¿?¿?¿?);    ¿item custom o algo?
+					ItemStack cobre = new ItemStack(21);
 					
 					if(inHand == 274){ //pico de cobre
-						
+						ipb.addDrop(new CustomDrop(cobre, sp.getLevel(SkillType.Mineria), 1, 40));
 					}else if(inHand == 257){	// pico de hierro
-						
+						ipb.addDrop(new CustomDrop(cobre, sp.getLevel(SkillType.Mineria), 1, 50));
 					}else if(inHand == 278){  // pico de acero
-						
+						ipb.addDrop(new CustomDrop(cobre, sp.getLevel(SkillType.Mineria), 1, 60));
 					}
 				}/*else if(block.getTypeId()){ // checkear 98:3 // soporte de minas
 					ItemStack soporteminas = new ItemStack(¿?¿?¿?¿?¿?);    ¿item custom o algo?
