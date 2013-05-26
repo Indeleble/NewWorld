@@ -14,6 +14,10 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
+import com.sk89q.worldguard.LocalPlayer;
+import com.sk89q.worldguard.protection.flags.Flag;
+import com.sk89q.worldguard.protection.managers.RegionManager;
+
 import core.skills.SkillPlayer;
 
 import ru.tehkode.permissions.PermissionUser;
@@ -26,6 +30,7 @@ public class ProsManager implements Listener {
 	public ProsManager() {
 
 		this.Prospectors = new ArrayList<String>();
+		
 	}
 
 	@EventHandler

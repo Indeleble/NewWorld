@@ -48,10 +48,11 @@ public class SkillCommandsBaseListener implements CommandExecutor {
 						sender.sendMessage(ChatColor.RED + "-----------------------------");
 
 						for (Skill skill : spm.getSkillPlayer(sender.getName()).getSkills()) {
-							sender.sendMessage(ChatColor.BLUE + skill.getType().toString()+ " " + skill.getLevel() + "/" + skill.getMaxLevel());
+							sender.sendMessage(ChatColor.BLUE + skill.getType().toString()+ " " + skill.getLevel() + "/" + skill.getMaxLevel() + "| Exp: " + skill.getExperience());
 						}
 						sender.sendMessage(ChatColor.RED + "-----------------------------");
 						sender.sendMessage(ChatColor.AQUA + "Tu nivel total: " + sp.getTotalLevel() + "/125");
+						sender.sendMessage(ChatColor.DARK_BLUE + "Experiencia necesaria para siguiente nivel: " + sp.getExpNextLevel());
 					} else {
 						if (args[0].equalsIgnoreCase("ver"))
 							sender.sendMessage(ChatColor.RED + "Escribe /skills ver");

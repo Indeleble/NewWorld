@@ -37,5 +37,35 @@ public class AnimalDb {
 		this.id = id;
 	}
 
+
+	public UUID getUuid() {
+		return uuid;
+	}
+
+
+	public void setUuid(UUID uuid) {
+		this.uuid = uuid;
+	}
+
+
+	public String getOwner() {
+		return owner;
+	}
+
+
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+
+
+	public int getAge() {
+		return age;
+	}
+
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
 	
 }

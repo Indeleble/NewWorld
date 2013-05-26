@@ -55,6 +55,12 @@ public class SkillPlayer {
 	private int getExperienceNeeded(int totalLevel) {
 		return (int) Math.round(10 + (totalLevel + 1 + Math.log(totalLevel + 1) * Math.log(150) * 700));
 	}
+	
+	public int getExpNextLevel(){
+		int exp = 0;
+		exp= getExperienceNeeded(getTotalLevel());
+		return exp;
+	}
 
 	public int getTotalLevel() {
 

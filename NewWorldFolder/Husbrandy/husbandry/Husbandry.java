@@ -1,12 +1,14 @@
 package husbandry;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import core.Core;
-import core.HusAnimalManager;
+import core.husbrandy.AnimalDb;
+import core.husbrandy.HusAnimalManager;
 
 
 
@@ -14,6 +16,7 @@ public class Husbandry extends JavaPlugin {
 
 	Logger log;
 	HusAnimalManager ham;
+	ArrayList<AnimalDb> animals;
 	
 	@Override
 	public void onEnable() {
@@ -23,9 +26,10 @@ public class Husbandry extends JavaPlugin {
 		PluginManager pm = this.getServer().getPluginManager();
 		
 		Core core = (Core) pm.getPlugin("NWCore");
-		ham = core.getHusAnimalManager();
 
-		pm.registerEvents(new TameListener(this.ham), this);
+		pm.registerEvents(new TameListener(this), this);
+		
+		animals = new ArrayList<AnimalDb>();
 		
 		
 		

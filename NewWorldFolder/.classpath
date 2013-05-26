@@ -13,6 +13,7 @@
 	<classpathentry kind="src" path="ArmasFuego"/>
 	<classpathentry kind="src" path="Gui"/>
 	<classpathentry kind="src" path="CrafteoArea"/>
+	<classpathentry kind="src" path="Handlers"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
@@ -24,7 +25,18 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="Dependencies/PermissionsEx.jar"/>
-	<classpathentry kind="lib" path="Dependencies/WorldGuard.jar"/>
+	<classpathentry kind="lib" path="Dependencies/WorldGuard.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://docs.sk89q.com/worldguard/apidocs/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="lib" path="Dependencies/RecipeManager.jar"/>
+	<classpathentry kind="lib" path="Dependencies/MoreMaterials-1.91 (1).jar"/>
+	<classpathentry kind="src" path="NoWater"/>
+	<classpathentry kind="lib" path="Dependencies/ControllableMobsAPI.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="http://javadoc.ntcomputer.de/cmapi/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

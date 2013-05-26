@@ -27,11 +27,11 @@ public class SkillPlayerManager extends BukkitRunnable {
 	}
 
 	public void saveDb() {
+		
 		log.info("Saving database. Number of players to save: " + skillPlayerList.size());
 		for (SkillPlayer sp : this.skillPlayerList) {
 			
 			db.update(sp);
-			log.info("-------------");
 			//log.info(String.valueOf(sp.getTalaExp()));
 			//log.info(String.valueOf(sp.getTalaLvl()));
 		}
