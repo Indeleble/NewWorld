@@ -1,12 +1,16 @@
 package miscelaneo.listeners;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 import miscelaneo.Miscelaneo;
 
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
@@ -19,6 +23,7 @@ import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.Door;
 
@@ -46,10 +51,12 @@ public class MiscelaneoListener implements Listener{
 	@EventHandler
     public void onPlayerInteract(PlayerInteractEvent evnt) {
 		
-		boolean canFarm = false;
+		
         Player player = evnt.getPlayer();
         Action action = evnt.getAction();
         Block block = evnt.getClickedBlock();
+  
+        
         ItemStack inHand = evnt.getPlayer().getItemInHand();
         int inHandId = evnt.getPlayer().getItemInHand().getTypeId();
         Material material;
@@ -73,11 +80,40 @@ public class MiscelaneoListener implements Listener{
 	        if(material == Material.NETHERRACK){
 	        	evnt.setCancelled(true);
 	        }
-			if(material == Material.SOIL){
+/*			if(material == Material.SOIL){
 	        	if((inHandId==295) || (inHandId==338) || (inHandId==361) || (inHandId==362) || (inHandId==391) || (inHandId==392)){  // Wheat Seeds, Sugar Cane, Pumpkin Seeds, Melon Seeds, Carrot, Potato
 	        		// checkear el radio alrededor del block. si no tiene bloque molino o espantapajaros, event.setcanceled
+	        		boolean canFarm = false;
+	        		
+	        		Location location = player.getLocation();
+	        		Location locationAhead = location.getBlock().getRelative(getPlayerFacing(player), 20).getLocation();
+
+	        		int radiomolino = 50;
+	        		
+/*	        		for (int x = -(radiomolino); x <= 50; x++){
+	        			for (int y = -(radiomolino); y <= 50; y++){
+	        				for (int z = -(radiomolino); z <= 50; z++){
+	        					player.sendMessage("coordenada x: "+x+" coordenada y: "+y+" coordenada z: "+z);
+	        					
+	        					Location loc = location.getBlock().getRelative(x, y, z).getLocation();
+
+	        					if (!getTransparentMaterials().contains(loc.getBlock().getTypeId()==29)){
+	        					
+	        						player.sendMessage("ESTE coordenada x: "+x+" coordenada y: "+y+" coordenada z: "+z);
+	        					//player.sendBlockChange(loc, Material.SNOW_BLOCK.getId(), (byte) 0);
+
+	        					}
+	    	        		}
+		        		}
+	        		}*/
+/*	        		if(canFarm==false){
+	        			evnt.setCancelled(true);
+	        			player.sendMessage(ChatColor.RED+"Esta zona no es adecuada para plantar");
+	        		}else if(canFarm==true){
+	        			canFarm=false;
+	        		}
 		        }
-        	}else if(material == Material.STONE){  // Colocar los soportes de las minas en la piedra.
+        	}else*/ if(material == Material.STONE){  // Colocar los soportes de las minas en la piedra.
 	        	if(inHandId==370){ // colocado como provisional, ghast tear (370)
 	        		r2 = r.nextInt(100);
 	        		if(inHand.getAmount()>1){
@@ -136,6 +172,48 @@ public class MiscelaneoListener implements Listener{
 		}
 	}
 	
+	public static List<Material> getTransparentMaterials(){
+		Material[] materials = {Material.AIR, Material.BED, Material.BED_BLOCK, Material.BREWING_STAND, Material.BROWN_MUSHROOM,
+				Material.BURNING_FURNACE, Material.CACTUS, Material.CAKE_BLOCK, Material.CAULDRON, Material.CHEST,
+				Material.DEAD_BUSH, Material.DETECTOR_RAIL, Material.DIODE, Material.DIODE_BLOCK_OFF, Material.DIODE_BLOCK_ON,
+				Material.DISPENSER, Material.DRAGON_EGG, Material.EGG, Material.ENCHANTMENT_TABLE, Material.ENDER_PORTAL, Material.ENDER_PORTAL_FRAME,
+				Material.ENDER_STONE, Material.FENCE, Material.FENCE_GATE, Material.FIRE, Material.FURNACE, Material.GLASS, Material.HUGE_MUSHROOM_1, Material.HUGE_MUSHROOM_2,
+				Material.IRON_DOOR_BLOCK, Material.IRON_FENCE, Material.JUKEBOX, Material.LADDER, Material.LAVA, Material.LEVER, Material.LONG_GRASS, Material.MELON_STEM,
+				Material.MOB_SPAWNER, Material.NETHER_FENCE, Material.NETHER_STALK, Material.NETHER_WARTS, Material.PAINTING, Material.PISTON_BASE, Material.PISTON_EXTENSION,
+				Material.PISTON_MOVING_PIECE, Material.PISTON_STICKY_BASE, Material.PORTAL, Material.PUMPKIN_STEM, Material.RED_ROSE, Material.RED_MUSHROOM, Material.SAPLING, Material.SIGN, Material.SIGN_POST, Material.STATIONARY_LAVA,
+				Material.SNOW, Material.STATIONARY_WATER, Material.STONE_BUTTON, Material.SUGAR_CANE_BLOCK, Material.THIN_GLASS, Material.TNT, Material.TORCH, Material.TRAP_DOOR, Material.VINE, Material.WALL_SIGN,
+				Material.WATER, Material.WEB, Material.WHEAT, Material.WOODEN_DOOR, Material.WORKBENCH, Material.YELLOW_FLOWER};
+
+		return Arrays.asList(materials);
+	}
+
+	private BlockFace getPlayerFacing(Player player) {
+		float y = player.getLocation().getYaw();
+        if( y < 0 ) y += 360;
+        y %= 360;
+        int i = (int)((y+8) / 22.5);
+        
+        if(i == 0) return BlockFace.WEST;
+        else if(i == 1) return BlockFace.NORTH_WEST;
+        else if(i == 2) return BlockFace.NORTH_WEST;
+        else if(i == 3) return BlockFace.NORTH_WEST;
+        else if(i == 4) return BlockFace.NORTH;
+        else if(i == 5) return BlockFace.NORTH_EAST;
+        else if(i == 6) return BlockFace.NORTH_EAST;
+        else if(i == 7) return BlockFace.NORTH_EAST;
+        else if(i == 8) return BlockFace.EAST;
+        else if(i == 9) return BlockFace.SOUTH_EAST;
+        else if(i == 10) return BlockFace.SOUTH_EAST;
+        else if(i == 11) return BlockFace.SOUTH_EAST;
+        else if(i == 12) return BlockFace.SOUTH;
+        else if(i == 13) return BlockFace.SOUTH_WEST;
+        else if(i == 14) return BlockFace.SOUTH_WEST;
+        else if(i == 15) return BlockFace.SOUTH_WEST;
+
+        return BlockFace.WEST;
+
+	}
+
 	@EventHandler //----- Tocar a la puerta
 	public void onBlockDamage(BlockDamageEvent event) {
 
