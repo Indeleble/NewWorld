@@ -36,9 +36,11 @@ public class Core extends JavaPlugin {
 		db = this.getDatabase();
 
 		spm = new SkillPlayerManager(db, log, this);
+		ham = new HusAnimalManager(db, log, this);
+		
 		pm = this.getServer().getPluginManager();
 
-		pm.registerEvents(new PlayerListener(spm, log), this);
+		pm.registerEvents(new PlayerListener(spm,ham, log), this);
 
 	}
 
@@ -76,6 +78,7 @@ public class Core extends JavaPlugin {
 		List<Class<?>> classes = new LinkedList<Class<?>>();
 		classes.add(SkillPlayer.class);
 		classes.add(Skill.class);
+		
 		classes.add(AnimalDb.class);
 
 		return classes;

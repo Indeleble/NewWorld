@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "SkillPlayers")
+@Table(name = "Animals")
 public class AnimalDb {
 
 	@Id
@@ -23,11 +23,16 @@ public class AnimalDb {
 	
 	@Column(name = "AGE")
 	private int					age;
+	
+	@Column(name = "TYPE")
+	private short 				type;
+	
+	@Column(name = "QUALITY")
+	private int					quality;
 
 	public AnimalDb() {
 
 	}
-
 
 	public int getId() {
 		return id;
@@ -65,6 +70,22 @@ public class AnimalDb {
 
 	public void setAge(int age) {
 		this.age = age;
+	}
+
+	public short getType() {
+		return type;
+	}
+
+	public void setType(short type) {
+		this.type = type;
+	}
+
+	public int getQuality() {
+		return quality;
+	}
+
+	public void setQuality(int quality) {
+		this.quality = quality;
 	}
 
 	
