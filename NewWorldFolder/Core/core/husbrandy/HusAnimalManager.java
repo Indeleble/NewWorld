@@ -130,7 +130,8 @@ public class HusAnimalManager {
 
 		return null;
 	}
-	
+	//Cattle = ganado
+	//Returns cows and sheeps
 	public ArrayList<AnimalDb> getCattle(String name) {
 
 		ArrayList<AnimalDb> cattle = new ArrayList<AnimalDb>();
@@ -140,6 +141,44 @@ public class HusAnimalManager {
 			for (AnimalDb animal : animals.get(name)) {
 
 				if (animal.getType() == EntityType.COW.getTypeId() || animal.getType() == EntityType.SHEEP.getTypeId()) {
+
+					cattle.add(animal);
+				}
+			}
+			if (cattle.size() >0) return cattle;
+		}
+
+		return null;
+	}
+	
+	public ArrayList<AnimalDb> getCows(String name) {
+
+		ArrayList<AnimalDb> cattle = new ArrayList<AnimalDb>();
+
+		if (animals.get(name) != null) {
+
+			for (AnimalDb animal : animals.get(name)) {
+
+				if (animal.getType() == EntityType.COW.getTypeId()) {
+
+					cattle.add(animal);
+				}
+			}
+			if (cattle.size() >0) return cattle;
+		}
+
+		return null;
+	}
+	
+	public ArrayList<AnimalDb> getSheeps(String name) {
+
+		ArrayList<AnimalDb> cattle = new ArrayList<AnimalDb>();
+
+		if (animals.get(name) != null) {
+
+			for (AnimalDb animal : animals.get(name)) {
+
+				if (animal.getType() == EntityType.SHEEP.getTypeId()) {
 
 					cattle.add(animal);
 				}

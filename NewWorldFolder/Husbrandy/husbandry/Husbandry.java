@@ -27,10 +27,8 @@ public class Husbandry extends JavaPlugin {
 		ham = core.getHusAnimalManager();
 
 		pm.registerEvents(new TameListener(this, ham), this);
-		getCommand("lobos").setExecutor(new WolfCommands(this.ham));
-		
-		
-		
+		getCommand("lobos").setExecutor(new WolfCommands(this.ham, this.getServer().getWorld("world")));
+			
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 package husbandry;
 
 public enum WolfCall {
-	llamar, esperar, ganado;
+	llamar, traer;
 	
 	public static WolfCall getFromString(String string){
 		for (WolfCall skillType : values()){

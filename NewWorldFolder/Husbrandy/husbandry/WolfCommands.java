@@ -1,18 +1,27 @@
 package husbandry;
 
 import java.util.ArrayList;
+import java.util.UUID;
 import java.util.logging.Logger;
 
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Cow;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Sheep;
+import org.bukkit.entity.Wolf;
 
 import ru.tehkode.permissions.PermissionUser;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
 import core.husbrandy.AnimalDb;
 import core.husbrandy.HusAnimalManager;
 import core.skills.SkillPlayer;
+import de.ntcomputer.minecraft.controllablemobs.api.ControllableMob;
+import de.ntcomputer.minecraft.controllablemobs.api.ControllableMobs;
 
 public class WolfCommands implements CommandExecutor {
 
@@ -21,13 +30,17 @@ public class WolfCommands implements CommandExecutor {
 	Player				player;
 	SkillPlayer			sp;
 	PermissionUser		user;
+	ArrayList<AnimalDb>	wolfs;
+	World				world;
+	String				args;
 
-	public WolfCommands(HusAnimalManager hum) {
+	public WolfCommands(HusAnimalManager hum, World world) {
 		this.hum = hum;
+		this.world = world;
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-
+		this.args = args[1];
 		if (cmd.getName().equalsIgnoreCase("lobos")) {
 
 			if (!(sender instanceof Player)) {
@@ -38,16 +51,18 @@ public class WolfCommands implements CommandExecutor {
 
 				player = (Player) sender;
 
-				if (args.length == 1) {
+				if (args.length >= 1) {
 
 					user = PermissionsEx.getUser(player);
 
 					if (user.inGroup("ganaderia")) {
-						// Comprobamos si tiene lobos
-						if (hum.getWolfs(player.getName()) != null) {
 
-								makeAction(args[0], player, hum.getWolfs(player.getName()));
-								return true;
+						this.wolfs = hum.getWolfs(player.getName());
+						// Comprobamos si tiene lobos
+						if (wolfs != null) {
+
+							makeAction(args[0]);
+							return true;
 
 							// Si no tiene lobos
 						} else {
@@ -71,37 +86,91 @@ public class WolfCommands implements CommandExecutor {
 		return true;
 	}
 
-	private String checkCommand(String string) {
+	private void makeAction(String string) {
 
-		for (WolfCall s : WolfCall.values()) {
-
-			if (string.equalsIgnoreCase(s.toString()))
-				return string;
-
-		}
-		return null;
-
-	}
-
-	private void makeAction(String string, Player player, ArrayList<AnimalDb> wolfs) {
-		
 		string = string.toLowerCase();
 		WolfCall action = WolfCall.getFromString(string);
-		switch (action){
-			
+		switch (action) {
+
 			case llamar:
+
+				for (AnimalDb wolfDb : wolfs) {
+
+					Wolf wolf = getWolf(wolfDb.getUuid());
+					wolf.setSitting(false);
+					ControllableMob<Wolf> cWolf = getControlledWolf(wolf);
+					cWolf.getActions().moveTo(player.getLocation());
+					wolf.setSitting(true);
+				}
 			break;
-			
-			case esperar:
+
+			case traer:
+
+				ArrayList<AnimalDb> cattle;
+
+				switch (args) {
+
+					case "vacas":
+						cattle = hum.getCows(player.getName());
+						if (cattle == null)
+							player.sendMessage("No tienes vacas");
+					break;
+
+					case "ovejas":
+						cattle = hum.getCows(player.getName());
+						if (cattle == null)
+							player.sendMessage("No tienes ovejas");
+					break;
+
+					default:
+						player.sendMessage("Solo ovejas o vacas");
+						cattle = null;
+					break;
+				}
+
+				if (cattle != null) {
+					int flag = 0;
+					for (AnimalDb a : cattle) {
+						
+						Wolf wolf = getWolf(wolfs.get(flag).getUuid());
+						wolf.setSitting(false);
+						ControllableMob<Wolf> cWolf = getControlledWolf(wolf);
+						LivingEntity animal = getCattleEntity(a.getUuid());
+						ControllableMob<LivingEntity> cAnimal = ControllableMobs.getOrAssign(animal);
+					}
+				}
+
 			break;
-			
-			case ganado:
-			break;
-			
+
 			default:
 				player.sendMessage("Comando mal escrito");
 			break;
 		}
-
 	}
+
+	private Wolf getWolf(UUID uid) {
+
+		for (Wolf w : world.getEntitiesByClass(Wolf.class)) {
+
+			if (w.getUniqueId() == uid)
+				return w;
+		}
+		return null;
+	}
+
+	private LivingEntity getCattleEntity(UUID uid) {
+
+		for (Entity e : world.getEntitiesByClasses(Cow.class, Sheep.class)) {
+
+			if (e.getUniqueId() == uid)
+				return (LivingEntity) e;
+		}
+
+		return null;
+	}
+	
+	private ControllableMob<Wolf> getControlledWolf(Wolf wolf){		
+		return ControllableMobs.getOrAssign(wolf, true);
+	}
+
 }
