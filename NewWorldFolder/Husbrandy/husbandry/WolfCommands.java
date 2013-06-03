@@ -1,5 +1,6 @@
 package husbandry;
 
+import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import org.bukkit.command.Command;
@@ -9,6 +10,7 @@ import org.bukkit.entity.Player;
 
 import ru.tehkode.permissions.PermissionUser;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
+import core.husbrandy.AnimalDb;
 import core.husbrandy.HusAnimalManager;
 import core.skills.SkillPlayer;
 
@@ -36,7 +38,7 @@ public class WolfCommands implements CommandExecutor {
 
 				player = (Player) sender;
 
-				if (args.length == 0) {
+				if (args.length == 1) {
 
 					user = PermissionsEx.getUser(player);
 
@@ -44,16 +46,8 @@ public class WolfCommands implements CommandExecutor {
 						// Comprobamos si tiene lobos
 						if (hum.getWolfs(player.getName()) != null) {
 
-							if (checkCommand(args[0]) != null) {
-
-								makeAction(args[0]);
+								makeAction(args[0], player, hum.getWolfs(player.getName()));
 								return true;
-
-							} else {
-
-								player.sendMessage("Comando mal escrito");
-								return true;
-							}
 
 							// Si no tiene lobos
 						} else {
@@ -68,11 +62,10 @@ public class WolfCommands implements CommandExecutor {
 					}
 
 				} else {
-					player.sendMessage("Pocos o demasiados parametros");
+					player.sendMessage("Comando mal escrito");
 					return true;
 				}
 			}
-
 		}
 
 		return true;
@@ -90,19 +83,23 @@ public class WolfCommands implements CommandExecutor {
 
 	}
 
-	private void makeAction(String string) {
+	private void makeAction(String string, Player player, ArrayList<AnimalDb> wolfs) {
 		
 		string = string.toLowerCase();
-		
-		switch (string){
+		WolfCall action = WolfCall.getFromString(string);
+		switch (action){
 			
-			case "llamar":
+			case llamar:
 			break;
 			
-			case "esperar":
+			case esperar:
 			break;
 			
-			case "ganado":
+			case ganado:
+			break;
+			
+			default:
+				player.sendMessage("Comando mal escrito");
 			break;
 		}
 
