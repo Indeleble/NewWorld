@@ -5,6 +5,7 @@ import java.util.Random;
 import java.util.logging.Logger;
 
 import org.bukkit.block.Biome;
+import org.bukkit.entity.Fish;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -46,16 +47,17 @@ public class PescaListener implements Listener {
 
 			if (event.getState() == State.IN_GROUND) {
 				sp = spm.getSkillPlayer(player.getName());
-				ItemStack is = getFish(sp.getLevel(SkillType.Pesca));
+				ItemStack is = getFish(sp.getLevel(SkillType.Pesca), biome);
 				pl.getServer().getWorld("world").dropItem(player.getLocation(), is);
+				sp.addExperience(SkillType.Tala, 500);
+				player.sendMessage("Pesca subio 500 puntos. Total: "+ sp.getExperience(SkillType.Pesca) + " Level: " + sp.getLevel(SkillType.Pesca));
 			}
 
 		} else
 			event.setCancelled(true);
-
 	}
 
-	private ItemStack getFish(int lvl) {
+	private ItemStack getFish(int lvl, Biome biome) {
 
 		int maxPurity = lvl * 3 + 10;
 		Random r = new Random();
@@ -66,6 +68,7 @@ public class PescaListener implements Listener {
 		ItemStack fish = new ItemStack(349);
 
 		ItemMeta im = fish.getItemMeta();
+		im.setDisplayName(getFishName(purity, biome));
 		ArrayList<String> lore = new ArrayList<String>();
 		lore.add("Calidad: " + purity);
 		im.setLore(lore);
@@ -78,7 +81,7 @@ public class PescaListener implements Listener {
 	private String getFishName(int p, Biome biome) {
 		String name = null;
 
-		if (biome == Biome.BEACH) {
+		if (biome == Biome.OCEAN) {
 			if (p < 10) {
 				name = "Boqueron";
 			} else if (p < 25) {
@@ -87,18 +90,18 @@ public class PescaListener implements Listener {
 				name = "Lenguado";
 			} else if (p < 75) {
 				name = "Pescadilla";
-			} else if (p < 101) {
+			} else {
 				name = "Dorada";
 			}
 		} else if (biome == Biome.RIVER) {
-			
+
 			if (p < 50) {
 				name = "Trucha";
 			} else {
 				name = "Salmon";
-			} 
-			
-		} else {			
+			}
+
+		} else {
 			name = "Desconocido";
 		}
 
