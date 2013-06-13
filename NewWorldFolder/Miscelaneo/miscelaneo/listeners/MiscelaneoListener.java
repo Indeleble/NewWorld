@@ -235,51 +235,52 @@ public class MiscelaneoListener implements Listener{
 	public void OnPlayerMoveEvent(PlayerMoveEvent event){
 		Player player = event.getPlayer();
 		if(player.getGameMode()==GameMode.SURVIVAL){
-			Location loc = event.getPlayer().getLocation();
-			loc.setY(loc.getY() - 1);
-			Location loc2 = event.getPlayer().getLocation();
-			loc2.setY(loc.getY() -2);
-			
-			World w = loc.getWorld();
-			Block b = w.getBlockAt(loc);
-			Block b2 = w.getBlockAt(loc2);
-			
-			if ((b.getType() == Material.ICE) && (b2.getType() == (Material.STATIONARY_WATER) || b2.getType() == (Material.WATER))){
-				int r2=0;
-				Random r = new Random();
+			if(!player.isSneaking()){
+				Location loc = event.getPlayer().getLocation();
+				loc.setY(loc.getY() - 1);
+				Location loc2 = event.getPlayer().getLocation();
+				loc2.setY(loc.getY() -2);
 				
-				r2 = r.nextInt(10);
-				if (r2==1){
+				World w = loc.getWorld();
+				Block b = w.getBlockAt(loc);
+				Block b2 = w.getBlockAt(loc2);
+				
+				if ((b.getType() == Material.ICE) && (b2.getType() == (Material.STATIONARY_WATER) || b2.getType() == (Material.WATER))){
+					int r2=0;
+					Random r = new Random();
 					
-					/* Bucles y demases */
-					int x = b.getX();
-					int z = b.getZ();
-					x++;
-					z++;
-					Location bLoc = b.getLocation();
-					bLoc.setX(x);
-					bLoc.setZ(z);
-
-					for (int i = 0;i<3;i++){
-						for (int j = 0;j<3;j++){
-							
-							if (player.getWorld().getBlockAt(bLoc).getType() == Material.ICE){
-								player.getWorld().getBlockAt(bLoc).setType(Material.WATER);
+					r2 = r.nextInt(10);
+					if (r2==1){
+						
+						/* Bucles y demases */
+						int x = b.getX();
+						int z = b.getZ();
+						x++;
+						z++;
+						Location bLoc = b.getLocation();
+						bLoc.setX(x);
+						bLoc.setZ(z);
+	
+						for (int i = 0;i<3;i++){
+							for (int j = 0;j<3;j++){
+								
+								if (player.getWorld().getBlockAt(bLoc).getType() == Material.ICE){
+									player.getWorld().getBlockAt(bLoc).setType(Material.WATER);
+									
+								}
+								bLoc.setZ(bLoc.getZ() - 1);
 								
 							}
-							bLoc.setZ(bLoc.getZ() - 1);
+							bLoc.setZ(bLoc.getZ() + 3);
+							bLoc.setX(bLoc.getX() - 1);
 							
 						}
-						bLoc.setZ(bLoc.getZ() + 3);
-						bLoc.setX(bLoc.getX() - 1);
 						
+	
+						player.sendMessage(ChatColor.DARK_RED+"¡Has roto el hielo por el que caminabas!");
 					}
-					
-
-					player.sendMessage(ChatColor.DARK_RED+"¡Has roto el hielo por el que caminabas!");
 				}
 			}
-
 		}
 		
 		
