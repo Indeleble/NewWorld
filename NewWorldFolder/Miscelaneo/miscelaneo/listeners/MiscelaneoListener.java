@@ -270,6 +270,7 @@ public class MiscelaneoListener implements Listener{
 							bLoc.setZ(bLoc.getZ() - 1);
 							
 						}
+						bLoc.setZ(bLoc.getZ() + 3);
 						bLoc.setX(bLoc.getX() - 1);
 						
 					}
