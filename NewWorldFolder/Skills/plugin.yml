@@ -10,7 +10,7 @@ commands:
       usage: /skills <ver/aprender> [habilidad]
       permission:
       permission-message: Sin permisos, Hu!Ha!
-    pangolin:
+   pangolin:
       description: Comando no permitido
       usage: /No permitido
       permission:
