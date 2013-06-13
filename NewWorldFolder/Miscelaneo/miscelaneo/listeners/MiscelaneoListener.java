@@ -7,6 +7,7 @@ import java.util.Random;
 import miscelaneo.Miscelaneo;
 
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -22,6 +23,7 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -228,6 +230,35 @@ public class MiscelaneoListener implements Listener{
 		}
 	}
 
+	/* Romper hielos y demases */
+	@EventHandler 
+	public void OnPlayerMoveEvent(PlayerMoveEvent event){
+		Player player = event.getPlayer();
+		if(player.getGameMode()==GameMode.SURVIVAL){
+			Location loc = event.getPlayer().getLocation();
+			World w = loc.getWorld();
+			loc.setY(loc.getY() - 1);
+			Block b = w.getBlockAt(loc);
+
+			if (b.getType() == Material.ICE){
+				int r2=0;
+				Random r = new Random();
+				
+				r2 = r.nextInt(1000);
+				if (r2==1){
+					
+					/* Bucles y demases 
+
+					player.sendMessage(ChatColor.DARK_RED+"¡Has roto el hielo por el que caminabas!");*/
+				}
+			}
+
+		}
+		
+		
+		
+		// for server getworld getblockat
+	}
 /*	@EventHandler //----- Sprint
 	public void onPlayerSprint(final PlayerToggleSprintEvent event){
 		
