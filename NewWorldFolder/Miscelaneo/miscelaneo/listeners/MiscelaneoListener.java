@@ -267,7 +267,7 @@ public class MiscelaneoListener implements Listener{
 								player.getWorld().getBlockAt(bLoc).setType(Material.WATER);
 								
 							}
-							bLoc.setY(bLoc.getY() - 1);
+							bLoc.setZ(bLoc.getZ() - 1);
 							
 						}
 						bLoc.setX(bLoc.getX() - 1);
