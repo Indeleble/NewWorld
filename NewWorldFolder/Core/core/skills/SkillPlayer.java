@@ -120,15 +120,9 @@ public class SkillPlayer {
 		return skill;
 	}
 
-	public void addSkill(SkillType type) {
-		
-		Skill skill = new Skill();
-		skill.setType(type);
-		skill.setPlayer(this);
-		skills.add(skill);
+	public void addSkill(Skill skill) {
 
-		skill.setMaxLevel(type.getLevel());
-		skill.setLevel(type.getLevel() / 10);
+		skills.add(skill);
 
 	}
 

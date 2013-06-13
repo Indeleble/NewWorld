@@ -84,8 +84,14 @@ public class SkillCommandsBaseListener implements CommandExecutor {
 										} else {
 
 											user.addGroup(skill);
-
-											sp.addSkill(st);
+											Skill skillDb = spm.getDatabase().createEntityBean(Skill.class);
+											skillDb.setType(st);
+											skillDb.setPlayer(sp);
+											skillDb.setMaxLevel(st.getLevel());
+											skillDb.setLevel(st.getLevel() / 10);
+											spm.getDatabase().save(skillDb);
+											
+											sp.addSkill(skillDb);
 
 											sender.sendMessage(ChatColor.LIGHT_PURPLE + "Decides aprender:  " + skill + " y empieza a nivel " + st.getLevel() / 10);
 											return true;

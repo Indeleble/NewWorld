@@ -25,6 +25,10 @@ public class SkillPlayerManager extends BukkitRunnable {
 		skillPlayerList = new ArrayList<SkillPlayer>(); 
 		this.runTaskTimerAsynchronously(this.core, 500, 500);
 	}
+	
+	public EbeanServer getDatabase(){
+		return this.db;
+	}
 
 	public void saveDb() {
 		
