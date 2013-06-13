@@ -248,7 +248,7 @@ public class MiscelaneoListener implements Listener{
 				int r2=0;
 				Random r = new Random();
 				
-				r2 = r.nextInt(1000);
+				r2 = r.nextInt(10);
 				if (r2==1){
 					
 					/* Bucles y demases */
