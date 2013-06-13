@@ -40,7 +40,7 @@ public class WolfCommands implements CommandExecutor {
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		this.args = args[1];
+		if (args.length == 2)	this.args = args[1];
 		if (cmd.getName().equalsIgnoreCase("lobos")) {
 
 			if (!(sender instanceof Player)) {
@@ -131,12 +131,23 @@ public class WolfCommands implements CommandExecutor {
 				if (cattle != null) {
 					int flag = 0;
 					for (AnimalDb a : cattle) {
-						
+
 						Wolf wolf = getWolf(wolfs.get(flag).getUuid());
-						wolf.setSitting(false);
-						ControllableMob<Wolf> cWolf = getControlledWolf(wolf);
 						LivingEntity animal = getCattleEntity(a.getUuid());
+
+						wolf.setSitting(false);
+
+						ControllableMob<Wolf> cWolf = getControlledWolf(wolf);
 						ControllableMob<LivingEntity> cAnimal = ControllableMobs.getOrAssign(animal);
+
+						cWolf.getActions().moveTo(animal.getLocation(), true);
+						cAnimal.getActions().follow(wolf, true, 6, 2);
+
+						if (flag == wolfs.size() - 1) {
+							flag = 0;
+
+						}else flag++;
+
 					}
 				}
 
@@ -168,8 +179,8 @@ public class WolfCommands implements CommandExecutor {
 
 		return null;
 	}
-	
-	private ControllableMob<Wolf> getControlledWolf(Wolf wolf){		
+
+	private ControllableMob<Wolf> getControlledWolf(Wolf wolf) {
 		return ControllableMobs.getOrAssign(wolf, true);
 	}
 

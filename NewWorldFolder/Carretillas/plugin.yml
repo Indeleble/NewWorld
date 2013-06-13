@@ -1,6 +1,0 @@
-name: New World tools
-main: plugin.Tools
-version: 1.0
-description: New World plugins core
-author: Indeleble
-database: false

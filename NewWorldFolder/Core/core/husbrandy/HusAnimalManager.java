@@ -2,6 +2,7 @@ package core.husbrandy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
 
@@ -12,7 +13,7 @@ import com.avaje.ebean.EbeanServer;
 
 public class HusAnimalManager {
 
-	HashMap<String, ArrayList<AnimalDb>>	animals;
+	HashMap<String, List<AnimalDb>>	animals;
 
 	EbeanServer								db;
 	Logger									log;
@@ -20,7 +21,7 @@ public class HusAnimalManager {
 
 	public HusAnimalManager(EbeanServer db, Logger log, Plugin core) {
 
-		this.animals = new HashMap<String, ArrayList<AnimalDb>>();
+		this.animals = new HashMap<String, List<AnimalDb>>();
 
 		this.log = log;
 		this.core = core;
@@ -80,7 +81,7 @@ public class HusAnimalManager {
 
 	}
 
-	public void addOnlineUser(String name, ArrayList<AnimalDb> al) {
+	public void addOnlineUser(String name, List<AnimalDb> al) {
 
 		if (animals.get(name) != null) {
 

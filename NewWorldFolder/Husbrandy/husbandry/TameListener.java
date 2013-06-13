@@ -4,7 +4,9 @@ import org.bukkit.Material;
 import org.bukkit.entity.Cow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Wolf;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
@@ -35,14 +37,13 @@ public class TameListener implements Listener {
 	public void PlayerInteractEvent(PlayerInteractEntityEvent ev) {
 
 		Player p = ev.getPlayer();
-		Entity e = ev.getRightClicked();
-		Cow cow = (Cow) e;
-		ControllableMob<Cow> conCow;
+		LivingEntity e = (LivingEntity) ev.getRightClicked();
+		ControllableMob<LivingEntity> conEn;
 		PermissionUser user = PermissionsEx.getUser(ev.getPlayer());
 
 		if (user.inGroup("ganaderia")) {
 
-			if (p.getItemInHand().getType() == Material.BONE && (e.getType() == EntityType.COW || e.getType() == EntityType.WOLF) ) {
+			if (p.getItemInHand().getType() == Material.BONE && (e.getType() == EntityType.SHEEP || e.getType() == EntityType.COW || e.getType() == EntityType.WOLF)) {
 
 				// Si tiene dueño
 
@@ -51,21 +52,6 @@ public class TameListener implements Listener {
 					// Si el que le llama es el dueño
 					if (ham.animalHasOwner(e.getUniqueId()).equalsIgnoreCase(p.getName())) {
 
-						conCow = ControllableMobs.getOrAssign(cow, true);
-
-						if (conCow.getActions().isActionRunning(ActionType.FOLLOW)) {
-
-							conCow.getActions().clearActions();
-							
-							conCow.getAI().restoreAIBehaviors();
-							p.sendMessage("Ese animal te deja de seguir");
-
-						} else {
-
-							conCow.getActions().clearActions();
-							conCow.getActions().follow(p, false, 3);
-							p.sendMessage("Te sigue");
-						}
 						// Si tiene dueño y no es el que activa el evento
 					} else {
 						p.sendMessage("Ese animal tiene dueño");
@@ -81,6 +67,11 @@ public class TameListener implements Listener {
 					animal.setQuality(10);
 
 					ham.addNewAnimalToDb(p.getName(), animal);
+					
+					if (e.getType() == EntityType.WOLF){
+						Wolf wolf = (Wolf) e;
+						wolf.setOwner(p);
+					}
 
 				}
 

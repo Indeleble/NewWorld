@@ -1,35 +1,39 @@
-package listeners;
+package skills.craft;
 
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.bukkit.entity.Item;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 
+import core.skills.SkillPlayerManager;
+
 public class CraftListener implements Listener {
 
 	Plugin pl;
 	Logger log;
+	SkillPlayerManager spm;
 
-	public CraftListener(Plugin p) {
+	public CraftListener(SkillPlayerManager spm, Logger log, Plugin p) {
 
 		this.pl = p;
-		log = p.getLogger();
+		this.log = log;
+		this.spm = spm;
 
 	}
 
 	@EventHandler
-	public void CraftArmorEvent(PrepareItemCraftEvent ev) {
+	public void CraftItemEvent(CraftItemEvent ev) {
 
 		ItemStack item = ev.getInventory().getResult();
 		ItemStack[] items = ev.getInventory().getContents();
+		Player player = (Player) ev.getWhoClicked();
 
 		int v = getMaxPurity(items);
 

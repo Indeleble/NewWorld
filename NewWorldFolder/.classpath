@@ -2,10 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="Core"/>
 	<classpathentry kind="src" path="Mulas"/>
-	<classpathentry kind="src" path="Tools"/>
 	<classpathentry kind="src" path="Walk"/>
-	<classpathentry kind="src" path="Carretillas"/>
-	<classpathentry kind="src" path="Purity"/>
 	<classpathentry kind="src" path="Miscelaneo"/>
 	<classpathentry kind="src" path="Husbrandy"/>
 	<classpathentry kind="src" path="Physics"/>
@@ -31,7 +28,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="Dependencies/RecipeManager.jar"/>
-	<classpathentry kind="lib" path="Dependencies/MoreMaterials-1.91 (1).jar"/>
 	<classpathentry kind="src" path="NoWater"/>
 	<classpathentry kind="lib" path="Dependencies/ControllableMobsAPI.jar">
 		<attributes>
@@ -39,5 +35,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="AGUI"/>
+	<classpathentry kind="lib" path="Dependencies/MoreMaterials-1.91.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

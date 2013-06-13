@@ -9,6 +9,9 @@ import org.getspout.spoutapi.player.SpoutPlayer;
 
 import skills.agricultura.AgriculturaListener;
 import skills.commands.SkillCommandsBaseListener;
+import skills.construccion.ConstruccionListener;
+import skills.construccion.QuarzPaintListener;
+import skills.craft.CraftListener;
 import skills.mineria.MiningListener;
 import skills.tala.TalaListener;
 import core.Core;
@@ -35,9 +38,13 @@ public class Skills extends JavaPlugin {
 		pm.registerEvents(new MiningListener(spm, log, this), this);
 		pm.registerEvents(new TalaListener(spm, log, this), this);
 		pm.registerEvents(new AgriculturaListener(spm, log, this), this);
+		pm.registerEvents(new ConstruccionListener(spm, log, this), this);
+		pm.registerEvents(new QuarzPaintListener(spm, log, this), this);
+		pm.registerEvents(new CraftListener(spm, log, this), this);
 		
 		//Register commands
 		getCommand("skills").setExecutor(new SkillCommandsBaseListener(spm));
+		getCommand("pangolin").setExecutor(new SkillCommandsBaseListener(spm));
 		
 	}
 

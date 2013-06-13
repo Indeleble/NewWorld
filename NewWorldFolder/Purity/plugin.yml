@@ -1,6 +1,0 @@
-name: Purity system
-main: purity.Purity
-version: 0.1b
-description: Purity drop system
-author: Indeleble
-database: false

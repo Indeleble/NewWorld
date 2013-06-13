@@ -3,11 +3,16 @@ main: skills.Skills
 version: 0.1b
 description: Skills system
 author: Indeleble
-depend: [NWCore]
+depend: [NWCore, PermissionsEx]
 
 commands:
    skills:
-      description: This is a demo command.
-      usage: /<command> [player]
+      description: Basic skills command
+      usage: /skills <ver/aprender> [habilidad]
       permission:
-      permission-message: You don't have <permission>
+      permission-message: Sin permisos, Hu!Ha!
+    pangolin:
+      description: Comando no permitido
+      usage: /No permitido
+      permission:
+      permission-message: Comando no permitido

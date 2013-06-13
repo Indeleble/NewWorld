@@ -82,7 +82,7 @@ public class PlayerListener implements Listener {
 				ham.addOnlineUser(player.getName());
 			}else{
 				
-				ArrayList<AnimalDb> al = (ArrayList<AnimalDb>) animalBeans;
+				List<AnimalDb> al =  animalBeans;
 				ham.addOnlineUser(player.getName(), al);
 			}	
 		}
