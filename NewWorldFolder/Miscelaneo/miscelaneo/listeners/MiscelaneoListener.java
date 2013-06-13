@@ -236,20 +236,24 @@ public class MiscelaneoListener implements Listener{
 		Player player = event.getPlayer();
 		if(player.getGameMode()==GameMode.SURVIVAL){
 			Location loc = event.getPlayer().getLocation();
-			World w = loc.getWorld();
 			loc.setY(loc.getY() - 1);
+			Location loc2 = event.getPlayer().getLocation();
+			loc2.setY(loc.getY() -2);
+			
+			World w = loc.getWorld();
 			Block b = w.getBlockAt(loc);
-
-			if (b.getType() == Material.ICE){
+			Block b2 = w.getBlockAt(loc2);
+			
+			if ((b.getType() == Material.ICE) && (b2.getType() == (Material.STATIONARY_WATER) || b2.getType() == (Material.WATER))){
 				int r2=0;
 				Random r = new Random();
 				
 				r2 = r.nextInt(1000);
 				if (r2==1){
 					
-					/* Bucles y demases 
+					/* Bucles y demases */
 
-					player.sendMessage(ChatColor.DARK_RED+"¡Has roto el hielo por el que caminabas!");*/
+					player.sendMessage(ChatColor.DARK_RED+"¡Has roto el hielo por el que caminabas!");
 				}
 			}
 
