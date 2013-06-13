@@ -37,10 +37,17 @@ public class SkillPlayerManager extends BukkitRunnable {
 		}
 	}
 
+	public void addSkillPlayer(String player) {
+
+		SkillPlayer sp = db.createEntityBean(SkillPlayer.class);
+		sp.setAccountName(player);
+		db.save(sp);
+		this.skillPlayerList.add(sp);
+	}
+	
 	public void addSkillPlayer(SkillPlayer player) {
 
 		this.skillPlayerList.add(player);
-		db.save(player);
 	}
 
 	public List<SkillPlayer> getSkillPlayerList() {

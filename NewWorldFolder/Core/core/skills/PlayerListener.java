@@ -53,10 +53,10 @@ public class PlayerListener implements Listener {
 		if (beans == null || beans.size() == 0) {
 
 			player.sendMessage("Bienvenido a Sacra RP, esperamos que lo pases bien");
-			SkillPlayer sp = new SkillPlayer();
-			sp.setAccountName(player.getName());
-
-			spm.addSkillPlayer(sp);
+//			SkillPlayer sp = new SkillPlayer();
+//			sp.setAccountName(player.getName());
+			
+			spm.addSkillPlayer(player.getName());
 			
 			user.addGroup("user");
 
