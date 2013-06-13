@@ -4,7 +4,6 @@ version: 0.1b
 description: Skills system
 author: Indeleble
 depend: [NWCore, PermissionsEx]
-
 commands:
    skills:
       description: Basic skills command
