@@ -79,41 +79,41 @@ public class MiscelaneoListener implements Listener{
         
         switch (action) {
 	        case RIGHT_CLICK_BLOCK:
-	        if(material == Material.NETHERRACK){
-	        	evnt.setCancelled(true);
-	        }
-/*			if(material == Material.SOIL){
+			/*if(material == Material.SOIL){
 	        	if((inHandId==295) || (inHandId==338) || (inHandId==361) || (inHandId==362) || (inHandId==391) || (inHandId==392)){  // Wheat Seeds, Sugar Cane, Pumpkin Seeds, Melon Seeds, Carrot, Potato
 	        		// checkear el radio alrededor del block. si no tiene bloque molino o espantapajaros, event.setcanceled
-	        		boolean canFarm = false;
-	        		
-	        		Location location = player.getLocation();
-	        		Location locationAhead = location.getBlock().getRelative(getPlayerFacing(player), 20).getLocation();
 
+	        		Location loc = evnt.getPlayer().getLocation();
+	        		World w = loc.getWorld();
+					Block b = w.getBlockAt(loc);
+					
 	        		int radiomolino = 50;
 	        		
-/*	        		for (int x = -(radiomolino); x <= 50; x++){
-	        			for (int y = -(radiomolino); y <= 50; y++){
-	        				for (int z = -(radiomolino); z <= 50; z++){
-	        					player.sendMessage("coordenada x: "+x+" coordenada y: "+y+" coordenada z: "+z);
-	        					
-	        					Location loc = location.getBlock().getRelative(x, y, z).getLocation();
+					/* Bucles y demases */
+/*
+					int x = b.getX();
+					int z = b.getZ();
+					x++;
+					z++;
+					Location bLoc = b.getLocation();
+					bLoc.setX(x);
+					bLoc.setZ(z);
 
-	        					if (!getTransparentMaterials().contains(loc.getBlock().getTypeId()==29)){
-	        					
-	        						player.sendMessage("ESTE coordenada x: "+x+" coordenada y: "+y+" coordenada z: "+z);
-	        					//player.sendBlockChange(loc, Material.SNOW_BLOCK.getId(), (byte) 0);
-
-	        					}
-	    	        		}
-		        		}
-	        		}*/
-/*	        		if(canFarm==false){
-	        			evnt.setCancelled(true);
-	        			player.sendMessage(ChatColor.RED+"Esta zona no es adecuada para plantar");
-	        		}else if(canFarm==true){
-	        			canFarm=false;
-	        		}
+					for (int i = 0;i<25;i++){
+						for (int j = 0;j<25;j++){
+							
+							if (player.getWorld().getBlockAt(bLoc).getType() != Material.PISTON_STICKY_BASE){
+								player.sendMessage(ChatColor.DARK_RED+"¡Necesitas cultivar cerca de un molino o un espantapajaros!");
+								
+							}
+							bLoc.setZ(bLoc.getZ() - 1);
+							
+						}
+						bLoc.setZ(bLoc.getZ() + 3);
+						bLoc.setX(bLoc.getX() - 1);
+						
+					}
+					
 		        }
         	}else*/ if(material == Material.STONE){  // Colocar los soportes de las minas en la piedra.
 	        	if(inHandId==370){ // colocado como provisional, ghast tear (370)
