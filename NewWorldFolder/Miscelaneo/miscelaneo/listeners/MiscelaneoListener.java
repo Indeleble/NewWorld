@@ -25,7 +25,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.Door;
 
@@ -189,6 +188,7 @@ public class MiscelaneoListener implements Listener{
 		return Arrays.asList(materials);
 	}
 
+	@SuppressWarnings("unused")
 	private BlockFace getPlayerFacing(Player player) {
 		float y = player.getLocation().getYaw();
         if( y < 0 ) y += 360;
