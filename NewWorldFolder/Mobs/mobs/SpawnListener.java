@@ -1,7 +1,12 @@
 package mobs;
 
+import org.bukkit.Location;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent.SpawnReason;
 
 
@@ -13,14 +18,15 @@ public class SpawnListener implements Listener {
 		this.plugin = listener;
 	}
 
-	
- 	public void CreatureSpawnEvent(final LivingEntity spawnee, final SpawnReason spawnReason){
+	@EventHandler(priority=EventPriority.HIGH)
+	public void onCreatureSpawn(CreatureSpawnEvent event){
+		
+		LivingEntity lentity = event.getEntity();
 
- 		SpawnReason SpawnCrianza = spawnReason.BREEDING;
- 		SpawnReason SpawnHuevo = spawnReason.EGG;
- 		SpawnReason SpawnPlugin = spawnReason.CUSTOM;
- 		SpawnReason SpawnSpawner = spawnReason.SPAWNER;
- 		
+		CreatureSpawnEvent.SpawnReason spawnreason = event.getSpawnReason();
+		EntityType entitytype = event.getEntityType();
+		Location originalloc = event.getLocation();
+		
  		/* En proceso */
  		
  		
