@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 
 import keys.listeners.KeysListener;
 
-import miscelaneo.instrumentos.InstrumentoHandler;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
