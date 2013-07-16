@@ -40,7 +40,8 @@ public class WolfCommands implements CommandExecutor {
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (args.length == 2)	this.args = args[1];
+		if (args.length == 2)
+			this.args = args[1];
 		if (cmd.getName().equalsIgnoreCase("lobos")) {
 
 			if (!(sender instanceof Player)) {
@@ -117,7 +118,7 @@ public class WolfCommands implements CommandExecutor {
 					break;
 
 					case "ovejas":
-						cattle = hum.getCows(player.getName());
+						cattle = hum.getSheeps(player.getName());
 						if (cattle == null)
 							player.sendMessage("No tienes ovejas");
 					break;
@@ -141,12 +142,13 @@ public class WolfCommands implements CommandExecutor {
 						ControllableMob<LivingEntity> cAnimal = ControllableMobs.getOrAssign(animal);
 
 						cWolf.getActions().moveTo(animal.getLocation(), true);
+						cAnimal.getProperties().setMovementSpeed(0.15f);
 						cAnimal.getActions().follow(wolf, true, 6, 2);
 
 						if (flag == wolfs.size() - 1) {
 							flag = 0;
 
-						}else flag++;
+						} else flag++;
 
 					}
 				}

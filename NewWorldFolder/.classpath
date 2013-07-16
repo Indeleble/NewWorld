@@ -36,5 +36,7 @@
 	</classpathentry>
 	<classpathentry kind="src" path="AGUI"/>
 	<classpathentry kind="lib" path="Dependencies/MoreMaterials-1.91.jar"/>
+	<classpathentry kind="src" path="Keys"/>
+	<classpathentry kind="src" path="Soil"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

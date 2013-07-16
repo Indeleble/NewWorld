@@ -1,57 +1,30 @@
-package miscelaneo.listeners;
+package keys.listeners;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
-import miscelaneo.Miscelaneo;
-
+import keys.Keys;
 
 import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
-import org.bukkit.block.BlockState;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
-import org.bukkit.event.block.BlockDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerTeleportEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.material.Door;
-
-import soil.Soil;
 
 
-@SuppressWarnings("deprecation")
-public class MiscelaneoListener implements Listener{
+public class KeysListener implements Listener{
 	
-	Miscelaneo plugin;
+	Keys keys;
 	
-	public MiscelaneoListener(Miscelaneo listener) {
-		plugin=listener;
-	}
-	
-	@EventHandler(priority=EventPriority.MONITOR, ignoreCancelled=true)
-	public void onPlayerJoin(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
-		player.setCompassTarget(player.getWorld().getBlockAt(0, 0, -12550820).getLocation());
-	}
-	  
-	@EventHandler(priority=EventPriority.MONITOR, ignoreCancelled=true)
-	public void onPlayerTeleport(PlayerTeleportEvent event) {
-		Player player = event.getPlayer();
-		player.setCompassTarget(player.getWorld().getBlockAt(0, 0, -12550820).getLocation());
+	public KeysListener(Keys keys) {
+		this.keys = keys;
 	}
 	 
 	@EventHandler
@@ -61,122 +34,17 @@ public class MiscelaneoListener implements Listener{
         Player player = evnt.getPlayer();
         Action action = evnt.getAction();
         Block block = evnt.getClickedBlock();
-  
-        
         ItemStack inHand = evnt.getPlayer().getItemInHand();
-        int inHandId = evnt.getPlayer().getItemInHand().getTypeId();
-        Material material;
-		Random r = new Random();
-		int r2 = 0;
-		int itemcalidad = 50 +10;  // AQUI COLOCAR EL CHECK DE LA CALIDAD DEL ITEM EN LA MANO
-		
-        if (player.hasMetadata("NPC")) return; // Checkear si el jugador es NPC.
-
-        /* Fix for NPE on interacting with air */
-        if (block == null) {
-            material = Material.AIR;
-        }else {
-            material = block.getType();
-        }
         
-        player.setCompassTarget(player.getWorld().getBlockAt(0, 0, -12550820).getLocation());
+        int iih = player.getItemInHand().getTypeId();
+        //330 369
+        
         
         switch (action) {
-	        case RIGHT_CLICK_BLOCK:
-	        if(material == Material.NETHERRACK){
-	        	evnt.setCancelled(true);
-	        }
-/*			if(material == Material.SOIL){
-	        	if((inHandId==295) || (inHandId==338) || (inHandId==361) || (inHandId==362) || (inHandId==391) || (inHandId==392)){  // Wheat Seeds, Sugar Cane, Pumpkin Seeds, Melon Seeds, Carrot, Potato
-	        		// checkear el radio alrededor del block. si no tiene bloque molino o espantapajaros, event.setcanceled
-	        		boolean canFarm = false;
-	        		
-	        		Location location = player.getLocation();
-	        		Location locationAhead = location.getBlock().getRelative(getPlayerFacing(player), 20).getLocation();
+        }
+        }
 
-	        		int radiomolino = 50;
-	        		
-/*	        		for (int x = -(radiomolino); x <= 50; x++){
-	        			for (int y = -(radiomolino); y <= 50; y++){
-	        				for (int z = -(radiomolino); z <= 50; z++){
-	        					player.sendMessage("coordenada x: "+x+" coordenada y: "+y+" coordenada z: "+z);
-	        					
-	        					Location loc = location.getBlock().getRelative(x, y, z).getLocation();
-
-	        					if (!getTransparentMaterials().contains(loc.getBlock().getTypeId()==29)){
-	        					
-	        						player.sendMessage("ESTE coordenada x: "+x+" coordenada y: "+y+" coordenada z: "+z);
-	        					//player.sendBlockChange(loc, Material.SNOW_BLOCK.getId(), (byte) 0);
-
-	        					}
-	    	        		}
-		        		}
-	        		}*/
-/*	        		if(canFarm==false){
-	        			evnt.setCancelled(true);
-	        			player.sendMessage(ChatColor.RED+"Esta zona no es adecuada para plantar");
-	        		}else if(canFarm==true){
-	        			canFarm=false;
-	        		}
-		        }
-        	}else*/ if(material == Material.STONE){  // Colocar los soportes de las minas en la piedra.
-	        	if(inHandId==370){ // colocado como provisional, ghast tear (370)
-	        		r2 = r.nextInt(100);
-	        		if(inHand.getAmount()>1){
-	        			player.getInventory().getItemInHand().setAmount(player.getInventory().getItemInHand().getAmount()-1);
-	        		}else if(inHand.getAmount()<=1){
-	        			player.getInventory().removeItem(player.getInventory().getItemInHand());
-	        		}
-	        		if(r2<=itemcalidad){
-	        			block.setTypeIdAndData(98, (byte) 3, true); //chiseled stone brick
-	        			player.sendMessage(ChatColor.GREEN+"Has colocado el soporte para la mina en la piedra");
-	        		}else{
-	        			evnt.setCancelled(true);
-	        			player.sendMessage(ChatColor.RED+"El soporte para la mina no tenia suficiente calidad como para aguantar el peso de la roca y se ha roto");
-	        		}
-	        	}
-	        }else if(material == Material.IRON_DOOR_BLOCK){ // Abrir las puertas de hierro con click derecho.
-				BlockState state = block.getState();
-				Door door = (Door) state.getData();
-				BlockState state2;
-				if (door.isTopHalf()) {
-					Door top = door;
-					state2 = block.getRelative(BlockFace.DOWN).getState();
-					Door bottom = (Door) state2.getData();
-					if (top.isOpen() == false) {
-						top.setOpen(true);
-						bottom.setOpen(true);
-						player.getWorld().playSound(block.getLocation(), Sound.DOOR_CLOSE, 1, 1);
-					}else {
-						top.setOpen(false);
-						bottom.setOpen(false);
-						player.getWorld().playSound(block.getLocation(), Sound.DOOR_CLOSE, 1, 1);
-					}
-					state.update();
-					state2.update();
-				}else {
-					Door bottom = door;
-					state2 = block.getRelative(BlockFace.UP).getState();
-					Door top = (Door) state2.getData();
-					if (bottom.isOpen() == false) {
-						bottom.setOpen(true);
-						top.setOpen(true);
-						player.getWorld().playSound(block.getLocation(), Sound.DOOR_CLOSE, 1, 1);
-					}else {
-						bottom.setOpen(false);
-						top.setOpen(false);
-						player.getWorld().playSound(block.getLocation(), Sound.DOOR_CLOSE, 1, 1);
-					}
-					state.update();
-					state2.update();
-				}
-			}else if(inHand.getTypeId() == 385){
-				evnt.setCancelled(true);
-			}
-			default:
-				break;
-		}
-	}
+/*		
 	
 	public static List<Material> getTransparentMaterials(){
 		Material[] materials = {Material.AIR, Material.BED, Material.BED_BLOCK, Material.BREWING_STAND, Material.BROWN_MUSHROOM,

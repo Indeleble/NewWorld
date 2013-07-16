@@ -3,7 +3,8 @@ package miscelaneo;
 
 import java.util.logging.Logger;
 
-import miscelaneo.commands.MiscelaneoCommand;
+import keys.commands.KeysCommand;
+
 import miscelaneo.instrumentos.InstrumentoHandler;
 import miscelaneo.listeners.MiscelaneoListener;
 
@@ -12,10 +13,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import soil.listeners.SoilListener;
+
 public class Miscelaneo extends JavaPlugin{
 	
-	public MiscelaneoCommand ejecutor;
-	public MiscelaneoListener listener;
+	public KeysCommand ejecutor;
+	public SoilListener listener;
 	
 	private static InstrumentoHandler iHandler;
 
